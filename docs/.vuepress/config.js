@@ -80,8 +80,15 @@ module.exports = {
     "lastUpdated": "Last Updated",
     "author": "kkyeer",
     "authorAvatar": "/avatar.png",
-    "record": "xxxx",
-    "startYear": "2017"
+    "record": "浙ICP备18011775号",
+    "recordLink":"http://www.beian.miit.gov.cn",
+    "startYear": "2019",
+    sitemap: {
+      hostname: "https://www.tpfuture.top/"
+    },
+    feed: {
+      canonical_base: 'https://www.tpfuture.top/',
+    }
   },
   "markdown": {
     "lineNumbers": true

@@ -7,6 +7,7 @@ tag:
   - Spring
   - XmlContext
   - 源码
+publish: false
 ---
 # SpringContext之xml配置(4) xml中的Bean定义节点加载成BeanDefinition对象
 

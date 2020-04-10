@@ -7,6 +7,7 @@ tag:
   - Spring
   - XmlContext
   - 源码
+publish: false
 ---
 # SpringContext之xml配置(5) BeanDefinition对象初始化为Bean
 

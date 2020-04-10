@@ -7,6 +7,7 @@ tag:
   - Spring
   - XmlContext
   - 源码
+publish: false
 ---
 # SpringContext之xml配置(2) new XmlApplicationContext("a-c.xml")过程的refresh()方法:规整configLocation成Resource数组
 

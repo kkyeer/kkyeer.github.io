@@ -7,6 +7,7 @@ tag:
   - Spring
   - XmlContext
   - 源码
+publish: false
 ---
 # SpringContext之xml配置(3) new XmlApplicationContext("a-c.xml")过程的refresh()方法:Resource加载中BeanDefinition
 

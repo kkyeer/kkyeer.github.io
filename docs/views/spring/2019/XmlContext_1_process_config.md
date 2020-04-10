@@ -1,20 +1,24 @@
 ---
-date: 2019-10-02
+date: 2019-09-01
 categories:
   - Spring
-  - 源码
 tag:
   - Spring
-  - XmlContext
+  - Context
   - 源码
+sidebarDepth: 3
+summary: 本系列主要介绍了SpringContext框架中，通过纯xml配置来初始化一个ApplicationContext，并通过class参数来获取实例bean的过程，本节主要介绍了学习过程中的配置文件，以及初始化ClassPathXmlApplicationContext实例过程中的第一部分，即处理入参字符串的部分
+publish: true
 ---
-# SpringContext之xml配置(1) xml配置获取ApplicationContext并通过Class类型获取简单Bean
+# SpringContext源码-Xml上下文初始化与Bean获取
 
 本系列主要介绍了SpringContext框架中，通过纯xml配置来初始化一个ApplicationContext，并通过class
 参数来获取实例bean的过程，本节主要介绍了学习过程中的配置文件，以及初始化ClassPathXmlApplicationContext实例过程中的
 第一部分，即处理入参字符串的部分
 
-## 1.1 pom.xml
+## 1. 环境准备
+
+### 1.1. pom.xml
 
 ```xml
     <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
@@ -25,7 +29,7 @@ tag:
     </dependency>
 ```
 
-## 1.2 application-context.xml
+### 1.2. application-context.xml
 
 文件application-context.xml位于src/main/resources目录下，bean定义如下：
 
@@ -36,14 +40,14 @@ tag:
     </bean>
 ```
 
-## 1.3 Pojo类
+### 1.3. BeanClass类
 
 Person.java类包含age,name两个Field，入口类比较简单，先从application-context.xml文件中加载一个ApplicationContext，再通过getBean(Person.class)方法获取Bean，最后打印验证
 
-## 1.4 入口类
+### 1.4. 应用入口
 
 ```Java
-public class TasteSpringBoot {
+public class TasteSpring {
     public static void main(String[] args) {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("application-context.xml");
         Person person = applicationContext.getBean(Person.class);
@@ -52,13 +56,15 @@ public class TasteSpringBoot {
 }
 ```
 
-## 2.1 初始化上下文:new ClassPathXmlApplicationContext("a-c.xml")
+## 2.1 初始化上下文
 
-### 2.1.1 ClassPathXmlApplicationContext的UML
+```new ClassPathXmlApplicationContext("a-c.xml")```
+
+### 2.1.1 UML
 
 ![UML](uml/ClassPathXmlApplicationContext.png)
 
-### 2.1.2 ClassPathXmlApplicationContext的构造方法
+### 2.1.2 构造方法
 
 ```new ClassPathXmlApplicationContext("a-c.xml")```直接调用到：
 
@@ -86,45 +92,9 @@ public class TasteSpringBoot {
 2. 调用setConfigLocations(configLocations)方法
 3. refresh
 
-#### 2.1.2.1 调用父类的参数为(String[])的构造方法:super(parent)
+接下来，沿继承链调用父类的无参构造方法：
 
-显式调用父类的参数为（ApplicationContext parent)的的构造方法：
-
-```java
-    public AbstractXmlApplicationContext(@Nullable ApplicationContext parent) {
-        super(parent);
-    }
-```
-
-显式调用父类的参数为（ApplicationContext parent)的的构造方法：
-
-```java
-    public AbstractRefreshableConfigApplicationContext(@Nullable ApplicationContext parent) {
-        super(parent);
-    }
-```
-
-显式调用父类的参数为（ApplicationContext parent)的的构造方法：
-
-```java
-    public AbstractRefreshableApplicationContext(@Nullable ApplicationContext parent) {
-        super(parent);
-    }
-```
-
-显式调用父类的参数为（ApplicationContext parent)的的构造方法：
-
-```Java
-    public AbstractApplicationContext(@Nullable ApplicationContext parent) {
-        this();
-        setParent(parent);
-    }
-```
-
-1. 显式调用了AbstractApplicationContext类的无参构造方法
-2. 调用setParent(parent)方法
-
-##### 2.1.2.1.1. AbstractApplicationContext的无参构造方法
+>> AbstractApplicationContext
 
 ```java
     public AbstractApplicationContext() {
@@ -144,7 +114,7 @@ public class TasteSpringBoot {
 
 3. 调用getResourcePatternResolver()获取并赋值到this.resourcePatternResolver
 
-###### 2.1.2.1.1.1. DefaultResourceLoader的无参构造方法
+#### 2.1.2.1. DefaultResourceLoader的无参构造方法
 
 1. 实例变量初始化
 
@@ -210,8 +180,9 @@ classLoader初始化完成后，DefaultResourceLoader的无参构造方法执行
 
 至此ClassPathXmlApplicationContext显式调用的```super(parent)```构造方法全部执行完成
 
-#### 2.1.2.2. 传入的configLocations字符串数组解析为绝对路径：setConfigLocations(configLocations)
+### 2.1.3 路径字符串数组解析为绝对路径
 
+setConfigLocations(configLocations)
 这里configLocations是字符串数组: ["application-context.xml"]，这个方法的方法体为：
 
 ```java
@@ -235,7 +206,7 @@ classLoader初始化完成后，DefaultResourceLoader的无参构造方法执行
 
 校验输入后，遍历传入的configLocations数组，对每个元素分别调用resolvPath()方法并存入this.configLocations数组
 
-##### 2.1.2.2.1 用系统的环境变量替换Config Location字符串中的PlaceholderresolvePath方法
+#### 2.1.3.1 用系统的环境变量替换Config Location字符串中的PlaceholderresolvePath方法
 
 ```java
     /**
@@ -252,7 +223,7 @@ classLoader初始化完成后，DefaultResourceLoader的无参构造方法执行
 
 获取ApplictionContext的environment，为空则new StandardEnvironment()并放入
 
-###### 2.1.2.2.1.1 StandardEnvironment的初始化
+#### 2.1.3.2 StandardEnvironment的初始化
 
 此类的父类为AbstractEnvironment，StandardEnvironment在父类基础上复写了customizePropertySources方法，大部分初始化及方法都在父类中，下面是父类AbstractEnvironment初始化的过程
 
@@ -268,7 +239,7 @@ AbstractEnvironment的无参构造方法调用了customizePropertySources(this.p
 1. "systemProperties"，值为System.getProperties()返回的map包装成的PropertiesPropertySource
 2. "systemEnvironment"，值为System.getenv()返回的map包装成的SystemEnvironmentPropertySource，值得一提的是如果提供了spring.properties文件并指定spring.getenv.ignore=false，则不加载
 
-###### 2.1.2.2.1.2 new StandardEnvironment().resolveRequiredPlaceholders(path)
+#### 2.1.3.3 解析Placeholder
 
 实际调用的是AbstractEnvironment类的resolveRequiredPlaceholders(String text)方法：
 
@@ -303,13 +274,13 @@ AbstractEnvironment的无参构造方法调用了customizePropertySources(this.p
 这个类是一个辅助类，用来把对应字符串的占位符替换成已经加载的相关property，比如字符串
 "${abcd}"会被替换成abcd对应的property值返回
 
-#### 2.1.2.3. ClassPathXmlApplicationContext调用refresh()方法
+### 2.1.4. refresh过程
 
-ClassPathXmlApplicationContext没有复写此方法，实际调用的是父类AbstractApplicationContext的refresh方法，在这个方法中会进行Bean的初始化，具体的过程参考[第二节](./XmlContext_2_refresh.md)
+ClassPathXmlApplicationContext没有复写此方法，实际调用的是父类AbstractApplicationContext的refresh方法，在这个方法中会进行Bean的初始化，具体的过程参考[refresh过程](./XmlContext_2_refresh.md)
 
-## 2.2 获取单例Bean：applicationContext.getBean(Person.class)
+## 2.2 获取单例Bean
 
-调用初始化完成的上下文的BeanFactory的getBean方法：
+````applicationContext.getBean(Person.class)```执行过程中，实际调用Context内部的BeanFactory的getBean方法，这可以视为**装饰器模式**的实际应用：
 
 ```java
     @Override
@@ -319,7 +290,7 @@ ClassPathXmlApplicationContext没有复写此方法，实际调用的是父类Ab
     }
 ```
 
-1. 断言BeanFactory的状态：断言当前的上下文是否状态处于active且非closed，但实际上对于ClassPathXmlApplicationContext而言，父类AbstractRefreshableApplicationContext复写了这个方法，因为BeanFactory的状态由内部的BeanFactory来维护
+1. 断言BeanFactory的状态：断言当前的上下文是否状态处于active且非closed，对于ClassPathXmlApplicationContext而言，BeanFactory的状态由内部的BeanFactory来维护
 2. 获取BeanFactory，调用BeanFactory的getBean方法来获取Bean，对于ClassPathXmlApplicationContext来说，内部的BeanFactory是DefaultListableBeanFactory类，所以调用的也是这个类的getBean方法：
 
     ```java
@@ -387,7 +358,7 @@ ClassPathXmlApplicationContext没有复写此方法，实际调用的是父类Ab
 ```
 
 1. 尝试获取NamedBeanHolder
-2. 如果第一步未获取成功，则尝试从父BeanFactory加载Bean：
+2. 如果第一步未获取成功，则尝试上溯父BeanFactory加载Bean：
     1. 如果父BeanFactory是DefaultListableBeanFactory类型，则递归调用resolveBean方法
     2. 否则调用parent.getBeanProvider(requiredType)，然后调用相关方法获取Bean
 
