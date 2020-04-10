@@ -2,7 +2,7 @@
 date: 2019-09-01
 categories:
   - Spring
-tag:
+tags:
   - Spring
   - Context
   - 源码
@@ -10,7 +10,7 @@ sidebarDepth: 3
 summary: 本系列主要介绍了SpringContext框架中，通过纯xml配置来初始化一个ApplicationContext，并通过class参数来获取实例bean的过程，本节主要介绍了学习过程中的配置文件，以及初始化ClassPathXmlApplicationContext实例过程中的第一部分，即处理入参字符串的部分
 publish: true
 ---
-# SpringContext源码-Xml上下文初始化与Bean获取
+# SpringContext源码--Xml上下文初始化与Bean获取
 
 本系列主要介绍了SpringContext框架中，通过纯xml配置来初始化一个ApplicationContext，并通过class
 参数来获取实例bean的过程，本节主要介绍了学习过程中的配置文件，以及初始化ClassPathXmlApplicationContext实例过程中的
@@ -763,6 +763,6 @@ ClassPathXmlApplicationContext没有复写此方法，实际调用的是父类Ab
 
 ##### 2.2.2.1.3 匹配到多个beanName的策略
 
-1. 如果是PrimaryBean，则返回第一个匹配到的BeanName
+1. 如果是```@Primary```注解的Bean，则返回第一个匹配到的BeanName
 2. 如果上面没有获取到，则获取最高优先级的BeanName
 3. 1，2步应该可以获取到唯一的BeanName，获取对象并返回

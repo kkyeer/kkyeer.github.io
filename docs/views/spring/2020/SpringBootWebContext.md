@@ -20,7 +20,6 @@
     3. 接收非空，注意默认为空
     4. beanFactory实例setConvertionService，取的是共享的单例
 3. 调用ApplicationContextInitializer实例的initialize方法，这些实例是在SpringApplication初始化过程中从spring.factory中加载的
-    - DubboApplicationContextInitializer:注册一个BeanFactoryPostProcessor实例,OverrideBeanDefinitionRegistryPostProcessor类型
     - DelegatingApplicationContextInitializer:调用"context.initializer.classes"属性定义的所有类的initialize方法
     - SharedMetadataReaderFactoryContextInitializer:注册BeanFactoryPostProcessor：CachingMetadataReaderFactoryPostProcessor
     - ContextIdApplicationContextInitializer:初始ApplicationContextId，优先取spring.application.name定义的值，没有默认"application",并把对应的ContextId对象注册到BeanFactory

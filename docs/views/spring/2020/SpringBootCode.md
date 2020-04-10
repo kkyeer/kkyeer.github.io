@@ -21,6 +21,7 @@
 - BeanFactoryAware
 - EnvironmentAware
 - ResourceLoaderAware
+- LoadTimeWeaverAware
 
 ## 配置文件处理
 

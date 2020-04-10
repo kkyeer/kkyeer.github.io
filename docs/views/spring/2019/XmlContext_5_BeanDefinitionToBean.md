@@ -13,6 +13,79 @@ publish: false
 
 在完成了Environment等必要的bean的创建后，AbstractBeanFactory开始调用doGetBean方法来进行具体的bean创建过程:
 
+    ### 1.11.1 初始化自定义的单例Bean
+
+    ```java
+        @Override
+        public void preInstantiateSingletons() throws BeansException {
+            if (logger.isTraceEnabled()) {
+                logger.trace("Pre-instantiating singletons in " + this);
+            }
+
+            // Iterate over a copy to allow for init methods which in turn register new bean definitions.
+            // While this may not be part of the regular factory bootstrap, it does otherwise work fine.
+            List<String> beanNames = new ArrayList<>(this.beanDefinitionNames);
+
+            // Trigger initialization of all non-lazy singleton beans...
+            for (String beanName : beanNames) {
+                RootBeanDefinition bd = getMergedLocalBeanDefinition(beanName);
+                if (!bd.isAbstract() && bd.isSingleton() && !bd.isLazyInit()) {
+                    if (isFactoryBean(beanName)) {
+                        Object bean = getBean(FACTORY_BEAN_PREFIX + beanName);
+                        if (bean instanceof FactoryBean) {
+                            final FactoryBean<?> factory = (FactoryBean<?>) bean;
+                            boolean isEagerInit;
+                            if (System.getSecurityManager() != null && factory instanceof SmartFactoryBean) {
+                                isEagerInit = AccessController.doPrivileged((PrivilegedAction<Boolean>)
+                                                ((SmartFactoryBean<?>) factory)::isEagerInit,
+                                        getAccessControlContext());
+                            }
+                            else {
+                                isEagerInit = (factory instanceof SmartFactoryBean &&
+                                        ((SmartFactoryBean<?>) factory).isEagerInit());
+                            }
+                            if (isEagerInit) {
+                                getBean(beanName);
+                            }
+                        }
+                    }
+                    else {
+                        getBean(beanName);
+                    }
+                }
+            }
+
+            // Trigger post-initialization callback for all applicable beans...
+            for (String beanName : beanNames) {
+                Object singletonInstance = getSingleton(beanName);
+                if (singletonInstance instanceof SmartInitializingSingleton) {
+                    final SmartInitializingSingleton smartSingleton = (SmartInitializingSingleton) singletonInstance;
+                    if (System.getSecurityManager() != null) {
+                        AccessController.doPrivileged((PrivilegedAction<Object>) () -> {
+                            smartSingleton.afterSingletonsInstantiated();
+                            return null;
+                        }, getAccessControlContext());
+                    }
+                    else {
+                        smartSingleton.afterSingletonsInstantiated();
+                    }
+                }
+            }
+        }
+    ```
+
+1. 复制当前的beanDefinitionNames数组到方法本地变量进行迭代，这样允许在bean初始化过程中注册新的bean到beanDefinitionNames而不影响迭代过程
+2. 对于每一个bean，执行下面的过程来初始化
+    1. 合并所有的BeanDefinition
+    2. 对于非Abstract、非懒加载的SingletonBean，如果是FactoryBean，则先调用getBean(beanName)方法初始化名为"&"+beanName的FactoryBean，再调用getBean(beanName)方法来初始化bean，如果不是FactoryBean，则直接调用getBean(beanName)方法，getBean(beanName)方法具体执行bean的初始化、连接、注入等功能，详情见[初始化bean的过程](XmlContext_5_BeanDefinitionToBean.md)
+3. 调用所有SmartInitializingSingleton类型的单例Bean的afterSingletonsInstantiated()方法
+
+BeanFactory和FactoryBean的区别：
+
+>FactoryBean是一个接口，接口中有getObject()方法，实现了此接口的bean，在SpringContext中作为Factory使用，beanFactory中维护了一个name为"&"+"beanName"的bean，用来生成具体的bean，"&"是Spring约定的标记一个bean为FactoryBean的标记
+>BeanFactory也是一个接口，内部定义了管理Bean生命周期、存取的方法，比如getBean的各种重载方法、containsBean、isSingleton等方法，ApplicationContext接口继承了此接口，因此，各种Context也实现了ApplicationContext接口，都可以看作BeanFactory
+
+
 1. 获取bean的beanName```final String beanName = transformedBeanName(name);```，主要是去掉入参的name前可能有的FactoryBean的&，然后把别名转换成唯一的beanName
 2. bean初始化的过程，可以细分为以下几种情况：
     1. 如果有eagerly cached的实例，且args为空
