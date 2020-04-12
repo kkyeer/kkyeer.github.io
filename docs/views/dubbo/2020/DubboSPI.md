@@ -2,20 +2,24 @@
 date: 2020-04-02
 categories:
   - dubbo
-  - 源码
 tags:
   - dubbo
   - 源码
+  - spi
 ---
 # Dubbo源码-命名SPI
 
 ## 1. Dubbo SPI
 
-DubboBootStrap作为单例类，在初始化单例时，通过Dubbo特殊的SPI机制初始化了一些Extension实例
+Dubbo对于大部分的组件，都是采用抽象接口+SPI机制加载实现类来调用的，相对于JDK默认的简单基于接口的SPI实现，Dubbo提供了第二个控制维度-命名，对于
+
+```
+
+1. 
 
 ### 1.1 加载插件
 
-插件使用ExtensionLoader类的实例进行加载，类似SPI，但是提供了命名机制
+
 
 1. 每个实例对应一个接口type，会按序在位置通过dubbo自定义的SPI机制进行搜寻并实例化，并缓存到本ExtensionLoader实例中
 2. 各种ExtensionLoader实例缓存到本类的静态的缓存map里，key为实现的接口，value为实例列表。
