@@ -11,6 +11,62 @@ publish: false
 ---
 # SpringContext之xml配置(4) xml中的Bean定义节点加载成BeanDefinition对象
 
+对于XML形式的Resource,实际调用XmlBeanDefinitionReader实例的reader.loadBeanDefinitions(configLocations)方法
+
+下面是XmlBeanDefinitionReader的类UML图
+
+![XmlBeanDefinitionReader的类UML图](uml/XmlBeanDefinitionReader.png)
+
+实际调用的是抽象类AbstractBeanDefinitionReader的方法
+
+```java
+    public int loadBeanDefinitions(String location, @Nullable Set<Resource> actualResources) throws BeanDefinitionStoreException {
+        ResourceLoader resourceLoader = getResourceLoader();
+        if (resourceLoader == null) {
+            throw new BeanDefinitionStoreException(
+                    "Cannot load bean definitions from location [" + location + "]: no ResourceLoader available");
+        }
+
+        if (resourceLoader instanceof ResourcePatternResolver) {
+            // Resource pattern matching available.
+            try {
+                Resource[] resources = ((ResourcePatternResolver) resourceLoader).getResources(location);
+                int count = loadBeanDefinitions(resources);
+                if (actualResources != null) {
+                    Collections.addAll(actualResources, resources);
+                }
+                if (logger.isTraceEnabled()) {
+                    logger.trace("Loaded " + count + " bean definitions from location pattern [" + location + "]");
+                }
+                return count;
+            }
+            catch (IOException ex) {
+                throw new BeanDefinitionStoreException(
+                        "Could not resolve bean definition resource pattern [" + location + "]", ex);
+            }
+        }
+        else {
+            // Can only load single resources by absolute URL.
+            Resource resource = resourceLoader.getResource(location);
+            int count = loadBeanDefinitions(resource);
+            if (actualResources != null) {
+                actualResources.add(resource);
+            }
+            if (logger.isTraceEnabled()) {
+                logger.trace("Loaded " + count + " bean definitions from location [" + location + "]");
+            }
+            return count;
+        }
+    }
+```
+
+在这里，入参location是字符串"application-context.xml"，actualResources为null，程序执行过程如下
+
+1. 获取resourceLoader对象，此对象负责把入参的location字符串规整为Resource对象数组
+2. 遍历上一步规整好的Resource数组，对每一个Resource对象调用loadBeanDefinitions方法，此方法将初始化好的bean定义存入reader内部的registry变量中，
+此变量即ApplicationContext的refresh方法新创建的beanFactory，在初始化reader的过程中被关联进来
+3. 返回加载的BeanDefinition的数量
+
 在[第三节:加载Resource对象成BeanDefinition](./XmlContext_3_LoadResource.md)中，已经将Resource解析成Document对象，并且遍历调用相关方法来对不同的DOM节点方法来加载内部定义，对于当前实例来说，Bean定义节点加载成BeanDefinition对象调用的是org.springframework.beans.factory.xml.DefaultBeanDefinitionDocumentReader对象的processBeanDefinition方法：
 
 ```java

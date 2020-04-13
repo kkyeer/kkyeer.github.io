@@ -10,7 +10,7 @@ sidebarDepth: 3
 summary: 本系列主要介绍了SpringContext框架中，通过纯xml配置来初始化一个ApplicationContext，并通过class参数来获取实例bean的过程，本节主要介绍了学习过程中的配置文件，以及初始化ClassPathXmlApplicationContext实例过程中的第一部分，即处理入参字符串的部分
 publish: true
 ---
-# SpringContext源码--Xml上下文初始化与Bean获取
+# SpringContext源码-Xml上下文初始化与Bean获取
 
 本系列主要介绍了SpringContext框架中，通过纯xml配置来初始化一个ApplicationContext，并通过class
 参数来获取实例bean的过程，本节主要介绍了学习过程中的配置文件，以及初始化ClassPathXmlApplicationContext实例过程中的
