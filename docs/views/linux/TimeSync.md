@@ -1,3 +1,13 @@
+---
+date: 2020-04-15
+categories:
+  - linux
+tags:
+  - linux
+  - UTC
+  - GMT
+description: 本文介绍了不同的时区时间计算系统，并给出Windows和Ubuntu双系统时间同步解决方案
+---
 # 解决Windows与Ubuntu双系统时间同步问题
 
 ## 1. 问题发现

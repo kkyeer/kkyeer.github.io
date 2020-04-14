@@ -2,12 +2,11 @@
 date: 2020-04-02
 categories:
   - dubbo
-  - 源码
 tags:
   - dubbo
   - 源码
 ---
-# Dubbo源码解析-初始化
+# Dubbo源码-框架初始化
 
 Dubbo通过利用Spring的生命周期钩子、监听器等机制来初始化及构造自己的配置。
 
