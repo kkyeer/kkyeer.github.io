@@ -7,7 +7,7 @@ tags:
   - dubbo
   - 源码
 ---
-# Dubbo源码解析-DubboBootstrap.start
+# Dubbo源码-DubboBootstrap.start
 
 在Spring上下文refresh完成后，会广播```ContextRefreshed```事件，此时```DubboBootstrapApplicationListener```的监听被触发，调用dubboBootstrap实例的```start```方法，DubboBootStrap作为单例类，在初始化单例时，通过Dubbo特殊的SPI机制初始化了一些Extension实例
 

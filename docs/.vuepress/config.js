@@ -92,5 +92,8 @@ module.exports = {
   },
   "markdown": {
     "lineNumbers": true
-  }
+  },
+  plugins: [
+    'flowchart'
+  ]
 }
