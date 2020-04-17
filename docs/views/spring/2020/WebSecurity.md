@@ -64,7 +64,25 @@ Login CSRF是一类特殊的CSRF攻击，攻击者在第三方网站插入如下
 - [http://lists.webappsec.org/pipermail/websecurity_lists.webappsec.org/2011-February/007533.html](http://lists.webappsec.org/pipermail/websecurity_lists.webappsec.org/2011-February/007533.html)
 - [https://labs.detectify.com/2017/03/15/loginlogout-csrf-time-to-reconsider/](https://labs.detectify.com/2017/03/15/loginlogout-csrf-time-to-reconsider/)
 
-## 3. 响应头配置
+## 3. XSS-跨站脚本攻击
+
+当一个网站，允许用户上传或者输入任意脚本，并且不加验证的下发到其他用户的浏览器时，便存在XSS漏洞。此时受害者的浏览器收到可信服务器下发的JS或者Flash内容并且执行，而实际上这些内容是恶意程序。
+
+XSS攻击分为三类，存储和反射和DOM型攻击。
+
+存储型攻击：恶意脚本被持久化到服务器的存储区如数据库，访问记录等
+反射型攻击：用户点击钓鱼网站或者钓鱼邮件，发送特制的请求到服务器，服务器执行请求后，给浏览器的**响应**中包含恶意脚本，浏览器执行此恶意脚本后，把敏感数据发送给攻击者
+
+防护：
+
+1. 关闭HTTP TRACE，用户发送HTTP TRACE请求时，浏览器会自动附带cookie信息
+2. 永远校验用户的上传内容
+3. 不要把用户上传的内容以html或者类似格式回传浏览器
+
+[参考资料:OWASP相关概念说明](https://owasp.org/www-community/attacks/xss/)
+[参考资料:防护](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html)
+
+## 4. 响应头配置
 
 - 缓存相关：如果允许缓存，当被别人点击后退时，可能获取到上次请求的响应
 
