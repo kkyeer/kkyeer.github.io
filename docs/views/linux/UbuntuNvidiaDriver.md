@@ -5,10 +5,10 @@ categories:
 tags:
   - linux
   - ubuntu
-publish: false
+publish: true
 ---
 
-# Ubuntu安装后准备环境
+# Ubuntu安装Nvidia闭源驱动
 
 ## Nvidia 闭源驱动
 
@@ -81,8 +81,7 @@ publish: false
 2. 输入下列命令，重启后安装便可完成。
 
     ```shell
-    sudo ubuntu-drivers autoinstall
-    ```
+``    ```
 
 3. 输入下列命令，查看驱动是否安装成功。
 
@@ -113,6 +112,7 @@ publish: false
     |    0     19399      G   ...-token=94C17C841BB41655B0F942E8E683FD26    34MiB |
     +-----------------------------------------------------------------------------+`
     ```
+
     若出现以上输出，则表明已经安装成功了。
 ————————————————
 版权声明：本文为CSDN博主「DuCeh」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
