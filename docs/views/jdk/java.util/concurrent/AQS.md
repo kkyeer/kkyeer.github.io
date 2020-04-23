@@ -35,11 +35,18 @@ static final class Node {
 
 - SIGNAL: -1 Node被激活，其后代已经或即将被block
 - CANCELLED: 1 Node被取消，可能的原因是超时或interrupt，注意这是唯一>0的状态，所以一般判断如果waitStatus>0则Node为Cancelled状态
-- CONDITION: -2 Node在Condition Queue里，除非被转移，不然不可以用作同步队列的Node
+- CONDITION: -2 Node在Condition Queue里，除非被转移，不然不可以用作同步队列的No~de
 - PROPAGATE: -3 当前Node被releaseShared，且需要被扩散，只出现在head里
-- 0: 初始状态，无意义
+- 0: 初始状态
 
 整个设计的目标是可以通过符号来判断Node是否需要被SIGNAL，当为正时不需要。
 
 ## 3. AQS的waitQueue
 
+AQS实例，内部存储一个双向队列，通过```head```和```tail```两个指针来存储队列的头和尾。
+
+入队操作：通过CAS操作来set tail指针
+
+unpark指定Node的后代：unpark指定的线程：先尝试入参节点的next指向的Node，如果为空或者已经Cancel，则从tail向前遍历到**最前面**可以unpard的线程。
+
+PS:为什么是向前追溯？Unpark只是保证调用的时间的状态中需要unpark的线程被唤起~，因为并发同时可能还有线程在入队，新入队线程会自动放到队列尾，导致状态变更
