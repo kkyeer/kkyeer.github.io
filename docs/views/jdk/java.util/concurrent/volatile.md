@@ -1,9 +1,8 @@
 ---
 date: 2020-04-18
 categories:
-  - jdk
+  - JDK
 tags:
-  - jdk
   - 源码
   - 多线程
   - 并发
