@@ -1,9 +1,9 @@
 ---
 date: 2020-04-13
 categories:
-  - dubbo
+  - Dubbo
 tags:
-  - dubbo
+  - Dubbo
   - 源码
 description: JDK的SPI机制允许在打包的时候，通过META-INF下的配置文件来切换某接口不同的实现，但是一般认为这种动态切换发生在打包过程，程序运行前。Dubbo在此基础上进行了扩展，以方便打包，并提供运行时的动态切换功能。
 ---

@@ -1,10 +1,10 @@
 ---
 date: 2020-04-20
 categories:
-  - linux
+  - Linux
 tags:
-  - linux
-  - ubuntu
+  - Linux
+  - Ubuntu
 publish: true
 ---
 

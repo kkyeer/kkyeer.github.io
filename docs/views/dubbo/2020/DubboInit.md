@@ -1,9 +1,9 @@
 ---
 date: 2020-04-02
 categories:
-  - dubbo
+  - Dubbo
 tags:
-  - dubbo
+  - Dubbo
   - 源码
 ---
 # Dubbo源码-框架初始化

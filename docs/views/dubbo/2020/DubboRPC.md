@@ -1,10 +1,9 @@
 ---
 date: 2020-04-02
 categories:
-  - dubbo
-  - 源码
+  - Dubbo
 tags:
-  - dubbo
+  - Dubbo
   - 源码
 ---
 # Dubbo源码-RPC调用

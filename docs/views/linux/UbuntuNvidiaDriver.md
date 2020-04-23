@@ -1,10 +1,10 @@
 ---
 date: 2020-04-14
 categories:
-  - linux
+  - Linux
 tags:
-  - linux
-  - ubuntu
+  - Linux
+  - Ubuntu
 publish: true
 ---
 
@@ -81,7 +81,8 @@ publish: true
 2. 输入下列命令，重启后安装便可完成。
 
     ```shell
-``    ```
+    sudo ubuntu-drivers autoinstall
+    ```
 
 3. 输入下列命令，查看驱动是否安装成功。
 
