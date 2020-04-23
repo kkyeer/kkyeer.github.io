@@ -26,7 +26,7 @@ publish: true
 
     在文件最后追加：
 
-    ```conf
+    ``` textfile
     blacklist nouveau
     option nouveau modeset=0
     ```
