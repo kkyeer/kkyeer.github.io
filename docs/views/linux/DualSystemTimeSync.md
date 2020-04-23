@@ -1,9 +1,9 @@
 ---
 date: 2020-04-15
 categories:
-  - linux
+  - Linux
 tags:
-  - linux
+  - Linux
 publish: true
 description: 本文介绍了不同的时区时间计算系统，并给出Windows和Ubuntu双系统时间同步解决方案
 ---
