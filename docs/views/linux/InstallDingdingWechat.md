@@ -1,9 +1,9 @@
 ---
-date: 2020-04-20
+date: 2019-04-20
 categories:
   - Linux
 tags:
-  - Linux
+  - Wine
   - Ubuntu
 publish: true
 ---

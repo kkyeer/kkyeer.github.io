@@ -3,7 +3,7 @@ date: 2020-04-24
 categories:
   - JDK
 tags:
-  - Map
+  - 集合类
 publish: false
 ---
 
