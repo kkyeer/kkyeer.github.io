@@ -65,7 +65,3 @@ sudo apt-get install libx11-dev
 2. fatal error: X11/***.h: No such file or directory
 参考 [【解决】fatal error: X11/XXXX.h: No such file or directory](https://blog.csdn.net/bedisdover/article/details/51840639)
 sudo apt-get install libxext-dev libxrender-dev libxtst-dev
-
-
-
-   

@@ -4,7 +4,7 @@ categories:
   - FrontEnd
 tags:
   - JS
-publish: false
+publish: true
 ---
 
 # JS里的this

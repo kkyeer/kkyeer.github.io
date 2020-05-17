@@ -31,6 +31,6 @@ wine ~/Downloads/DingTalk-x.exe
 终端运行 winecfg，新建配置指向/.wine/drive_c/Program\ Files\ \(x86\)/DingDing/main/current/DingTalk.exe
 ，然后在函数库里添加 riched20.dl riched32.dll msvcp60.dll msvcp120.dll
 
-## 托盘
+## 托盘处理
 
-打开gnome-tweaks，在扩展里打开top-icon-plus
+对于Gnome桌面，安装gnome-tweaks，在扩展里安装插件：top-icon-plus

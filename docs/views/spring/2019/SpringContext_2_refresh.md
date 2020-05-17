@@ -8,7 +8,7 @@ tags:
   - 源码
 publish: true
 ---
-# SpringContext源码-refresh
+# SpringContext源码(2)-refresh方法
 
 AbstractApplicationContext类作为所有Context的共同父类，定义了refresh()方法，代码如下：
 
