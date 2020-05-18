@@ -2,14 +2,15 @@
 date: 2019-10-02
 categories:
   - Spring
-  - 源码
 tag:
   - Spring
+  - Context
   - XmlContext
   - 源码
-publish: false
+publish: true
 ---
-# SpringContext之xml配置(4) xml中的Bean定义节点加载成BeanDefinition对象
+
+# SpringContext(4)-xml中的Bean定义节点加载成BeanDefinition对象
 
 对于XML形式的Resource,实际调用XmlBeanDefinitionReader实例的reader.loadBeanDefinitions(configLocations)方法
 

@@ -1,9 +1,9 @@
 ---
-date: 2020-04-15
+date: 2019-04-15
 categories:
   - Linux
 tags:
-  - Linux
+  - TimeZone
 publish: true
 description: 本文介绍了不同的时区时间计算系统，并给出Windows和Ubuntu双系统时间同步解决方案
 ---
@@ -92,4 +92,4 @@ sudo vim /etc/default/rcS
 
 ————————————————
 版权声明：本文为CSDN博主「JeanCheng」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
-原文链接：https://blog.csdn.net/gatieme/java/article/details/51883981
+原文链接：[https://blog.csdn.net/gatieme/java/article/details/51883981](https://blog.csdn.net/gatieme/java/article/details/51883981)

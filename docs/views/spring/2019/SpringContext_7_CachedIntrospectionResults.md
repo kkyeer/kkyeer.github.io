@@ -1,4 +1,4 @@
-# SpringContext之xml配置(7) CachedIntrospectionResults
+# SpringContext(7)-CachedIntrospectionResults
 
 BeanWrapperImpl对象中会缓存每个Property的PropertyDescriptor以及Bean的相关信息到CachedIntrospectionResults对象中，BeanWrapperImpl调用CachedIntrospectionResults的静态方法forClass来获取CachedIntrospectionResults对象
 

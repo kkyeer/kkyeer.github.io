@@ -1,7 +1,7 @@
 ---
 date: 2020-05-05
 categories:
-  - redis
+  - 待发布
 tags:
   - docker-compose
   - redis-cluster

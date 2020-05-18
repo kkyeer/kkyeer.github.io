@@ -7,16 +7,11 @@ tag:
   - Context
   - XmlContext
   - 源码
-publish: false
+publish: true
 ---
-# SpringContext-配置转化成Resource数组
+# SpringContext(3)-配置文件读取成Resource数组
 
-对于当前实例来说
-
-1. 第一步中，resourceLoader在初始化过程中被赋值成当前的ClassPathXmlApplicationContext
-2. 第二步中，调用getResource(location)方法获取Resource数组时，程序中判断resourceLoader是否是ResourcePatternResolver实例，是则调用ResourcePatternResolver实例的方法,否则调用resourceLoader的方法来加载，在本例中，由于AbstractApplicationContext实现ResourcePatternResolver接口，因此调用了实现方法：```return this.resourcePatternResolver.getResources(locationPattern);```，在这里this.resourcePatternResolver为PathMatchingResourcePatternResolver对象
-
-###### 1.2.1.3.1.1 读取Resource数组：PathMatchingResourcePatternResolver实例方法：getResources(locationPattern)
+调用getResource(location)方法获取Resource数组时，程序中判断resourceLoader是否是ResourcePatternResolver实例，是则调用ResourcePatternResolver实例的方法，否则调用resourceLoader的方法来加载，在本例中，由于AbstractApplicationContext实现ResourcePatternResolver接口，因此调用了实现方法：```return this.resourcePatternResolver.getResources(locationPattern);```，在这里this.resourcePatternResolver为PathMatchingResourcePatternResolver对象，实际调用PathMatchingResourcePatternResolver实例方法：getResources(locationPattern)
 
 此方法根据传入的字符串的特征来调用相应的策略，将传入的字符串解析成Resource数组，策略按顺序如下：
 
@@ -30,7 +25,7 @@ publish: false
 
 至此所有的configLocation字符串已经解析成Resource数组，当前实例中为一个ClassPathContextResource对象的数组，返回后，程序将继续进行Bean定义的读取
 
-###### 1.2.1.3.1.2 AbstractBeanDefinitionReader从Resource对象中加载Bean定义
+## AbstractBeanDefinitionReader从Resource对象中加载Bean定义
 
 AbstractBeanDefinitionReader获取到Resource数组后，会迭代数组元素，对每个Resource执行```loadBeanDefinitions(Resource resource)```方法来加载Bean定义，并将读取到的Bean定义数目加和后返回，具体的读取流程见下一节[AbstractBeanDefinitionReader从Resource对象中加载Bean定义](XmlContext_3_LoadResource.md)
 

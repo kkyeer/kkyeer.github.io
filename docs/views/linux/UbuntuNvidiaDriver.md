@@ -1,9 +1,9 @@
 ---
-date: 2020-04-14
+date: 2019-04-14
 categories:
   - Linux
 tags:
-  - Linux
+  - Nvidia
   - Ubuntu
 publish: true
 ---

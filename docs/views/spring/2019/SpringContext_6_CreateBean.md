@@ -1,4 +1,15 @@
-# SpringContext之xml配置(6) CreateBean
+---
+date: 2019-10-02
+categories:
+  - Spring
+tag:
+  - Spring
+  - Context
+  - XmlContext
+  - 源码
+publish: true
+---
+# SpringContext(6)-CreateBean
 
 实际执行具体的bean创建的，是refresh过程新建的DefaultListableBeanFactory的父类AbstractAutowireCapableBeanFactory中的createBean方法：
 

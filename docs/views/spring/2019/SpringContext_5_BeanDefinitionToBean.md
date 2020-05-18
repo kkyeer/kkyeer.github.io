@@ -2,14 +2,14 @@
 date: 2019-10-02
 categories:
   - Spring
-  - 源码
 tag:
   - Spring
+  - Context
   - XmlContext
   - 源码
-publish: false
+publish: true
 ---
-# SpringContext之xml配置(5) BeanDefinition对象初始化为Bean
+# SpringContext(5)-BeanDefinition对象初始化为Bean
 
 在完成了Environment等必要的bean的创建后，AbstractBeanFactory开始调用doGetBean方法来进行具体的bean创建过程:
 
@@ -202,29 +202,29 @@ BeanFactory和FactoryBean的区别：
 
 ## 1.2 beanDefinition存储在parentBeanFactory的情况
 
-```java
-    // Check if bean definition exists in this factory.
-    BeanFactory parentBeanFactory = getParentBeanFactory();
-    if (parentBeanFactory != null && !containsBeanDefinition(beanName)) {
-        // Not found -> check parent.
-        String nameToLookup = originalBeanName(name);
-        if (parentBeanFactory instanceof AbstractBeanFactory) {
-            return ((AbstractBeanFactory) parentBeanFactory).doGetBean(
-                    nameToLookup, requiredType, args, typeCheckOnly);
+    ```java
+        // Check if bean definition exists in this factory.
+        BeanFactory parentBeanFactory = getParentBeanFactory();
+        if (parentBeanFactory != null && !containsBeanDefinition(beanName)) {
+            // Not found -> check parent.
+            String nameToLookup = originalBeanName(name);
+            if (parentBeanFactory instanceof AbstractBeanFactory) {
+                return ((AbstractBeanFactory) parentBeanFactory).doGetBean(
+                        nameToLookup, requiredType, args, typeCheckOnly);
+            }
+            else if (args != null) {
+                // Delegation to parent with explicit args.
+                return (T) parentBeanFactory.getBean(nameToLookup, args);
+            }
+            else if (requiredType != null) {
+                // No args -> delegate to standard getBean method.
+                return parentBeanFactory.getBean(nameToLookup, requiredType);
+            }
+            else {
+                return (T) parentBeanFactory.getBean(nameToLookup);
+            }
         }
-        else if (args != null) {
-            // Delegation to parent with explicit args.
-            return (T) parentBeanFactory.getBean(nameToLookup, args);
-        }
-        else if (requiredType != null) {
-            // No args -> delegate to standard getBean method.
-            return parentBeanFactory.getBean(nameToLookup, requiredType);
-        }
-        else {
-            return (T) parentBeanFactory.getBean(nameToLookup);
-        }
-    }
-```
+    ```
 
 根据调用的方法不同，调用对应的parentBeanFactory的getBean方法，返回调用结果
 
@@ -232,33 +232,33 @@ BeanFactory和FactoryBean的区别：
 
 ### 1.3.1. 合并并校验BeanDefinition
 
-```java
-    final RootBeanDefinition mbd = getMergedLocalBeanDefinition(beanName);
-    checkMergedBeanDefinition(mbd, beanName, args);
-```
+    ```java
+        final RootBeanDefinition mbd = getMergedLocalBeanDefinition(beanName);
+        checkMergedBeanDefinition(mbd, beanName, args);
+    ```
 
 ### 1.3.2. 初始化BeanDefinition中dependsOn属性定义的bean
 
-```java
-    // Guarantee initialization of beans that the current bean depends on.
-    String[] dependsOn = mbd.getDependsOn();
-    if (dependsOn != null) {
-        for (String dep : dependsOn) {
-            if (isDependent(beanName, dep)) {
-                throw new BeanCreationException(mbd.getResourceDescription(), beanName,
-                        "Circular depends-on relationship between '" + beanName + "' and '" + dep + "'");
-            }
-            registerDependentBean(dep, beanName);
-            try {
-                getBean(dep);
-            }
-            catch (NoSuchBeanDefinitionException ex) {
-                throw new BeanCreationException(mbd.getResourceDescription(), beanName,
-                        "'" + beanName + "' depends on missing bean '" + dep + "'", ex);
+    ```java
+        // Guarantee initialization of beans that the current bean depends on.
+        String[] dependsOn = mbd.getDependsOn();
+        if (dependsOn != null) {
+            for (String dep : dependsOn) {
+                if (isDependent(beanName, dep)) {
+                    throw new BeanCreationException(mbd.getResourceDescription(), beanName,
+                            "Circular depends-on relationship between '" + beanName + "' and '" + dep + "'");
+                }
+                registerDependentBean(dep, beanName);
+                try {
+                    getBean(dep);
+                }
+                catch (NoSuchBeanDefinitionException ex) {
+                    throw new BeanCreationException(mbd.getResourceDescription(), beanName,
+                            "'" + beanName + "' depends on missing bean '" + dep + "'", ex);
+                }
             }
         }
-    }
-```
+    ```
 
 ### 1.3.3. 根据不同的scope调用不同的策略进行创建
 
