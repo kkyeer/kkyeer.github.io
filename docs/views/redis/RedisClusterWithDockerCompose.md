@@ -20,59 +20,52 @@ publish: false
 version: "3"
 services:
   redis11:
-    image: redis
-    ports:
-      - 46011:6379
-    volumes:
-      - /etc/redis/redis.conf:/usr/local/etc/redis/redis.conf
+    image: redis:6.0.1
     command:
-      redis-server /usr/local/etc/redis/redis.conf
-    container_name: redis1
+      redis-server --bind 0.0.0.0 --maxmemory 20mb --save 900 1
+    container_name: redis11
+    networks:
+      redis_network:
+        ipv4_address: 172.19.0.11
+    restart: always
+
   redis12:
-    image: redis
-    ports:
-      - 46012:6379
-    volumes:
-      - /etc/redis/redis.conf:/usr/local/etc/redis/redis.conf
+    image: redis:6.0.1
     command:
-      redis-server /usr/local/etc/redis/redis.conf
-    container_name: redis2
+      redis-server --bind 0.0.0.0 --maxmemory 20mb --slaveof 172.19.0.11 6379 --save 900 1
+    container_name: redis12
+    networks:
+      redis_network:
+        ipv4_address: 172.19.0.12
+    restart: always
+
   redis13:
-    image: redis
-    ports:
-      - 46013:6379
-    volumes:
-      - /etc/redis/redis.conf:/usr/local/etc/redis/redis.conf
+    image: redis:6.0.1
     command:
-      redis-server /usr/local/etc/redis/redis.conf
-    container_name: redis3
-  redis21:
-    image: redis
-    ports:
-      - 46021:6379
-    volumes:
-      - /etc/redis/redis.conf:/usr/local/etc/redis/redis.conf
+      redis-server --bind 0.0.0.0 --maxmemory 20mb --slaveof 172.19.0.11 6379 --save 900 1
+    container_name: redis13
+    networks:
+      redis_network:
+        ipv4_address: 172.19.0.13
+    restart: always
+  redis_sentinel_1:
+    image: redis:6.0.1
     command:
-      redis-server /usr/local/etc/redis/redis.conf
-    container_name: redis4
-  redis22:
-    image: redis
-    ports:
-      - 46022:6379
+      redis-sentinel /usr/local/etc/redis/sentinel.conf --save 900 1
+    container_name: redis_sentinel_1
     volumes:
-      - /etc/redis/redis.conf:/usr/local/etc/redis/redis.conf
-    command:
-      redis-server /usr/local/etc/redis/redis.conf
-    container_name: redis5
-  redis23:
-    image: redis
-    ports:
-      - 46023:6379
-    volumes:
-      - /etc/redis/redis.conf:/usr/local/etc/redis/redis.conf
-    command:
-      redis-server /usr/local/etc/redis/redis.conf
-    container_name: redis6
+      - ./sentinel.conf:/usr/local/etc/redis/sentinel.conf
+    depends_on:
+      - redis11
+      - redis12
+      - redis13
+    networks:
+      redis_network:
+        ipv4_address: 172.19.0.101
+    restart: always
+networks:
+  redis_network:
+    external: true
 ```
 
 ## 配置集群
