@@ -8,7 +8,7 @@ tags:
 publish: true
 ---
 
-# 修复IDEA光标不跟随问题
+# 修复Ubuntu系统下IDEA输入法不跟随光标问题
 
 ## 下载编译JetBrainsRuntime
 
