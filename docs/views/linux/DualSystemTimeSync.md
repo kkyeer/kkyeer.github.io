@@ -80,11 +80,20 @@ HKEY_LOCAL_MACHINE/SYSTEM/CurrentControlSet/Control/TimeZoneInformation/
 
 ### 6.2. 在Ubuntu下关闭UTC
 
-这个用这个方法是我比较推荐的：按Ctrl+Alt+T调出终端，输入：
+这个用这个方法是我比较推荐的：
+16.04之前：按Ctrl+Alt+T调出终端，输入：
 
 ```shell
 sudo vim /etc/default/rcS
 ```
+
+16.04之后：
+
+```shell
+timedatectl set-local-rtc 1 --adjust-system-clock
+```
+
+保证再次使用timedatectl命令，输出的RTC in local TZ:yes
 
 找到```UTC=yes```这一行，改成```UTC=no```
 
