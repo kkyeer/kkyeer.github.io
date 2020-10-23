@@ -1,6 +1,6 @@
 module.exports = {
-  "title": "kkyeer's blog",
-  "description": "born to code",
+  "title": "一水轩",
+  "description": "Born for code",
   "dest": "public",
   "head": [
     [
@@ -91,7 +91,8 @@ module.exports = {
     }
   },
   "markdown": {
-    "lineNumbers": true
+    "lineNumbers": true,
+    "extractHeaders": [ 'h2', 'h3', 'h4' ]
   },
   plugins: [
     'flowchart'
