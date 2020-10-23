@@ -6,7 +6,7 @@ client.scp("public",{
   port:22,
   host:'www.tpfuture.top',
   username: 'ngmng',
-  privateKey: require('fs').readFileSync(process.env.USERPROFILE+'\\.ssh\\id_rsa'),
+  privateKey: require('fs').readFileSync("/Users/chengyingzhang"+'/.ssh/id_rsa'),
   path:'/home/ngmng/data/dist/'
 },function (error) {
   console.log(error)
