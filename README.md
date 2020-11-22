@@ -1,11 +1,12 @@
-# vuepress-theme-reco-demo
+# 博客
 
-Blog demo for vuepress-theme-reco
+基于 vuepress-theme-reco
 
 ```bash
 # 编译
-npm run build
+yarn install
+yarn build
 
 # 启动
-npm run dev
+yarn dev
 ```
