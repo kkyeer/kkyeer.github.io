@@ -26,3 +26,45 @@ publish: true
 update user set authentication_string = password('root'), password_expired = 'N', password_last_changed = now() where user = 'root';
 
 在之前的版本中，密码字段的字段名是 password，5.7版本改为了 authentication_string
+
+5、退出 mysql，编辑 /etc/my.cnf 文件，删除 skip-grant-tables=1 的内容
+
+6、重启 mysqld 服务，再用新密码登录即可
+
+另外，MySQL 5.7 在初始安装后（CentOS7 操作系统）会生成随机初始密码，并在 /var/log/mysqld.log 中有记录，可以通过 cat 命令查看，找 password 关键字
+
+找到密码后，在本机以初始密码登录，并且（也只能）通过 alter user 'root'@'localhost' identified by 'root' 命令，修改 root 用户的密码为 root，然后退出，重新以root用户和刚设置的密码进行登录即可。"
+184,nginx开机启动,1,1,1,2018-11-24 12:04:09,1,"切换到/lib/systemd/system/目录，创建nginx.service文件vim nginx.service
+
+```console
+# cd /lib/systemd/system/
+# vim nginx.service
+```
+
+文件内容如下：
+
+```conf
+[Unit]
+Description=nginx
+After=network.target
+
+[Service]
+Type=forking
+ExecStart=/usr/local/nginx/sbin/nginx
+ExecReload=/usr/local/nginx/sbin/nginx reload
+ExecStop=/usr/local/nginx/sbin/nginx quit
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
+```
+
+    退出并保存文件，执行systemctl enable nginx.service使nginx开机启动
+
+```
+# systemctl enable nginx.service
+```
+
+---------------------
+
+本文来自 stinkstone 的CSDN 博客 ，全文地址请点击：https://blog.csdn.net/stinkstone/article/details/78082748?utm_source=copy
