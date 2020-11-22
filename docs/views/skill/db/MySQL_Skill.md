@@ -1,9 +1,9 @@
 ---
 date: 2020-08-25
 categories:
-  - skill
+  - Skill
 tags:
-  - skill
+  - 
 publish: false
 ---
 
