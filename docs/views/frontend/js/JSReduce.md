@@ -1,7 +1,7 @@
 ---
 date: 2019-05-14
 categories:
-  - FrontEnd
+  - 前端
 tags:
   - JS
 publish: true
