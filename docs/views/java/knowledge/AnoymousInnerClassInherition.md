@@ -1,7 +1,7 @@
 ---
 date: 2018-11-24
 categories:
-  - java
+  - Java
 tags:
   - 
 publish: true
