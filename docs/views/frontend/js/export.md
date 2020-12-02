@@ -3,7 +3,7 @@ date: 2018-11-24
 categories:
   - 前端
 tags:
-  - js
+  - JS
 publish: true
 ---
 

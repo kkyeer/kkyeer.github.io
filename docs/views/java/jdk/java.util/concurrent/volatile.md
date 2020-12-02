@@ -1,7 +1,7 @@
 ---
 date: 2020-04-18
 categories:
-  - JDK
+  - Java
 tags:
   - 源码
   - 多线程

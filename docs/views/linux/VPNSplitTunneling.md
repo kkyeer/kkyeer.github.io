@@ -1,4 +1,4 @@
-路径:/Library/Application Support/Tunnelblick/Shared/open.tblk/Contents/Resources
+路径:/Library/Application\ Support/Tunnelblick/Shared/open.tblk/Contents/Resources
 
 配置:
     route-nopull

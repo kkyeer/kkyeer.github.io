@@ -1,7 +1,7 @@
 ---
 date: 2020-11-22
 categories:
-  - Skill
+  - 技巧
 tags:
   - markdown
 publish: true

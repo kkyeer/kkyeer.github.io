@@ -1,9 +1,9 @@
 ---
 date: 2019-05-14
 categories:
-  - Skill
+  - 技巧
 tags:
-  - Jar
+  - JAR
 publish: true
 ---
 

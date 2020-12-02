@@ -1,7 +1,7 @@
 ---
 date: 2020-09-19
 categories:
-  - JDK
+  - Java
 tags:
   - BUG
 publish: true

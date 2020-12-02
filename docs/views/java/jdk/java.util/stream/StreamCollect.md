@@ -1,7 +1,7 @@
 ---
 date: 2018-06-14
 categories:
-  - JDK
+  - Java
 tags:
   - Stream
   - 源码解析
