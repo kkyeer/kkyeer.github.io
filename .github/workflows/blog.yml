@@ -33,11 +33,9 @@ jobs:
     - name: Install SSH key
       uses: shimataro/ssh-key-action@v2
       with:
-        key: ${{ secrets.SSH_KEY }}
+        key: ${{ secrets.SSHKEY }}
         name: id_rsa # optional
         known_hosts: ${{ secrets.KNOWN_HOSTS }}
     - name: upload
-      env:
-        SSHKEY: ${{ secrets.SSHKEY }}
       run: node upload.js
     
