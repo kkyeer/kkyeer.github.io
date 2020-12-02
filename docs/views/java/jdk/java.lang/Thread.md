@@ -4,7 +4,7 @@ categories:
   - 待发布
 tags:
   - 源码
-  - JDK1.8
+  - Java
 publish: false
 ---
 

@@ -1,7 +1,7 @@
 ---
 date: 2020-04-24
 categories:
-  - JDK
+  - Java
 tags:
   - 集合类
 publish: true

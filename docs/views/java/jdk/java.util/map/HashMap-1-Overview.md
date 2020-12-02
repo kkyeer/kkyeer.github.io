@@ -1,9 +1,9 @@
 ---
 date: 2020-04-15
 categories:
-  - JDK
+  - Java
 tags:
-  - JDK1.8
+  - Java
   - 源码
 publish: true
 ---

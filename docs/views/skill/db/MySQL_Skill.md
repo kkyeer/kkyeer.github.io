@@ -1,7 +1,7 @@
 ---
 date: 2020-08-25
 categories:
-  - Skill
+  - 技巧
 tags:
   - 
 publish: false

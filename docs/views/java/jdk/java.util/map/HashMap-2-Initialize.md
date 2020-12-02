@@ -1,7 +1,7 @@
 ---
 date: 2020-04-15
 categories:
-  - JDK
+  - Java
 tags:
   - 源码
 publish: true

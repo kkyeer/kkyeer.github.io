@@ -1,7 +1,7 @@
 ---
 date: 2019-05-14
 categories:
-  - JDK
+  - Java
 tags:
   - 注解
 publish: true
