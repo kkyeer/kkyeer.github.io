@@ -30,8 +30,14 @@ jobs:
       run: yarn install
     - name: build blog
       run: yarn build
+    - name: Install SSH key
+      uses: shimataro/ssh-key-action@v2
+      with:
+        key: ${{ secrets.SSH_KEY }}
+        name: id_rsa # optional
+        known_hosts: ${{ secrets.KNOWN_HOSTS }}
     - name: upload
       env:
         SSHKEY: ${{ secrets.SSHKEY }}
-      run: node upload.js $SSHKEY
+      run: node upload.js
     
