@@ -25,7 +25,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: install
-      run: npm install -g yarn & yarn install 
+      uses: c-hive/gha-yarn-cache@v1
     - name: build blog
       run: yarn build
     - name: upload
