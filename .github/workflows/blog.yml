@@ -30,6 +30,6 @@ jobs:
       run: yarn build
     - name: upload
       env:
-        SSH-KEY: ${{ secrets.SSHKEY }}
-      run: node upload.js $SSH-KEY
+        SSHKEY: ${{ secrets.SSHKEY }}
+      run: node upload.js $SSHKEY
     
