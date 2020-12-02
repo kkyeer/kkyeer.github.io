@@ -24,7 +24,13 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    - name: install
     - run: npm install -g yarn
     - run: yarn install
+    - name: build
     - run: npm run build --if-present
-    - run: npm test
+    - name: upload
+      env:
+        SSH-KEY: ${{ secrets.SSHKEY }}
+      run: node upload.js $SSH-KEY
+    
