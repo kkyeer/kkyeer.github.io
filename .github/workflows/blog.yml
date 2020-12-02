@@ -27,7 +27,7 @@ jobs:
     - name: cache
       uses: c-hive/gha-yarn-cache@v1
     - name: install
-      run: npm install -g yarn & yarn install
+      run: yarn install
     - name: build blog
       run: yarn build
     - name: upload
