@@ -1,10 +1,10 @@
 ---
 date: 2020-12-15
 categories:
-  -  编程技巧
+  -  知识技能
 tags:
   - SQL
-publish: false
+publish: true
 ---
 
 # SQL数组生成临时表
