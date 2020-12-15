@@ -3,7 +3,7 @@ date: 2019-10-14
 categories:
   - Linux
 tags:
-  - 技巧
+  - 知识技能
 publish: true
 ---
 

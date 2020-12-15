@@ -1,7 +1,7 @@
 ---
 date: 2020-09-16
 categories:
-  - 技巧
+  - 知识技能
 tags:
   - 调试
 publish: false
