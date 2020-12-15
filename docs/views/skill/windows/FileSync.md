@@ -1,7 +1,7 @@
 ---
 date: 2019-05-14
 categories:
-  - 技巧
+  - 知识技能
 tags:
   - FileSync
 publish: true

@@ -1,7 +1,7 @@
 ---
 date: 2020-04-17
 categories:
-  - 技巧
+  - 知识技能
 tags:
   - IDEA
 publish: true
