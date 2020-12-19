@@ -75,13 +75,13 @@ module.exports = {
         "link": "https://vuepress-theme-reco.recoluan.com"
       }
     ],
-    "logo": "/logo.png",
+    "logo": "https://cdn.jsdelivr.net/gh/kkyeer/picbed/logo.png",
     "search": true,
     "searchMaxSuggestions": 10,
     "sidebar": "auto",
     "lastUpdated": "Last Updated",
     "author": "kkyeer",
-    "authorAvatar": "/avatar.png",
+    "authorAvatar": "https://cdn.jsdelivr.net/gh/kkyeer/picbed/avatar.png",
     "record": "浙ICP备18011775号",
     "recordLink":"http://www.beian.miit.gov.cn",
     "startYear": "2019",
