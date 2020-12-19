@@ -1,6 +1,8 @@
+const path = require('path')
+
 module.exports = {
-  "title": "kkyeer's blog",
-  "description": "born to code",
+  "title": "一水轩",
+  "description": "Born for code",
   "dest": "public",
   "head": [
     [
@@ -91,9 +93,36 @@ module.exports = {
     }
   },
   "markdown": {
-    "lineNumbers": true
+    "lineNumbers": true,
+    "extractHeaders": [ 'h2', 'h3', 'h4' ]
   },
   plugins: [
     'flowchart'
-  ]
+  ],
+  configureWebpack: () => {
+    const NODE_ENV = process.env.NODE_ENV
+    //判断是否是生产环境
+    if(NODE_ENV === 'production'){
+      return {
+        output: {
+          publicPath: 'https://cdn.jsdelivr.net/gh/kkyeer/blog@gh-pages/'
+        },
+        resolve: {
+          //配置路径别名
+          alias: {
+            'public': path.resolve(__dirname, './public') 
+          }
+        }
+      }
+    }else{
+      return {
+        resolve: {
+          //配置路径别名
+          alias: {
+            'public': path.resolve(__dirname, './public') 
+          }
+        }
+      }
+    }
+  }
 }

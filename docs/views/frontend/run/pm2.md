@@ -1,7 +1,7 @@
 ---
 date: 2019-01-14
 categories:
-  - FrontEnd
+  - 前端
 tags:
   - pm2
 publish: true
