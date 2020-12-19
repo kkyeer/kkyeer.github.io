@@ -105,7 +105,7 @@ module.exports = {
     if(NODE_ENV === 'production'){
       return {
         output: {
-          publicPath: 'https://cdn.jsdelivr.net/gh/kkyeer/blog@cdn/'
+          publicPath: 'https://cdn.jsdelivr.net/gh/kkyeer/blog@gh-pages/'
         },
         resolve: {
           //配置路径别名
