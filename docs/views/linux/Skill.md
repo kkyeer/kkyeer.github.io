@@ -1,7 +1,7 @@
 ---
 date: 2019-05-14
 categories:
-  - Skill
+  - 知识技能
 tags:
   - Linux
 publish: true

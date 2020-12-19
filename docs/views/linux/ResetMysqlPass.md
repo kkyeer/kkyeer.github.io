@@ -3,7 +3,7 @@ date: 2018-08-14
 categories:
   - Linux
 tags:
-  - Mysql
+  - MySQL
 publish: true
 ---
 
