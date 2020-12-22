@@ -12,8 +12,6 @@ publish: false
 
 JUC包中有多个常用类型的原子操作包装类，包括```AtomicInteger```,```AtomicLong```,```AtomicReference```，内部封装了对于原生数值、索引的操作，主要是更新数据时使用CAS操作。
 
-另外值得注意的是，针对CAS操作中的ABA问题，提供了```AtomicStampedReference```类来支持带version的CAS操作
-
 基本类型的封装，基本原理是通过底层的```Unsafe```类CAS方法更新数组对应的内存空间的值:
 
 - AtomicBoolean
@@ -23,7 +21,11 @@ JUC包中有多个常用类型的原子操作包装类，包括```AtomicInteger`
 - AtomicLongArray
 - AtomicReferenceArray
 
-针对并发更新字段的情景，
+另外值得注意的是，针对CAS操作中的ABA问题，提供了```AtomicStampedReference```类来支持带version的CAS操作
+
+针对并发经计算字段的情景，提供了下面的几个类来提高操作效率
+
+
 
 ## LazySet方法：高效非可靠volitile
 
