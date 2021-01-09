@@ -25,8 +25,6 @@ JUC包中有多个常用类型的原子操作包装类，包括```AtomicInteger`
 
 针对并发经计算字段的情景，提供了下面的几个类来提高操作效率
 
-
-
 ## LazySet方法：高效非可靠volitile
 
 大部分Atomic类提供了LazySet方法，Java Doc对其描述为最终将数值变更为给定值，比较模糊。
@@ -43,7 +41,7 @@ JUC包中有多个常用类型的原子操作包装类，包括```AtomicInteger`
     }
 ```
 
-追踪代码：```Unsafe.putOrdered*``` -> unsafe.cpp：```SET_FIELD_VOLATILE ``` -> ```OrderAccess::release_store_fence``` -> orderAccess.hpp: ```release_store_fence    xchg ```，在X86指令集下， 此方法最终实现为xchg指令。
+追踪代码：```Unsafe.putOrdered*``` -> unsafe.cpp：```SET_FIELD_VOLATILE``` -> ```OrderAccess::release_store_fence``` -> orderAccess.hpp: ```release_store_fence xchg```，在X86指令集下， 此方法最终实现为xchg指令。
 根据StackOverFlow的说法，这个指令的作用类似Store-Store屏障，**保证此指令前面的指令Happen-Before此指令**，但是此指令和后面的指令可能产生指令重排序，**不保证此指令的操作马上对其他CPU可见**，但是此指令比volitile关键字用的MESI协议或总线锁轻量很多（20个cycle）,因此对于某些场景，可以用LasySet方法提升效率，如常见的计数逻辑，多写少读且不强求所有时间的强一致性。
 
 参考1: [Stack overflow上的讨论](https://stackoverflow.com/questions/1468007/atomicinteger-lazyset-vs-set)
@@ -91,3 +89,4 @@ JUC包中有多个常用类型的原子操作包装类，包括```AtomicInteger`
 
 经本机测试，使用LazySet的效率是直接Set的三倍，原因是直接Set的情况下，由于value是[volatile](https://www.tpfuture.top/views/java/jdk/java.util/concurrent/volatile.html)的，根据JMM的要求，每次set（即store操作）都会触发内存屏障（PCIE锁）导致效率低。
 
+### strip
