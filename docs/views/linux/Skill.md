@@ -16,73 +16,107 @@ publish: true
 - 需要永久配置密码的话就去redis.conf的配置文件中找到requirepass这个参数，如下配置：
 
 修改redis.conf配置文件　　
-```
+
+```file
 requirepass foobared
 ```
+
 或者在redis-cli里
+
 ```sh
-config set requirepass MayuanTest
+config set requirepass foobared
 ```
+
 ## 文件按时间排序
+
 从旧到新：
-```
+
+```shell
 ls -trl
 ```
+
 从新到旧：
-```
+
+```shell
 ls -tl
 ```
 
-
-其中 
 -t表示按修改时间排序，最新的在最上
 -r表示反向排序
 
-
 ## dns修改
+
 ```sh
 vim /etc/resolv.conf
 ```
 
 ## 安装多版本的Python
+
 1. 下载pyenv脚本
-```bash
-curl -L https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer|bash
-```
+
+  ```bash
+  curl -L https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer|bash
+  ```
+
 2. 将下面内容加入 ~/.bashrc
-export PATH="/home/python/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+
+  ```sh
+  export PATH="/home/python/.pyenv/bin:$PATH"
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+  ```
+
 3. 使上述更改生效
-```
-source ~/.bashrc
-```
+
+  ```sh
+  source ~/.bashrc
+  ```
+
 4. 列出所有可用版本
-pyenv install -l
+
+  ```sh
+  pyenv install -l
+  ```
+
 5. 安装编译环境
-sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
-libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \
-xz-utils tk-dev libffi-dev liblzma-dev python-openssl
+
+  ```sh
+  sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
+  libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \
+  xz-utils tk-dev libffi-dev liblzma-dev python-openssl
+  ```
+
 6. 安装某版本
-pyenv install 3.5.0 -v
+
+  ```sh
+  pyenv install 3.5.0 -v
+  ```
+
 7. 上面直接安装较慢，可以考虑手动下载对应的安装包后，放入
 {user-home}/.pyenv/cache目录下,重新执行上面的命令进行安装
 8. 查看安装版本
-pyenv versions
+
+  ```sh
+  pyenv versions
+  ```
+
 9. to be continue
 
 ## 查看文件夹大小
+
 ```sh
 du -h {dir_path}
 ```
+
 ## SSH添加本地key到远程服务器
-```
+
+```sh
 ssh-copy-id root@服务器域名或IP
 ```
 
 ## 杀掉指定关键词的进程
 
-```
+```sh
 ps -ef|grep XXXXXXX|grep -v grep|cut -c 9-15|xargs kill -9
 ```
 
@@ -114,6 +148,7 @@ fsck选项 –启动时fsck检查的顺序。为0就表示不检查，（/）分
 ```
 
 ## ubuntu中的samba配置
+
 vim /etc/samba/smb.conf
 重启samba服务
 service smbd restart
@@ -124,12 +159,14 @@ service smbd restart
 [详细说明](http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html)
 
 ## ssh
+
 ### ssh传输文件
+
 ```shell
 scp /path/filename username@servername:/path   
 ```
 
-## Ubuntu修复DNS开机重置到127.0.0.53
+## Ubuntu修复DNS开机重置
 
 执行```sudo vim /etc/network/interfaces```
     添加一行DNS配置，比如```dns-nameservers 8.8.8.8```
@@ -160,3 +197,17 @@ Filesystem Size Used Avail Use% Mounted on
 2、排序看最大的未被释放的文件大小，命令：sort -nr -k 7 deleted_file>sort_deleted_file
 3、more sort_deleted_file 查看前面那些文件，将占用空间大的程序kill掉
 kill 进程号
+
+## PCI设备
+
+### 列出所有PCI设备
+
+```sh
+lspci
+```
+
+类似的还有列出所有USB
+
+```sh
+lsusb
+```

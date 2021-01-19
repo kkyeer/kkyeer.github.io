@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = {
   "title": "一水轩",
   "description": "Born for code",
@@ -73,13 +75,13 @@ module.exports = {
         "link": "https://vuepress-theme-reco.recoluan.com"
       }
     ],
-    "logo": "/logo.png",
+    "logo": "https://cdn.jsdelivr.net/gh/kkyeer/picbed/logo.png",
     "search": true,
     "searchMaxSuggestions": 10,
     "sidebar": "auto",
     "lastUpdated": "Last Updated",
     "author": "kkyeer",
-    "authorAvatar": "/avatar.png",
+    "authorAvatar": "https://cdn.jsdelivr.net/gh/kkyeer/picbed/avatar.png",
     "record": "浙ICP备18011775号",
     "recordLink":"http://www.beian.miit.gov.cn",
     "startYear": "2019",
@@ -96,5 +98,31 @@ module.exports = {
   },
   plugins: [
     'flowchart'
-  ]
+  ],
+  configureWebpack: () => {
+    const NODE_ENV = process.env.NODE_ENV
+    //判断是否是生产环境
+    if(NODE_ENV === 'production'){
+      return {
+        output: {
+          publicPath: 'https://cdn.jsdelivr.net/gh/kkyeer/blog@gh-pages/'
+        },
+        resolve: {
+          //配置路径别名
+          alias: {
+            'public': path.resolve(__dirname, './public') 
+          }
+        }
+      }
+    }else{
+      return {
+        resolve: {
+          //配置路径别名
+          alias: {
+            'public': path.resolve(__dirname, './public') 
+          }
+        }
+      }
+    }
+  }
 }
