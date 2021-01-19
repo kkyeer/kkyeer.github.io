@@ -1,0 +1,97 @@
+<mxfile host="65bd71144e" modified="2021-01-05T03:24:42.063Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.52.1 Chrome/83.0.4103.122 Electron/9.3.5 Safari/537.36" version="13.10.0" etag="mVwuoLUNJG1xINPmHo8-" type="embed">
+    <diagram id="C-7BoatS1rkwXfEbbwEP" name="Page-1">
+        <mxGraphModel dx="943" dy="670" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#F4F1DE" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="7" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#E07A5F;fillColor=#F2CC8F;fontColor=#393C56;labelBackgroundColor=#F4F1DE;" edge="1" parent="1" source="4" target="6">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="Spring上下文初始化" style="rounded=1;whiteSpace=wrap;html=1;sketch=0;strokeColor=#E07A5F;fillColor=#F2CC8F;fontColor=#393C56;" vertex="1" parent="1">
+                    <mxGeometry x="69" y="30" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="19" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#E07A5F;fillColor=#F2CC8F;fontColor=#393C56;" edge="1" parent="1" source="6" target="14">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="&lt;div&gt;application-auto-upgrading.yml&lt;/div&gt;&lt;div&gt;注入AutoUpgradingConfig.java&lt;/div&gt;&lt;div&gt;Job-&amp;gt;Flow-&amp;gt;Step-&amp;gt;JobName&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;sketch=0;strokeColor=#E07A5F;fillColor=#F2CC8F;fontColor=#393C56;" vertex="1" parent="1">
+                    <mxGeometry x="19" y="130" width="220" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#E07A5F;fillColor=#F2CC8F;fontColor=#393C56;" edge="1" parent="1" source="11" target="14">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="Controller层&lt;br&gt;调用到触发方法" style="rounded=1;whiteSpace=wrap;html=1;sketch=0;strokeColor=#E07A5F;fillColor=#F2CC8F;fontColor=#393C56;" vertex="1" parent="1">
+                    <mxGeometry x="369" y="30" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="21" value="" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#E07A5F;fillColor=#F2CC8F;fontColor=#393C56;" edge="1" parent="1" source="14" target="20">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="根据读入的Job，顺序执行flow里的step" style="rounded=1;whiteSpace=wrap;html=1;sketch=0;strokeColor=#E07A5F;fillColor=#F2CC8F;fontColor=#393C56;" vertex="1" parent="1">
+                    <mxGeometry x="369" y="130" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="23" value="" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#E07A5F;fillColor=#F2CC8F;fontColor=#393C56;" edge="1" parent="1" source="20" target="22">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="39" value="upgrading" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=16;fontColor=#393C56;" vertex="1" connectable="0" parent="23">
+                    <mxGeometry x="0.6593" relative="1" as="geometry">
+                        <mxPoint y="6" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="24" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;strokeColor=#E07A5F;fillColor=#F2CC8F;fontColor=#393C56;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="20" target="25">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="579" y="330" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="26" value="Sftp" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=#393C56;fontSize=16;" vertex="1" connectable="0" parent="24">
+                    <mxGeometry x="0.05" y="1" relative="1" as="geometry">
+                        <mxPoint x="20" y="1" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="30" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#E07A5F;fillColor=#F2CC8F;fontColor=#393C56;" edge="1" parent="1" source="20" target="28">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="37" value="parseFile" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=16;fontColor=#393C56;" vertex="1" connectable="0" parent="30">
+                    <mxGeometry x="0.3083" y="1" relative="1" as="geometry">
+                        <mxPoint x="23.33" y="1" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="31" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#E07A5F;fillColor=#F2CC8F;fontColor=#393C56;" edge="1" parent="1" source="20" target="29">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="38" value="generateReport" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=16;fontColor=#393C56;" vertex="1" connectable="0" parent="31">
+                    <mxGeometry x="0.5313" y="-1" relative="1" as="geometry">
+                        <mxPoint x="11.67" y="-1" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="20" value="对于每个Step，根据Type匹配1个或多个Excutor" style="rounded=1;whiteSpace=wrap;html=1;sketch=0;strokeColor=#E07A5F;fillColor=#F2CC8F;fontColor=#393C56;" vertex="1" parent="1">
+                    <mxGeometry x="369" y="230" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="40" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;strokeColor=#E07A5F;fillColor=#F2CC8F;fontSize=16;fontColor=#393C56;" edge="1" parent="1" source="22">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="429" y="680" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="22" value="经销商等参数&lt;br&gt;注入上下文" style="whiteSpace=wrap;html=1;rounded=1;fontColor=#393C56;strokeColor=#E07A5F;fillColor=#F2CC8F;sketch=0;" vertex="1" parent="1">
+                    <mxGeometry x="369" y="560" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="25" value="&lt;pre style=&quot;font-family: &amp;#34;inconsolata&amp;#34; , monospace ; font-size: 10.5pt&quot;&gt;&lt;font color=&quot;#000000&quot;&gt;SFTPAutoStepExecutor&lt;/font&gt;&lt;/pre&gt;" style="rounded=1;whiteSpace=wrap;html=1;sketch=0;strokeColor=#E07A5F;fillColor=#F2CC8F;fontColor=#393C56;" vertex="1" parent="1">
+                    <mxGeometry x="589" y="290" width="220" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="28" value="&lt;pre style=&quot;font-family: &amp;#34;inconsolata&amp;#34; , monospace ; font-size: 10.5pt&quot;&gt;&lt;font color=&quot;#000000&quot;&gt;ParseFileAutoStepExecutor&lt;/font&gt;&lt;/pre&gt;" style="rounded=1;whiteSpace=wrap;html=1;sketch=0;strokeColor=#E07A5F;fillColor=#F2CC8F;fontColor=#393C56;" vertex="1" parent="1">
+                    <mxGeometry x="589" y="370" width="220" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="29" value="&lt;pre style=&quot;font-family: &amp;#34;inconsolata&amp;#34; , monospace ; font-size: 10.5pt&quot;&gt;&lt;pre style=&quot;font-family: &amp;#34;inconsolata&amp;#34; , monospace ; font-size: 10.5pt&quot;&gt;&lt;font color=&quot;#000000&quot;&gt;GenerateReportAutoStepExecutor&lt;/font&gt;&lt;/pre&gt;&lt;/pre&gt;" style="rounded=1;whiteSpace=wrap;html=1;sketch=0;strokeColor=#E07A5F;fillColor=#F2CC8F;fontColor=#393C56;" vertex="1" parent="1">
+                    <mxGeometry x="589" y="450" width="220" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="33" value="..." style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=none;sketch=0;fontColor=#393C56;fontSize=32;" vertex="1" parent="1">
+                    <mxGeometry x="479" y="500" width="40" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="34" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;strokeColor=#E07A5F;fillColor=#F2CC8F;fontSize=32;fontColor=#393C56;" edge="1" parent="1" source="33" target="33">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="41" value="根据配置的JobName，从SpringBatch上下文中获取并顺序执行" style="whiteSpace=wrap;html=1;rounded=1;fontColor=#393C56;strokeColor=#E07A5F;fillColor=#F2CC8F;sketch=0;" vertex="1" parent="1">
+                    <mxGeometry x="369" y="680" width="120" height="60" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
