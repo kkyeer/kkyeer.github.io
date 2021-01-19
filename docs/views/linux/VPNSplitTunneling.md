@@ -13,14 +13,14 @@ publish: true
 
 ## 前提条件
 
-1. 拿到ovpn文件
+1. 可以拿到ovpn文件
 2. 使用TunnelBlick能连接成功
 
 ## 步骤(Mac)
 
-1. TunnelBlick配置，与正常配置相同
+1. 使用[TunnelBlick](https://tunnelblick.net)作为客户端，安装好后，双击ovpn文件即可安装（MAC）
 2. 停止正在运行的VPN
-3. 找到ovpn配置文件，路径```/Library/Application\ Support/Tunnelblick/Shared/{你的VPN在TunnelBlick的名称}.tblk/Contents/Resources
+3. 找到ovpn配置文件，路径```/Library/Application\ Support/Tunnelblick/Shared/{你的VPN在TunnelBlick的名称}.tblk/Contents/Resources```
 4. 在配置文件增加下面几行
 
     说明：
@@ -39,3 +39,4 @@ publish: true
     ```
 
 5. 重启VPN
+6. 使用MTR等工具验证，外部网站是否不走VPN服务器
