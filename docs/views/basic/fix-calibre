@@ -1,0 +1,1 @@
+sudo mkdir -p /home/kk/app/calibre && sudo tar xvf /home/kk/Downloads/calibre-5.9.0-x86_64.txz -C /home/kk/app/calibre && sudo /home/kk/app/calibre/calibre_postinstall
