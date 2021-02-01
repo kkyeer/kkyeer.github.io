@@ -86,6 +86,10 @@ Netty使用引用计数来判断ByteBuf对象是否可以被释放
 
 负责初始化，分配内存
 
+### Pooled/Unpooled
+
+### ByteBufUtil
+
 ## 冷知识
 
 ### 客户端连接服务器的最大连接数
