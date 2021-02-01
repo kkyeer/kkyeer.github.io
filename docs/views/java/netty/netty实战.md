@@ -69,7 +69,22 @@ EMBEDDED:测试用
 
 ## ByteBuf
 
-Netty使用引用计数来判断ByteBuf对象是否可以被释放，因此
+Netty使用引用计数来判断ByteBuf对象是否可以被释放
+
+类型：
+
+1. HeapBuf: 堆上分配的Buffer
+2. DirectBuffer: allocate和deallocate代价比较高，需要池化
+3. CompositeByteBuf: 包装各种Buffer，比如分离Header的buf和Body的Buf
+
+### Discard和Clear
+
+1. Discard:将当前的读位置后的数据复制到头部，涉及到复制
+2. clear:重置指针位置
+
+### ByteBufAllocator
+
+负责初始化，分配内存
 
 ## 冷知识
 
