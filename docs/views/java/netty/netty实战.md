@@ -33,6 +33,11 @@ channel是线程安全的？？？（如何理解这个的线程安全）
 2. write
 3. writeAndFlush
 
+### Channel的生命周期
+
+Channel Registered -> Channel Active -> Channel Inactive ->
+Channel Unregistered
+
 ## Channel Handler
 
 流上**事件**处理器，如active，read事件，netty提供了类似***ChannelInboundHandlerAdapter***的基础类，这些类实现了对应的接口，内部将对应的事件转发到Pipeline的下一个Handler
