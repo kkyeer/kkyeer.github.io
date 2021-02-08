@@ -42,6 +42,8 @@ Channel Unregistered
 
 流上**事件**处理器，如active，read事件，netty提供了类似***ChannelInboundHandlerAdapter***的基础类，这些类实现了对应的接口，内部将对应的事件转发到Pipeline的下一个Handler
 
+SimpleChannelInboundHandler实现了大部分通用逻辑（包括资源释放），一般情况下只需要继承它然后复写需要的方法（事件监听器）
+
 ### 数据写出
 
 一般在Channel Handler内部保存ChannelHandlerContext，并通过这个引用写出数据。写出数据有两种方式，一种是获取Channel对象写出，数据从最后一个OutboundHandler处理，另一种是通过ChannelHandlerContext写出，数据从***下一个OutboundHandler***开始处理
