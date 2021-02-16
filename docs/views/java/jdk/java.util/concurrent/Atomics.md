@@ -5,7 +5,7 @@ categories:
 tags:
   - 源码
   - 并发
-publish: false
+publish: true
 ---
 
 # JDK源码-JUC包中的Atomic类
@@ -140,4 +140,4 @@ public final int getAndIncrement() {
 
 经本机测试，使用LazySet的效率是直接Set的三倍，原因是直接Set的情况下，由于value是[volatile](https://www.tpfuture.top/views/java/jdk/java.util/concurrent/volatile.html)的，根据JMM的要求，每次set（即store操作）都会触发内存屏障（PCIE锁）导致效率低。
 
-## 
+##
