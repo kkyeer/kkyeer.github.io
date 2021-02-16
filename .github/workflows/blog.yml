@@ -53,5 +53,9 @@ jobs:
         rm -rf /tmp/public
         tar -xf /tmp/blog.tar.xz -C /tmp/
         rm -rf /home/ngmng/data/dist/
-        cp -rf /tmp/public/ /home/ngmng/data/dist
+    - name: Deploy2
+      env:
+        HOST: www.tpfuture.top
+        USER: ngmng
+      run: cp -rf /tmp/public/ /home/ngmng/data/dist
     
