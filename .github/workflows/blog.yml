@@ -49,5 +49,5 @@ jobs:
       env:
         HOST: www.tpfuture.top
         USER: ngmng
-      run: tar -xf /tmp/blog.tar.xz -C /tmp/&&rm -rf /home/ngmng/data/dist/&&mv /tmp/public/ /home/ngmng/data/dist/
+      run: tar -xf /tmp/blog.tar.xz -C /tmp/&&rm -rf /home/ngmng/data/dist/&&ls -al /tmp&&ls -al /home/ngmng/data/&&mv /tmp/public/ /home/ngmng/data/dist/&&ls -al /home/ngmng/data/
     
