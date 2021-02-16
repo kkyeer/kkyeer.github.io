@@ -39,27 +39,7 @@ jobs:
     - name: Compress
       run: tar -cvf /tmp/blog.tar ./public
     - name: upload
-      uses: betanzos/scp-upload@v1
-      with:
-        # Source local file path
-        # REQUIRED
-        source: /tmp/blog.tar
-
-        # Remote host
-        # REQUIRED
-        host: www.tpfuture.top
-
-        # Remote host username
-        # REQUIRED
-        username: ngmng
-
-        # SSH private key
-        # REQUIRED  
-        key: ~/.ssh/id_rsa
-
-        # Remote directory to copy the file. Default $HOME
-        # REQUIRED  
-        remote_dir: /tmp/
+      run: node upload.js
     - name: Deploy
       env:
         HOST: www.tpfuture.top
