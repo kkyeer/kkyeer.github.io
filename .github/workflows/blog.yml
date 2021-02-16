@@ -45,6 +45,13 @@ jobs:
       run: tar Jcf /tmp/blog.tar.xz ./public
     - name: upload
       run: node upload.js
+    
+    - name: Install ngmng SSH key
+      uses: shimataro/ssh-key-action@v2
+      with:
+        key: ${{ secrets.NGMNG_SSH_KEY }}
+        name: id_rsa # optional
+        known_hosts: ${{ secrets.KNOWN_HOSTS }}
     - name: Deploy
       env:
         HOST: www.tpfuture.top
