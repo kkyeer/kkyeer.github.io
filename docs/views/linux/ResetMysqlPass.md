@@ -11,7 +11,7 @@ publish: true
 
 参考[https://www.cnblogs.com/activiti/p/7810166.html](https://www.cnblogs.com/activiti/p/7810166.html)
 
-操作系统为centos7 64
+操作系统为centos7 x64
 
 1、修改 /etc/my.cnf，在 [mysqld] 小节下添加一行：skip-grant-tables=1
 
