@@ -37,7 +37,7 @@ jobs:
         name: id_rsa # optional
         known_hosts: ${{ secrets.KNOWN_HOSTS }}
     - name: Compress
-      run: tar -cvf /tmp/blog.tar ./public
+      run: tar Jcvf /tmp/blog.tar.xz ./public
     - name: upload
       run: node upload.js
     - name: Deploy
@@ -45,5 +45,5 @@ jobs:
         HOST: www.tpfuture.top
         USER: ngmng
       run: |
-        tar xvf /tmp/blog.tar -C /home/ngmng/dist/
+        tar xvf /tmp/blog.tar.xz -C /home/ngmng/dist/
     
