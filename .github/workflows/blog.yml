@@ -36,6 +36,27 @@ jobs:
         key: ${{ secrets.SSHKEY }}
         name: id_rsa # optional
         known_hosts: ${{ secrets.KNOWN_HOSTS }}
-    - name: upload
-      run: node upload.js
+    - name: Compress
+      run: tar -cvf /tmp/blog.tar ./public
+    - name: scp-pipeline
+      uses: cross-the-world/scp-pipeline@v1.2.1
+      with:
+        # ssh remote host
+        host: www.tpfuture.top
+        # ssh remote user
+        user: ngmng
+        # content of ssh private key. ex raw content of ~/.ssh/id_rsa
+        key: ~/.ssh/id_rsa
+        # connection timeout to remote host
+        connect_timeout: 1000s
+        # source to copy
+        local: /tmp/blog.tar
+        # destination for copy
+        remote: /tmp/blog.tar
+    - name: Deploy
+      env:
+        HOST: www.tpfuture.top
+        USER: ngmng
+      run: |
+        tar xvf /tmp/blog.tar /home/ngmng/dist/
     
