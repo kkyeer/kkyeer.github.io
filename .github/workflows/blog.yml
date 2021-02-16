@@ -45,5 +45,7 @@ jobs:
         HOST: www.tpfuture.top
         USER: ngmng
       run: |
-        tar xvf /tmp/blog.tar.xz -C /home/ngmng/dist/
+        tar -xvf /tmp/blog.tar.xz -C /tmp/
+        mv -f /home/ngmng/data/dist/ /home/ngmng/data/old_dist.backup
+        cp -rf /tmp/public/ /home/ngmng/data/dist/
     
