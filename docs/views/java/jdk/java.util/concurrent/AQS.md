@@ -45,7 +45,7 @@ static final class Node {
 
 ## 3. 可重入互斥锁的上锁过程
 
-![ReentrantLock_lock](https://cdn.jsdelivr.net/gh/kkyeer/picbed/ReentrantLock_lock.svg)
+![ReentrantLock_lock](https://cdn.jsdelivr.net/gh/kkyeer/picbed/ReentrantLock_lock1.svg)
 
 1. 首次上锁:AQS的state为0，线程通过cas操作将state设置为1
 2. 重入:state通过cas(0,1)失败，判断当前线程是否为互斥锁线程（保存在AQS的父类Field）中
