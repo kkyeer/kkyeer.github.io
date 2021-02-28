@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = {
   "title": "一水轩",
   "description": "Born for code",
@@ -7,7 +9,7 @@ module.exports = {
       "link",
       {
         "rel": "icon",
-        "href": "/favicon.ico"
+        "href": "https://cdn.jsdelivr.net/gh/kkyeer/picbed/favicon.ico"
       }
     ],
     [
@@ -67,19 +69,24 @@ module.exports = {
         "link": "https://www.recoluan.com"
       },
       {
+        "title": "Victor Chu的博客",
+        "desc": "Victor Chu的博客",
+        "link": "http://www.victorchu.info/"
+      },
+      {
         "title": "vuepress-theme-reco",
         "desc": "A simple and beautiful vuepress Blog & Doc theme.",
         "avatar": "https://vuepress-theme-reco.recoluan.com/icon_vuepress_reco.png",
         "link": "https://vuepress-theme-reco.recoluan.com"
       }
     ],
-    "logo": "/logo.png",
+    "logo": "https://cdn.jsdelivr.net/gh/kkyeer/picbed/httpscdn.jsdelivr.netghkkyeerpicbedavatar.png.png",
     "search": true,
     "searchMaxSuggestions": 10,
     "sidebar": "auto",
     "lastUpdated": "Last Updated",
     "author": "kkyeer",
-    "authorAvatar": "/avatar.png",
+    "authorAvatar": "https://cdn.jsdelivr.net/gh/kkyeer/picbed/httpscdn.jsdelivr.netghkkyeerpicbedavatar.png.png",
     "record": "浙ICP备18011775号",
     "recordLink":"http://www.beian.miit.gov.cn",
     "startYear": "2019",
@@ -96,5 +103,31 @@ module.exports = {
   },
   plugins: [
     'flowchart'
-  ]
+  ],
+  configureWebpack: () => {
+    const NODE_ENV = process.env.NODE_ENV
+    //判断是否是生产环境
+    if(NODE_ENV === 'production'){
+      return {
+        output: {
+          publicPath: 'https://cdn.jsdelivr.net/gh/kkyeer/blog@gh-pages/'
+        },
+        resolve: {
+          //配置路径别名
+          alias: {
+            'public': path.resolve(__dirname, './public') 
+          }
+        }
+      }
+    }else{
+      return {
+        resolve: {
+          //配置路径别名
+          alias: {
+            'public': path.resolve(__dirname, './public') 
+          }
+        }
+      }
+    }
+  }
 }
