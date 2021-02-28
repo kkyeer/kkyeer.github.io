@@ -5,7 +5,7 @@ categories:
 tags:
   - 源码
   - 并发
-publish: false
+publish: true
 ---
 
 # JDK源码-JUC包中的Atomic类
@@ -21,6 +21,7 @@ Integer | AtomicInteger |  |  |
 Double |  |  | DoubleAdder | DoubleAccumulator
 Long | AtomicLong | AtomicLongArray | LongAdder | LongAccumulator
 引用类型 | AtomicReference | AtomicReferenceArray |  |
+引用类型（ABA) | AtomicStampedReference| | |
 
 另外值得注意的是，针对CAS操作中的ABA问题，提供了```AtomicStampedReference```类来支持带version的CAS操作
 
@@ -90,7 +91,7 @@ public final int getAndIncrement() {
 ```
 
 追踪代码：```Unsafe.putOrdered*``` -> unsafe.cpp：```SET_FIELD_VOLATILE``` -> ```OrderAccess::release_store_fence``` -> orderAccess.hpp: ```release_store_fence    xchg```，在X86指令集下， 此方法最终实现为xchg指令。
-根据StackOverFlow的说法，这个指令的作用类似Store-Store屏障，**保证此指令前面的指令Happen-Before此指令**，但是此指令和后面的指令可能产生指令重排序，**且不保证此指令的操作对其他CPU马上可见**，但是此指令（20个cycle）比volitile关键字用的总线锁（80cycle）轻量很多,因此对于某些场景，可以用LasySet方法提升效率，如常见的计数逻辑，多写少读且不强求所有时间的强一致性。
+根据StackOverFlow的说法，这个指令的作用类似Store-Store屏障，**保证此指令前面的指令Happen-Before此指令**，但是此指令和后面的指令可能产生指令重排序，**且不保证此指令的操作对其他CPU马上可见**，但是此指令（20个cycle）比volitile关键字用的总线锁（80cycle）轻量很多,因此对于某些场景，可以用LasySet方法提升效率，如常见的计数逻辑，多写少读且不强求任意时间点的强一致性。
 
 参考1: [Stack overflow上的讨论](https://stackoverflow.com/questions/1468007/atomicinteger-lazyset-vs-set)
 参考2: [说明与性能比较](http://psy-lob-saw.blogspot.com/2012/12/atomiclazyset-is-performance-win-for.html)
@@ -100,6 +101,7 @@ public final int getAndIncrement() {
 考虑如下场景，生产者与消费者分布在不同的线程，两者通过共享的索引来同步当前生产者进度：一个AtomicInteger对象，其他线程读取这个数字来确定当前的消费进度，全量代码见[GitHub](https://github.com/kkyeer/JavaPlayground/blob/master/src/main/java/concurrent/lab/TestAtomicLazySetCatch.java)，核心代码：
 
 ```java
+// 生产者
     public Thread producer(){
         return new Thread(
                 ()->{;
@@ -115,6 +117,7 @@ public final int getAndIncrement() {
 ```
 
 ```java
+// 消费者
     public Thread consumer(){
         return new Thread(
                 ()->{
@@ -136,3 +139,5 @@ public final int getAndIncrement() {
 ```
 
 经本机测试，使用LazySet的效率是直接Set的三倍，原因是直接Set的情况下，由于value是[volatile](https://www.tpfuture.top/views/java/jdk/java.util/concurrent/volatile.html)的，根据JMM的要求，每次set（即store操作）都会触发内存屏障（PCIE锁）导致效率低。
+
+##

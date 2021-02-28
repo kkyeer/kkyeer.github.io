@@ -45,7 +45,6 @@ publish: true
 
     没有任何输出说明禁用成功。
 
-
 驱动安装方法总共有三种：
 
 - 使用标准Ubuntu仓库进行自动化安装
@@ -80,8 +79,16 @@ publish: true
 
 2. 输入下列命令，重启后安装便可完成。
 
+    >自动安装推荐驱动
+
     ```shell
     sudo ubuntu-drivers autoinstall
+    ```
+
+    >安装指定驱动
+
+    ```shell
+    sudo apt install nvidia-driver-390
     ```
 
 3. 输入下列命令，查看驱动是否安装成功。
@@ -117,4 +124,4 @@ publish: true
     若出现以上输出，则表明已经安装成功了。
 ————————————————
 版权声明：本文为CSDN博主「DuCeh」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
-原文链接：https://blog.csdn.net/Knight_vae/java/article/details/102009020
+原文链接：<https://blog.csdn.net/Knight_vae/java/article/details/102009020>
