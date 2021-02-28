@@ -5,7 +5,7 @@ categories:
 tags:
   - 源码
   - 并发
-publish: false
+publish: true
 ---
 
 # JDK源码-AQS
@@ -179,12 +179,58 @@ addWaiter的源码解析如下：
 
 ## 4. unlock与唤醒过程
 
-unpark指定Node的后代：unpark指定的线程：先尝试入参节点的next指向的Node，如果为空或者已经Cancel，则从tail向前遍历到**最前面**可以unpark的线程。
+```java
+    public final boolean release(int arg) {
+        if (tryRelease(arg)) { // state -= 1，处理互斥锁的Thread标记
+            // 当前head指针暂存
+            Node h = head; 
+            // 判断是否需要唤醒后面的线程，判断依据 1. waitQueue已经被初始化 2. head的状态不为0，如果后面有线程已经被park,则其会把前面的都设置为Signal 
+            if (h != null && h.waitStatus != 0)
+            // unpark过程
+                unparkSuccessor(h);
+            return true;
+        }
+        return false;
+    }
 
-PS:为什么是向前追溯？Unpark只是保证调用的时间的状态中需要unpark的线程被唤起~，因为并发同时可能还有线程在入队，新入队线程会自动放到队列尾，导致状态变更，状态变更后，新入队的
+    // unpark当前节点的后继节点
+    private void unparkSuccessor(Node node) {
+        /*
+         * If status is negative (i.e., possibly needing signal) try
+         * to clear in anticipation of signalling.  It is OK if this
+         * fails or if status is changed by waiting thread.
+         */
+        int ws = node.waitStatus;
+        // 清除head节点的状态
+        if (ws < 0)
+        // 这里有个gap，不过被本线程还是其他线程清除没有区别
+            compareAndSetWaitStatus(node, ws, 0);
 
-## 1.1 互斥锁与共享锁
+        /*
+         * Thread to unpark is held in successor, which is normally
+         * just the next node.  But if cancelled or apparently null,
+         * traverse backwards from tail to find the actual
+         * non-cancelled successor.
+         */
+        Node s = node.next;
+        // 如果下一个节点已经被取消，则由tail向前追溯
+        if (s == null || s.waitStatus > 0) {
+            s = null;
+            for (Node t = tail; t != null && t != node; t = t.prev)
+            // 为什么是向前追溯见下面的解释
+                if (t.waitStatus <= 0)
+                    s = t;
+        }
+        if (s != null)
+        // unpark 对应的线程
+            LockSupport.unpark(s.thread);
+    }
+```
 
-## 1.2 公平锁与非公平锁
+为什么是向前遍历？
 
-众所周知，AQS作为JUC包的核心类，同时提供了公平锁与非公平锁的实现，两者的区别主要在于在调用tryAccuire
+首先，进入此分支表示下一个节点已经被取消，因此此时的s可能已经从CLH队列移除，因此，想找到下一个unpark的节点，必须从head向后遍历，或者tail向前遍历。
+
+考虑同时有节点在获取锁的情况，如果采用head向后遍历，则参考lock过程，可能存在一个时间点，tail指针已经指向node，但是node的前指针还未赋值，此时从当前线程的视角看，队列似乎已经没有下一个线程，然而其实是有的，参考下图
+
+![AQS_unpark_successor_bankwards](https://cdn.jsdelivr.net/gh/kkyeer/picbed/AQS_unpark_successor_bankwards.png)
