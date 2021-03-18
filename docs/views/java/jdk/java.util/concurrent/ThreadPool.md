@@ -18,7 +18,7 @@ JVM中的线程与JVM Thread对象，os_thread系统线程一一对应，由于�
 
 coreSize: 核心线程数
 maxSize: 最大线程数
-idleKeepTime:
+idleKeepTime: 超过核心线程数的线程，最大空闲存活时间
 Queue:
 RejectPolicy:默认是丢弃，还有CallerRun，抛异常，丢弃，丢弃Oldest
 ThreadFactory:
