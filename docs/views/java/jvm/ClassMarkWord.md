@@ -10,3 +10,5 @@ publish: false
 # JVM对象的对象头
 
 JVM中，对象存储在堆上，分为三个部分，
+
+![markword](https://cdn.jsdelivr.net/gh/kkyeer/picbed/markword.png)
