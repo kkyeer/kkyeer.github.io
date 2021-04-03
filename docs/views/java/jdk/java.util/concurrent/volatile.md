@@ -70,11 +70,11 @@ Thread thread2 = new Thread(
 ```shell
 Wrong,x = 0 and y = 0
 Exception in thread "main" java.util.concurrent.RejectedExecutionException: Task java.util.concurrent.FutureTask@d716361 rejected from java.util.concurrent.ThreadPoolExecutor@3764951d[Shutting down, pool size = 12, active threads = 12, queued tasks = 23280, completed tasks = 2713]
-	at java.util.concurrent.ThreadPoolExecutor$AbortPolicy.rejectedExecution(ThreadPoolExecutor.java:2063)
-	at java.util.concurrent.ThreadPoolExecutor.reject(ThreadPoolExecutor.java:830)
-	at java.util.concurrent.ThreadPoolExecutor.execute(ThreadPoolExecutor.java:1379)
-	at java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:112)
-	at concurrent.reorder.Reveal.main(Reveal.java:59)
+ at java.util.concurrent.ThreadPoolExecutor$AbortPolicy.rejectedExecution(ThreadPoolExecutor.java:2063)
+ at java.util.concurrent.ThreadPoolExecutor.reject(ThreadPoolExecutor.java:830)
+ at java.util.concurrent.ThreadPoolExecutor.execute(ThreadPoolExecutor.java:1379)
+ at java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:112)
+ at concurrent.reorder.Reveal.main(Reveal.java:59)
 Wrong,x = 0 and y = 0
 ```
 
@@ -101,7 +101,7 @@ Java编译出来的class文件，仅能被Java虚拟机（JVM）识别，实际�
 
 所谓宿主机，即运行JVM的机器，可能是个人开发的电脑，线上的生产服务器，Docker容器等，操作系统、硬件的不同，内存模型和指令也不尽相同，鉴于目前多核CPU无论在开发环境和生产环境均为主流，一般认为宿主机的内存模型简化为主内存和多级CPU内部缓存再到寄存器，一般来说，在当前，多核CPU已经司空见惯，每个CPU都有多个核，一般来说，在CPU的三级缓存中，L3为各个核共享，L1和L2为核内缓存，模型如下
 
->**核内存储(寄存器\L1\L2)  <->  CPU内部共享高速缓存(L3 Cache)  <->  内存(RAM)**
+![CPU_architect](https://cdn.jsdelivr.net/gh/kkyeer/picbed/CPU_architect.jpg)
 
 执行高速缓存仅仅是用作寄存器和主内存之间缓存用，CPU通过各种技术保证寄存器读取时缓存内的值与主内存的对应值一致，对于线程来说，线程的内存访问区域为寄存器，且多个CPU可以**认为同时并行**执行不同的线程，因此从线程的维度看，可以进一步简化为
 
