@@ -29,3 +29,5 @@ ThreadFactory:
 2. CachedThreadPool: Queue为SyncronizedQueue，本身不存储Runnable,线程无限增长，线程会被复用，存活60s
 3. ForkJoinPool: 特殊的线程池
 4. SingleThreadPool: core和max为1，Queue为LinkedBlockingQueue且大小为Integer.maxValue
+
+## 线程池提交Task过程
