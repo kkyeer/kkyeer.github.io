@@ -211,3 +211,9 @@ lspci
 ```sh
 lsusb
 ```
+
+## 查看io占用高进程
+
+```sh
+iotop -oP
+```
