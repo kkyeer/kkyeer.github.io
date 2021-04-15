@@ -61,6 +61,14 @@ S0C/S1C、S0U/S1U、EC/EU、OC/OU、MC/MU分别代表两个Survivor区、Eden区
 
 -XX:+UseG1GC
 
+### MetaSpace溢出
+
+打印包下面Class加载数
+
+```shell
+jcmd <PID> GC.class_stats|awk '{print$13}'|sed  's/\(.*\)\.\(.*\)/\1/g'|sort |uniq -c|sort -nrk1
+```
+
 ## 上下文切换
 
 ```shell
