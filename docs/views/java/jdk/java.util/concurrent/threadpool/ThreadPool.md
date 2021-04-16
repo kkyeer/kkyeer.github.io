@@ -83,7 +83,7 @@ public void execute(Runnable command) {
 
 ### 线程池状态与数量
 
-对于ThreadPool对象来说，决定其当前状态有两个参数，state与worker数量，这两个参数需要保证原子性，即不允许出现两者不匹配的情况，因此，与其每次操作时上锁，不如将之合到一个Atomic变量中
+对于ThreadPool对象来说，决定其当前状态有两个参数，state与worker数量，这两个参数需要保证原子性，即不允许出现两者不匹配的情况，因此，与其每次操作时上锁，将之合到一个Atomic变量中效率更高
 
 ```java
 // 存储线程状态
