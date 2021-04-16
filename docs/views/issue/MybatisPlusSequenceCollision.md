@@ -209,3 +209,5 @@ public class CustomIdGenerator implements IdentifierGenerator {
 ### 自动化方案
 
 参考美团的唯一ID生成器，使用ZK配合虚拟节点来获取当前已经被占用的WorkerId，计算本服务的WorkerId，并使用心跳保持，代码暂略。
+
+[Leaf——美团点评分布式ID生成系统](https://tech.meituan.com/2017/04/21/mt-leaf.html)
