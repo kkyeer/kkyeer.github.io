@@ -15,7 +15,7 @@ MybatisPlus版本3.3.2，使用```@TableId```注解配合Insert语句使用时�
 
 MybatisPlus内置的雪花算法，基本思路与Twitter一致，将64bit的Long型数据如下分配
 
-![MbpSnowFlake.svg](https://cdn.jsdelivr.net/gh/kkyeer/picbed/MbpSnowFlake.svg)
+![MbpSnowFlake.svg](https://cdn.jsdelivr.net/gh/kkyeer/picbed/MbpSnowFlake2.svg)
 
 - 42bit: 时间戳
 - 5bit: DataCenterId(0-32)
