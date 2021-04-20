@@ -185,7 +185,9 @@ private boolean addWorker(Runnable firstTask, boolean core) {
                     mainLock.unlock();
                 }
                 if (workerAdded) {
-                    // 线程开启
+                    // 线程开启，实际上执行的是ThreadPoolExecutor类的runWorker方法，这里的关键点是
+                    // 上面获取的thread的初始化代码: this.thread = getThreadFactory().newThread(this);
+                    // 此处newThread(this)中this指向Worker对象，
                     t.start();
                     workerStarted = true;
                 }
@@ -197,6 +199,115 @@ private boolean addWorker(Runnable firstTask, boolean core) {
         }
         return workerStarted;
     }
+```
+
+>注意，线程开启，实际上执行的是ThreadPoolExecutor类的runWorker方法，这里的关键点是worker.thread的初始化代码: ```this.thread = getThreadFactory().newThread(this);```，此处newThread(this)中this指向Worker对象(**实现了```Runnable```接口**)本身，线程start的时候执行的Worker的run方法如下，注意runWorker方法是ThreadPoolExecutor类中的方法
+
+```java
+public void run() {
+    // 
+    runWorker(this);
+}
+```
+
+### runWorker方法
+
+```java
+final void runWorker(Worker w) {
+    Thread wt = Thread.currentThread();
+    Runnable task = w.firstTask;
+    w.firstTask = null;
+    w.unlock(); // allow interrupts
+    boolean completedAbruptly = true;
+    try {
+        // 寻找新任务
+        while (task != null || (task = getTask()) != null) {
+            // AQS加锁
+            w.lock();
+            // If pool is stopping, ensure thread is interrupted;
+            // if not, ensure thread is not interrupted.  This
+            // requires a recheck in second case to deal with
+            // shutdownNow race while clearing interrupt
+
+            // 检查线程池状态，如果是STOP终端本线程，如果非STOP，确认本线程未被外部interrupted
+            if ((runStateAtLeast(ctl.get(), STOP) ||
+                    (Thread.interrupted() &&
+                    runStateAtLeast(ctl.get(), STOP))) &&
+                !wt.isInterrupted())
+                wt.interrupt();
+
+            try {
+                // 生命周期钩子
+                beforeExecute(wt, task);
+                // 执行
+                Throwable thrown = null;
+                try {
+                    task.run();
+                } catch (RuntimeException x) {
+                    thrown = x; throw x;
+                } catch (Error x) {
+                    thrown = x; throw x;
+                } catch (Throwable x) {
+                    thrown = x; throw new Error(x);
+                } finally {
+                // 生命周期钩子
+                    afterExecute(task, thrown);
+                }
+            } finally {
+                task = null;
+                w.completedTasks++;
+                w.unlock();
+            }
+        }
+        // worker正常执行完成
+        completedAbruptly = false;
+    } finally {
+        processWorkerExit(w, completedAbruptly);
+    }
+}
+```
+
+### getTask方法
+
+```java
+private Runnable getTask() {
+    boolean timedOut = false; // Did the last poll() time out?
+
+    for (;;) {
+        int c = ctl.get();
+        int rs = runStateOf(c);
+
+        // Check if queue empty only if necessary.
+        if (rs >= SHUTDOWN && (rs >= STOP || workQueue.isEmpty())) {
+            decrementWorkerCount();
+            return null;
+        }
+
+        int wc = workerCountOf(c);
+
+        // Are workers subject to culling?
+        boolean timed = allowCoreThreadTimeOut || wc > corePoolSize;
+        // 检查是否超时，依赖上面的开关，以及每次循环时，下面从队列poll的时候带超时参数，然后判断
+        if ((wc > maximumPoolSize || (timed && timedOut))
+            && (wc > 1 || workQueue.isEmpty())) {
+            if (compareAndDecrementWorkerCount(c))
+                return null;
+            continue;
+        }
+
+        try {
+            // 从队列中拿取对象
+            Runnable r = timed ?
+                workQueue.poll(keepAliveTime, TimeUnit.NANOSECONDS) :
+                workQueue.take();
+            if (r != null)
+                return r;
+            timedOut = true;
+        } catch (InterruptedException retry) {
+            timedOut = false;
+        }
+    }
+}
 ```
 
 ### remove方法
@@ -215,9 +326,9 @@ Worker(Runnable firstTask) {
 }
 ```
 
-Worker对象继承AQS，初始化状态为-1，绑定一个新线程，新线程的Runnable对象为传入的FirstTask
+Worker对象继承AQS，初始化状态为-1，绑定一个新线程，新线程的Runnable对象为**this**，此处细节为Worker对象实现了Runnable接口，在接口的run方法实现中，进行FirstTask任务的执行和队列任务的抢占
 
-## 线程安全
+## 线程池的线程安全
 
 ### Idle线程清除
 
