@@ -12,9 +12,9 @@ publish: false
 
 JVM中的线程与JVM Thread对象，os_thread系统线程一一对应，由于线程本身的申请、销毁以及上下文切换比较耗费资源，因此需要合理的复用已创建的Thread对象，JDK原生提供了ThreadPoolExecutor类来提供池化线程对象的实现。
 
-## 基本数据结构
+## 概述
 
-## 线程池初始化核心参数
+### 线程池初始化核心参数
 
 coreSize: 核心线程数
 maxSize: 最大线程数
@@ -23,14 +23,14 @@ Queue: 存储Runnable对象的队列
 RejectPolicy: 线程无法存入线程池时会被调用，默认是丢弃，还有CallerRun，抛异常，丢弃Oldest，也可以扩展自己的实现
 ThreadFactory: 初始化Thread实例的工厂类
 
-## 原生自带的几种线程池与参数
+### 原生线程池与默认参数
 
 1. FixedThreadPool: core和maxSize固定，Queue为LinkedBlockingQueue且大小为Integer.maxValue，存活0S
 2. CachedThreadPool: Queue为SyncronizedQueue，本身不存储Runnable,线程无限增长，线程会被复用，存活60s
 3. ForkJoinPool: 特殊的线程池
 4. SingleThreadPool: core和max为1，Queue为LinkedBlockingQueue且大小为Integer.maxValue
 
-## 线程池提交Task过程
+## 线程池execute过程
 
 一般来说，调用execute方法来提交Runnable对象到线程池中，对于JUC包中的ThreadPool实现，大概流程如下
 
@@ -108,6 +108,8 @@ private static int workerCountOf(int c)  { return c & CAPACITY; }
 private static int ctlOf(int rs, int wc) { return rs | wc; }
 ```
 
+![ThreadPoolLifeCycle](https://cdn.jsdelivr.net/gh/kkyeer/picbed/ThreadPoolLifeCycle.svg)
+
 注意线程池状态字段，RUNNING是唯一一个非负数，因此判断线程池是否在运行时状态可以使用```rs >= SHUTDOWN```来判断。
 
 运行状态的一些定义：
@@ -119,6 +121,8 @@ private static int ctlOf(int rs, int wc) { return rs | wc; }
 - TERMINATED：terminated()已经完成，该方法执行完毕代表线程池已经完全终止
 
 ### addWorker方法
+
+![addworker](https://cdn.jsdelivr.net/gh/kkyeer/picbed/addworker.svg)
 
 ```java
 private boolean addWorker(Runnable firstTask, boolean core) {
@@ -212,6 +216,8 @@ public void run() {
 
 ### runWorker方法
 
+![runWorker](https://cdn.jsdelivr.net/gh/kkyeer/picbed/runWorker.svg)
+
 ```java
 final void runWorker(Worker w) {
     Thread wt = Thread.currentThread();
@@ -269,6 +275,8 @@ final void runWorker(Worker w) {
 
 ### getTask方法
 
+![ThreadPoolGetTask](https://cdn.jsdelivr.net/gh/kkyeer/picbed/ThreadPoolGetTask.svg)
+
 ```java
 private Runnable getTask() {
     boolean timedOut = false; // Did the last poll() time out?
@@ -310,11 +318,14 @@ private Runnable getTask() {
 }
 ```
 
-### remove方法
-
 ### 为什么入队后，再次检查worker数量为0，addWorker参数为(null, false)
 
+让Worker调用getTask()方法从队列中拉取任务
+
 ## Worker对象
+
+Worker对象继承AQS来实现互斥锁。
+实现了Runnable接口，将自己包装到Thread对象里。
 
 ### 构造方法
 
