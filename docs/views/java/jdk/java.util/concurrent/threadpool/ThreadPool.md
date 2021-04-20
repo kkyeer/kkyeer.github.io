@@ -81,7 +81,7 @@ public void execute(Runnable command) {
 }
 ```
 
-### 线程池状态与数量
+### 线程池运行状态与数量
 
 对于ThreadPool对象来说，决定其当前状态有两个参数，state与worker数量，这两个参数需要保证原子性，即不允许出现两者不匹配的情况，因此，与其每次操作时上锁，将之合到一个Atomic变量中效率更高
 
@@ -90,7 +90,7 @@ public void execute(Runnable command) {
 private final AtomicInteger ctl = new AtomicInteger(ctlOf(RUNNING, 0));
 // =29
 private static final int COUNT_BITS = Integer.SIZE - 3;
-// 前3bit为0，后面为1
+// 前3bit为0，后面为1，可以理解为mask
 private static final int CAPACITY   = (1 << COUNT_BITS) - 1;
 
 // runState is stored in the high-order bits
@@ -99,16 +99,130 @@ private static final int SHUTDOWN   =  0 << COUNT_BITS;
 private static final int STOP       =  1 << COUNT_BITS;
 private static final int TIDYING    =  2 << COUNT_BITS;
 private static final int TERMINATED =  3 << COUNT_BITS;
+
+
+
 // Packing and unpacking ctl
 private static int runStateOf(int c)     { return c & ~CAPACITY; }
 private static int workerCountOf(int c)  { return c & CAPACITY; }
 private static int ctlOf(int rs, int wc) { return rs | wc; }
 ```
 
-### 原子性addWorker方法
+注意线程池状态字段，RUNNING是唯一一个非负数，因此判断线程池是否在运行时状态可以使用```rs >= SHUTDOWN```来判断。
+
+运行状态的一些定义：
+
+- RUNNING：接受新任务并处理排队任务
+- SHUTDOWN：不接受新任务，但处理排队任务
+- STOP：不接受新任务，不处理排队任务，并中断正在进行的任务
+- TIDYING：所有任务已经终止，workerCount为零，线程转换到状态TIDYING将运行terminate()钩子方法
+- TERMINATED：terminated()已经完成，该方法执行完毕代表线程池已经完全终止
+
+### addWorker方法
+
+```java
+private boolean addWorker(Runnable firstTask, boolean core) {
+        // 1阶段:判断线程池状态，Worker数量+1
+        retry:
+        for (;;) {
+            int c = ctl.get();
+            int rs = runStateOf(c);
+
+            // Check if queue empty only if necessary.
+            // 这里进行线程池状态检查，如果线程池状态 >= SHUTDOWN意味着线程池非RUNNING
+            // 同时检查是否线程池标记为SHUTDOWN且等待队列非空，增加Worker来处理队列中的任务，这种场景发生在线程池标记为SHUTDOWN状态后，清理IdleWorker发现线程数量不够
+            if (rs >= SHUTDOWN &&
+                ! (rs == SHUTDOWN && firstTask == null && ! workQueue.isEmpty()))
+                return false;
+
+
+            for (;;) {
+                int wc = workerCountOf(c);
+                if (wc >= CAPACITY ||
+                    wc >= (core ? corePoolSize : maximumPoolSize))
+                    return false;
+                // CAS增加worker数，成功后进入下一阶段
+                if (compareAndIncrementWorkerCount(c))
+                    break retry;
+                c = ctl.get();  // Re-read ctl
+                // CAS增加Worker数失败，可能是其他线程也新增/减少了Worker，此时可能会导致线程池状态变化，此处判断下，如果确实线程池状态变化，从外循环开始走，否则继续CAS
+                if (runStateOf(c) != rs)
+                    continue retry;
+                // else CAS failed due to workerCount change; retry inner loop
+            }
+        }
+
+        // 2阶段：新增Worker
+        boolean workerStarted = false;
+        boolean workerAdded = false;
+        Worker w = null;
+        try {
+            // Worker对象初始化
+            w = new Worker(firstTask);
+            final Thread t = w.thread;
+            if (t != null) {
+                // 重入锁，所有的Worker操作都需要上锁
+                final ReentrantLock mainLock = this.mainLock;
+                mainLock.lock();
+                try {
+                    // Recheck while holding lock.
+                    // Back out on ThreadFactory failure or if
+                    // shut down before lock acquired.
+                    int rs = runStateOf(ctl.get());
+
+                    // 同样，有两种线程池状态可以增加Worker:线程池运行中或者SHUTDOWN状态但是增加Worker来处理Queue
+                    if (rs < SHUTDOWN ||
+                        (rs == SHUTDOWN && firstTask == null)) {
+                        if (t.isAlive()) // precheck that t is startable
+                            throw new IllegalThreadStateException();
+                        workers.add(w);
+                        int s = workers.size();
+                        if (s > largestPoolSize)
+                            largestPoolSize = s;
+                        workerAdded = true;
+                    }
+                } finally {
+                    mainLock.unlock();
+                }
+                if (workerAdded) {
+                    // 线程开启
+                    t.start();
+                    workerStarted = true;
+                }
+            }
+        } finally {
+            // 线程增加失败，可能的原因如线程池状态变化，此时需要把第一阶段增加的线程数减掉
+            if (! workerStarted)
+                addWorkerFailed(w);
+        }
+        return workerStarted;
+    }
+```
 
 ### remove方法
 
 ### 为什么入队后，再次检查worker数量为0，addWorker参数为(null, false)
 
-## 线程池的线程安全
+## Worker对象
+
+### 构造方法
+
+```java
+Worker(Runnable firstTask) {
+    setState(-1); // inhibit interrupts until runWorker
+    this.firstTask = firstTask;
+    this.thread = getThreadFactory().newThread(this);
+}
+```
+
+Worker对象继承AQS，初始化状态为-1，绑定一个新线程，新线程的Runnable对象为传入的FirstTask
+
+## 线程安全
+
+### Idle线程清除
+
+### Shutdown与新增任务
+
+### Queue快速填满与新增CoreWorker
+
+### Queue快速清空与新增IdleWorker
