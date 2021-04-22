@@ -1,7 +1,7 @@
 ---
 date: 2019-11-22
 categories:
-  - 知识技能
+  - 懂
 tags:
   - 
 publish: true

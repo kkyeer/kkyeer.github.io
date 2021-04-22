@@ -1,7 +1,7 @@
 ---
 date: 2019-05-19
 categories:
-  - 知识技能
+  - 懂
 tags:
   - 日志
 publish: true

@@ -1,7 +1,7 @@
 ---
 date: 2020-11-22
 categories:
-  - 知识技能
+  - 懂
 tags:
   - markdown
 publish: true

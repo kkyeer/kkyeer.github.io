@@ -1,7 +1,7 @@
 ---
 date: 2017-05-14
 categories:
-  - 知识技能
+  - 懂
 tags:
   - Encode
 publish: true

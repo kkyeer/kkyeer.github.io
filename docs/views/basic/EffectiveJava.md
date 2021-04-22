@@ -1,7 +1,7 @@
 ---
 date: 2020-10-17
 categories:
-  - 知识技能
+  - 懂
 tags:
   - 读书笔记
 publish: false

@@ -1,7 +1,7 @@
 ---
 date: 2020-08-25
 categories:
-  - 知识技能
+  - 懂
 tags:
   - 
 publish: false
