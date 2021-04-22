@@ -1,7 +1,7 @@
 ---
 date: 2020-12-15
 categories:
-  -  知识技能
+  -  懂
 tags:
   - SQL
 publish: true

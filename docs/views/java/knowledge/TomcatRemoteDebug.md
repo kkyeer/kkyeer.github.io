@@ -1,7 +1,7 @@
 ---
 date: 2019-12-14
 categories:
-  - 知识技能
+  - 懂
 tags:
   - Debug
 publish: true
