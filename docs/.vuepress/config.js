@@ -9,7 +9,7 @@ module.exports = {
       "link",
       {
         "rel": "icon",
-        "href": "https://cdn.jsdelivr.net/gh/kkyeer/picbed/favicon.ico"
+        "href": "https://cdn.jsdelivr.net/gh/kkyeer/picbed/favicon_coder.ico"
       }
     ],
     [
@@ -80,13 +80,13 @@ module.exports = {
         "link": "https://vuepress-theme-reco.recoluan.com"
       }
     ],
-    "logo": "https://cdn.jsdelivr.net/gh/kkyeer/picbed/httpscdn.jsdelivr.netghkkyeerpicbedavatar.png.png",
+    "logo": "https://cdn.jsdelivr.net/gh/kkyeer/picbed/avatar_coder.png",
     "search": true,
     "searchMaxSuggestions": 10,
     "sidebar": "auto",
     "lastUpdated": "Last Updated",
     "author": "kkyeer",
-    "authorAvatar": "https://cdn.jsdelivr.net/gh/kkyeer/picbed/httpscdn.jsdelivr.netghkkyeerpicbedavatar.png.png",
+    "authorAvatar": "https://cdn.jsdelivr.net/gh/kkyeer/picbed/avatar_coder.png",
     "record": "浙ICP备18011775号",
     "recordLink":"http://www.beian.miit.gov.cn",
     "startYear": "2019",
