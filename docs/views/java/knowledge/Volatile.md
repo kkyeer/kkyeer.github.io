@@ -1,13 +1,11 @@
 ---
 date: 2019-11-22
 categories:
-  - Java
+  - JVM
 tags:
   - 
 publish: true
 ---
-
-# Java指令重排序与volatile关键字
 
 # Java指令重排序与volatile关键字
 

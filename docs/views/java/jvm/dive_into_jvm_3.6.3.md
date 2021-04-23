@@ -1,7 +1,7 @@
 ---
 date: 2020-09-22
 categories:
-  - Java
+  - JVM
 tags:
   - jvm
 publish: true

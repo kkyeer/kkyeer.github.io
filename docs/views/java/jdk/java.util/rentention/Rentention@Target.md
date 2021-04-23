@@ -1,7 +1,7 @@
 ---
 date: 2019-05-14
 categories:
-  - Java
+  - JDK源码
 tags:
   - 注解
 publish: true
@@ -13,6 +13,7 @@ publish: true
 ## 注解中的@Target
 
 @Target的可能取值为以下枚举类中值的组合，指征当前的注解类可以在哪些位置使用
+
 ```Java
 public enum ElementType {
     /** Class, interface (including annotation type), or enum declaration */
@@ -54,19 +55,28 @@ public enum ElementType {
     TYPE_USE
 }
 ```
+
 ### 默认值
+
 当一个注解没有指定@Target时，默认可以在除了TYPE_PARAMETER以外的任何上下文使用
+
 ### 分类
+
 从类型上区分，上面10个枚举值可以分为两种，前八种出现在声明上下文中，后两种出现在类型上下文中
+
 ### 声明上下文注解
+
 1. 声明上下文注解包括八种，从外到内分别是包声明，类声明，Field声明，构造器声明，方法声明，参数声明，注解声明，本地变量声明
 2. 类声明，Field声明，构造器声明，方法声明，参数声明比较常用，注解的值的获取都是通过Class对象的反射来获取，需要特别注意的是，**当一个变量是私有变量时，通过Field反射获取前需要setAccesible(true)**
 3. 包注解，通过package-info.java类定义，通过Package类反射获取值
+
 ```Java
- 	Package pkg = Package.getPackage("taste.annotaions.targetdemo");
+  Package pkg = Package.getPackage("taste.annotaions.targetdemo");
         System.out.println("PACKAGE:" + pkg.getAnnotation(PackageAnnotation.class).value());
 ```
+
 4. 声明类注解的使用如下代码所示
+
 ```Java
 /**
  * @Author: kkyeer
@@ -196,6 +206,7 @@ public class VariousTarget {
 ## 类型上下文注解
 
 ### 注解定义
+
 ```Java
 @Target(ElementType.TYPE_USE)
 @Retention(RetentionPolicy.RUNTIME)
@@ -207,6 +218,7 @@ public @interface TypeUseAnnotation {
 当一个注解的Target被指定为TYPE_USE时，这个注解的使用位置为类型参数的位置，具体参考JLS4.11，基本上可以理解为，几乎所有类型定义的位置都可以使用，试举几例如下
 
 #### 注解返回值和异常
+
 ```Java
  public @TypeUseAnnotation("Return type") String trapOperation(List<String> param) throws @TypeUseAnnotation("Exception annotation") Exception{
         if (param != null) {
@@ -216,7 +228,9 @@ public @interface TypeUseAnnotation {
         return null;
 }
 ```
+
 获取上述注解的值
+
 ```Java
 Method method = clazz.getMethod("trapOperation", List.class);
 // 异常列表中的注解

@@ -1,13 +1,12 @@
 ---
 date: 2020-04-15
 categories:
-  - Java
+  - JDK源码
 tags:
-  - Java
-  - 源码
+  - HashMap
 publish: true
 ---
-# HashMap源码-二次Hash与核心变量
+# JDK源码-HashMap二次Hash与核心变量
 
 ## 1. 摘要
 

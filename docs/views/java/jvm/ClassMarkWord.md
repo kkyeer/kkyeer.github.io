@@ -1,9 +1,9 @@
 ---
 date: 2020-11-28
 categories:
-  - Java
-tags:
   - JVM
+tags:
+  - Class
 publish: false
 ---
 

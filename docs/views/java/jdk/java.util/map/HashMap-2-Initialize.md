@@ -1,12 +1,12 @@
 ---
 date: 2020-04-15
 categories:
-  - Java
+  - JDK源码
 tags:
   - 源码
 publish: true
 ---
-# HashMap源码-增删与扩容
+# JDK源码-HashMap增删与扩容
 
 ## 1. 构造方法
 

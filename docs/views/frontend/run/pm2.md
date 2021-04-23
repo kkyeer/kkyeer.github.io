@@ -1,7 +1,7 @@
 ---
 date: 2019-01-14
 categories:
-  - 前端
+  - 前端DevOps
 tags:
   - pm2
 publish: true

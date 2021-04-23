@@ -1,7 +1,7 @@
 ---
 date: 2020-09-19
 categories:
-  - Java
+  - 开发问题
 tags:
   - BUG
 publish: true
