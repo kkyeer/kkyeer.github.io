@@ -64,21 +64,20 @@ public class ToArrayBugExperiment {
 - 报错1:将一个Child类型的array,通过Arrays.asList转化成了一个```List<Object>```，理论上此类型的List可以存储任何Object类型（及其子类型）的对象，下面的set方法理应可以正常执行，但是报错了
 - 报错2:```Arrays.asList```转换而成的List，再次执行```toArray()```后的```Object[]```数组，放入```Object```对象报错
 
-### 表面原因
+### 原因(JDK8)
 
 如果仔细查看```java.util.Arrays#asList```方法，会发现其只是将入参数组传入了```ArrayList```的构造器，并返回构造出的实例，此处有几个关键点:
 
 1. 这里的类是```java.util.Arrays.ArrayList```，是Arrays的内部类，而非常用的```java.util.ArrayList```
 2. 看下述的源码，此类只是简单的将传入的array的**引用**赋值给内部的数组
 3. 后面的```get```和```set```方法，都是直接对包裹的数组进行操作。因此在上述测试代码set的时候，实质上是想赋值一个```Child```类型的数组的位置为Object，根据数组的约定，是不允许的，因此报错
-4. ```toArray()```方法调用```clone()```，此方法会直接复制原数组，因此返回值仍是```Child[]```类型
+4. ```toArray()```方法调用```clone()```，此方法会直接复制原数组，因此返回值仍是```Child[]```类型，**发生了协变，即实际类型为```Child[]```的数组，被一个```Object[]```类型的变量引用**
 5. ```toArray(T... a)```方法调用```Arrays.copyOf```或者```System.arraycopy```方法，两种方法均保证返回值数组为```Object[]```类型
 
 ```java
 private static class ArrayList<E> extends AbstractList<E>
     implements RandomAccess, java.io.Serializable
 {
-    private static final long serialVersionUID = -2764017481108945198L;
     private final E[] a;
 
     ArrayList(E[] array) {
@@ -86,17 +85,6 @@ private static class ArrayList<E> extends AbstractList<E>
         a = Objects.requireNonNull(array);
     }
 
-    @Override
-    public E get(int index) {
-        return a[index];
-    }
-
-    @Override
-    public E set(int index, E element) {
-        E oldValue = a[index];
-        a[index] = element;
-        return oldValue;
-    }
     // 下面两个方法实现不同
     @Override
     public Object[] toArray() {
@@ -116,17 +104,39 @@ private static class ArrayList<E> extends AbstractList<E>
         return a;
     }
 
-
     // 省略其他方法实现
 }
 ```
 
 ### 解决
 
-1. 使用```Arrays.asList(T... a)```方法时，注意返回值的List的泛型应该与传入的类型T一致
+1. 使用```Arrays.asList(T... a)```方法时，注意返回值的List的泛型应该与传入的类型T一致，**编译器不会报错**
 
     ```java
     List<Child> arr = Arrays.asList(childArray);  // <== 此处List的泛型应为Child，不能随便修改
     ```
 
-2. 使用```toArray(T[] a)```来保证结果数组与预期类型一致，避免使用无参的```toArray()```方法
+2. 使用```toArray(T[] a)```来保证结果数组与预期类型一致，**避免使用无参的```toArray()```方法**
+
+## JDK11的变化
+
+JDK11中，```java.util.Arrays.ArrayList```类的实现有变化， toArray()方法同时会修改返回值的类型，强制转为```Object[]```，具体代码如下:
+
+```java
+    private static class ArrayList<E> extends AbstractList<E>
+        implements RandomAccess, java.io.Serializable
+    {
+        // 这是JDK8的实现
+        @Override
+        public Object[] toArray() {
+            return a.clone();
+        }
+        // 这是JDK11的实现，数组的类型有变化
+        @Override
+        public Object[] toArray() {
+            return Arrays.copyOf(a, a.length, Object[].class);
+        }
+    }
+```
+
+对于JDK11来说，返回的数组永远是```Object[]```，不会因为协变导致问题。因此第二个问题不会报错。
