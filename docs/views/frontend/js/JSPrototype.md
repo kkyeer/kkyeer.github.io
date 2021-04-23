@@ -1,7 +1,7 @@
 ---
 date: 2019-05-14
 categories:
-  - 前端
+  - JS
 tags:
   - JS
 publish: true

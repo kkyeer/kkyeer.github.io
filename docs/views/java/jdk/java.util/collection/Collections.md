@@ -1,13 +1,13 @@
 ---
 date: 2020-12-14
 categories:
-  - Java
+  - JDK源码
 tags:
   - JDK
 publish: true
 ---
 
-# JDK源码学习-常用Collection
+# JDK源码-常用Collection
 
 ## LinkedList
 
@@ -50,5 +50,3 @@ LinkedList底层为双向链表，每个节点为Node对象，内部分别有Pre
 ```
 
 通过上述特性可以快速构造LRU缓存
-
-

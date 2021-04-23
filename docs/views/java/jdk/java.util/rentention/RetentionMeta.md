@@ -1,13 +1,13 @@
 ---
 date: 2020-02-14
 categories:
-  - Java
+  - Java进阶
 tags:
   - 注解
 publish: true
 ---
 
-# JavaSE元注解
+# Java使用进阶-Java元注解
 
 在注解定义时，用在注解头部的注解，称为元注解，目前元注解在java.lang.annotation包内，分别```@Target```,```@Retention```,```@Documented```,```@Inherited```,```@Repeatable```,```@Native```
 

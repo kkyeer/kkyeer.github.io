@@ -1,8 +1,6 @@
 ---
 date: 2018-11-24
 categories:
-  - 前端
-tags:
   - JS
 publish: true
 ---

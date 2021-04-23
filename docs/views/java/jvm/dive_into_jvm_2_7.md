@@ -1,13 +1,13 @@
 ---
 date: 2020-10-22
 categories:
-  - Java
+  - JVM
 tags:
   - jvm
 publish: true
 ---
 
-# 《深入Java虚拟机》代码2-7 String.intern()示例代码研究
+# 《深入Java虚拟机》代码2-7 String.intern()示例代码问题
 
 ## 环境说明
 

@@ -1,7 +1,7 @@
 ---
 date: 2018-05-14
 categories:
-  - 前端
+  - 前端DevOps
 tags:
   - npm
 publish: true

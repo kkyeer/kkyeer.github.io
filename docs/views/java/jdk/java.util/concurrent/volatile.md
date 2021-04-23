@@ -1,7 +1,7 @@
 ---
 date: 2020-04-18
 categories:
-  - Java
+  - JVM
 tags:
   - 源码
   - 多线程
@@ -70,11 +70,11 @@ Thread thread2 = new Thread(
 ```shell
 Wrong,x = 0 and y = 0
 Exception in thread "main" java.util.concurrent.RejectedExecutionException: Task java.util.concurrent.FutureTask@d716361 rejected from java.util.concurrent.ThreadPoolExecutor@3764951d[Shutting down, pool size = 12, active threads = 12, queued tasks = 23280, completed tasks = 2713]
-	at java.util.concurrent.ThreadPoolExecutor$AbortPolicy.rejectedExecution(ThreadPoolExecutor.java:2063)
-	at java.util.concurrent.ThreadPoolExecutor.reject(ThreadPoolExecutor.java:830)
-	at java.util.concurrent.ThreadPoolExecutor.execute(ThreadPoolExecutor.java:1379)
-	at java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:112)
-	at concurrent.reorder.Reveal.main(Reveal.java:59)
+ at java.util.concurrent.ThreadPoolExecutor$AbortPolicy.rejectedExecution(ThreadPoolExecutor.java:2063)
+ at java.util.concurrent.ThreadPoolExecutor.reject(ThreadPoolExecutor.java:830)
+ at java.util.concurrent.ThreadPoolExecutor.execute(ThreadPoolExecutor.java:1379)
+ at java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:112)
+ at concurrent.reorder.Reveal.main(Reveal.java:59)
 Wrong,x = 0 and y = 0
 ```
 

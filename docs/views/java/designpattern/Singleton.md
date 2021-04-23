@@ -1,7 +1,7 @@
 ---
 date: 2018-11-22
 categories:
-  - Java
+  - 设计模式
 tags:
   - 设计模式
 publish: true

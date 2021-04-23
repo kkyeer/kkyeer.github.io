@@ -23,10 +23,55 @@ module.exports = {
   "theme": "reco",
   "themeConfig": {
     "nav": [
+      
       {
         "text": "Home",
         "link": "/",
         "icon": "reco-home"
+      },
+      {
+        "text":"Category",
+        "icon":"reco-category",
+        "items":[
+          {
+            "text":"服务端",
+            "items":[
+              {"text":"JDK源码","link":"/categories/JDK源码/"},
+              {"text":"JVM","link":"/categories/JVM/"},
+              {"text":"Java进阶","link":"/categories/Java进阶/"},
+              {"text":"设计模式","link":"/categories/设计模式/"}
+            ]
+          },
+          {
+            "text":"中间件",
+            "items":[
+              {"text":"Spring","link":"/categories/Spring/"},
+              {"text":"Dubbo","link":"/categories/Dubbo/"},
+              {"text":"Redis","link":"/categories/Redis/"}
+            ]
+          },
+          {
+            "text":"前端",
+            "items":[
+              {"text":"JS","link":"/categories/JS/"},
+              {"text":"前端DevOps","link":"/categories/前端DevOps/"}
+            ]
+          },
+          {
+            "text":"问题解决",
+            "items":[
+              {"text":"线上问题","link":"/categories/线上问题/"},
+              {"text":"开发问题","link":"/categories/开发问题/"},
+            ]
+          },
+          {
+            "text":"其他",
+            "items":[
+              {"text":"懂","link":"/categories/懂/"},
+              {"text":"Linux","link":"/categories/Linux/"},
+            ]
+          }
+        ]
       },
       {
         "text": "TimeLine",

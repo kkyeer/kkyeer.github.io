@@ -1,13 +1,13 @@
 ---
 date: 2021-04-12
 categories:
-  - Java
+  - JDK源码
 tags:
   - 源码
 publish: true
 ---
 
-# StringBuilder
+# JDK源码-StringBuilder
 
 ## 扩容机制
 

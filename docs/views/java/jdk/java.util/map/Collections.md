@@ -1,9 +1,9 @@
 ---
 date: 2020-04-24
 categories:
-  - Java
+  - JDK源码
 tags:
-  - 集合类
+  - Collection
 publish: true
 ---
 

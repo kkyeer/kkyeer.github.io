@@ -1,7 +1,7 @@
 ---
 date: 2018-11-24
 categories:
-  - 前端
+  - JS
 tags:
   - 
 publish: true

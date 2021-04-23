@@ -1,10 +1,10 @@
 ---
 date: 2018-11-24
 categories:
-  - Java
+  - Java进阶
 tags:
   - 
-publish: true
+publish: false
 ---
 
 # 匿名内部类的继承
