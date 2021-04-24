@@ -140,6 +140,10 @@ module.exports = {
     },
     feed: {
       canonical_base: 'https://www.tpfuture.top/',
+    },
+    valineConfig: {
+      appId: '3dgRozlCeViNeuUcacu3bSqK-gzGzoHsz',// your appId
+      appKey: 'FJjynPiDtLCjJ0YJ2myShSEx', // your appKey
     }
   },
   "markdown": {
@@ -148,6 +152,7 @@ module.exports = {
   },
   plugins: [
     'flowchart'
+
   ],
   configureWebpack: () => {
     const NODE_ENV = process.env.NODE_ENV
