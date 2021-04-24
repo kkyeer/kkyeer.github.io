@@ -1,3 +1,11 @@
+---
+date: 2021-04-24 12:10:29
+categories:
+  - Spring
+tags:
+  - 
+publish: false
+---
 # SpringBoot源码-@Configuration配置处理
 
 ## 1. 解析Class，读取BeanDefinition
@@ -23,7 +31,7 @@ parse: 调用ConfigurationClassParser对象的parse方法来进行解析：
         - @EnableAutoConfiguration
             - @Import(AutoConfigurationImportSelector.class)
             - @AutoConfigurationPackage
-                - @Import(AutoConfigurationPackages.Registrar.class) 
+                - @Import(AutoConfigurationPackages.Registrar.class)
     - 上面@Import进来的class分为两种：
         - ImportSelector：决定哪些Configuration类可以被选中，其子类DeferredImportSelector提供了分组的形式来细化管理Import
             - AutoConfigurationImportSelector:处理SpringAutoConfiguration包下面定义的各种Bean等
