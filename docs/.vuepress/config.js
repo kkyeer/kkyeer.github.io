@@ -95,6 +95,7 @@ module.exports = {
         ]
       }
     ],
+    "lastUpdated": 'Last Updated',
     "type": "blog",
     "blogConfig": {
       "category": {
