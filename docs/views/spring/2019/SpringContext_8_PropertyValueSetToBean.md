@@ -1,3 +1,11 @@
+---
+date: 2021-04-24 12:11:16
+categories:
+  - Spring
+tags:
+  - 
+publish: false
+---
 # SpringContext(8)-PropertyValue到Bean内部属性：BeanWrapper对象的setPropertyValues方法
 
 解析出的PropertyValue，通过BeanWrapperImpl的父类AbstractPropertyAccessor的setPropertyValues方法来集成到Bean的属性中，该方法遍历PropertyValues内部的List，对每一个PropertyValue，调用```setPropertyValue(PropertyValue pv)```方法

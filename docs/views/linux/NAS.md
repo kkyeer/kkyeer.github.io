@@ -1,6 +1,14 @@
+---
+date: 2021-04-24 12:07:42
+categories:
+  - 
+tags:
+  - 
+publish: false
+---
 # NAS
 
-##　SAMBA
+## 　SAMBA
 
 ```shell
 sudo mount -t cifs //192.168.50.150/download /mnt/download -o username=kkyeer,sec=ntlmssp,iocharset=utf8,uid=0,gid=0
