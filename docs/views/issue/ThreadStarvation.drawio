@@ -147,8 +147,8 @@
                 <mxCell id="91" value="因为上面的耗时操作，导致子任务都提交到了阻塞队列" style="shape=callout;whiteSpace=wrap;html=1;perimeter=calloutPerimeter;fontFamily=Helvetica;fontSize=12;align=center;strokeColor=#d6b656;strokeWidth=2;fillColor=#fff2cc;sketch=0;portConstraintRotation=0;" vertex="1" parent="1">
                     <mxGeometry x="390" y="540" width="150" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="97" value="因为这批任务都在阻塞队列里，所以需要线程池有空闲Worker的时候才会被执行" style="text;html=1;strokeColor=#b85450;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=0;fillColor=#f8cecc;" vertex="1" parent="1">
-                    <mxGeometry x="50" y="670" width="220" height="35" as="geometry"/>
+                <mxCell id="97" value="因为这批任务都在阻塞队列里，所以被阻塞住，需要线程池有空闲Worker的时候才会被执行" style="text;html=1;strokeColor=#b85450;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=0;fillColor=#f8cecc;" vertex="1" parent="1">
+                    <mxGeometry x="50" y="670" width="180" height="50" as="geometry"/>
                 </mxCell>
                 <mxCell id="99" value="因为线程池没有Worker来执行上面的任务，所以这个Outer线程阻塞在这里" style="text;html=1;strokeColor=#b85450;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=0;fillColor=#f8cecc;" vertex="1" parent="1">
                     <mxGeometry x="50" y="890" width="240" height="45" as="geometry"/>
