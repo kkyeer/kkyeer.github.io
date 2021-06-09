@@ -102,6 +102,21 @@ private static class BadTask implements Callable<String>{
 
 ## 典型情况-嵌套提交导致的RT上升
 
-破坏上面的必要条件的第3点，即由于压力不大导致并非所有子任务都在阻塞队列里，这样会有部分线程可以慢慢执行完子任务，但是由于这部分线程数量少，导致RT非常高，完整代码见[ThreadHalfStarvation](https://github.com/kkyeer/JavaPlayground/blob/fccaa0c21101d4e5b3bdc07d9fde74b4bc454331/src/main/java/issue/threadstarvation/ThreadHalfStarvation.java)
+破坏上面的必要条件的第3点，即由于压力没有那么大导致并非所有子任务都阻塞在队列里，这样会有部分线程可以慢慢执行完子任务，但是由于执行子任务的线程数量少，最开始只有一小部分子任务有机会被执行，从宏观看约等于**子任务串行执行**，导致RT非常高，完整代码见[Github上的代码](https://github.com/kkyeer/JavaPlayground/blob/master/src/main/java/issue/threadstarvation/ThreadHalfStarvation.java)
 
-![20210602170319](https://cdn.jsdelivr.net/gh/kkyeer/picbed/20210602170319.png)
+![20210607114327](https://cdn.jsdelivr.net/gh/kkyeer/picbed/20210607114327.png)
+
+执行结果如下：
+
+```shell
+OK,consume 310ms
+OK,consume 310ms
+OK,consume 310ms
+OK,consume 310ms
+OK,consume 334ms
+OK,consume 380ms
+OK,consume 380ms
+OK,consume 407ms
+OK,consume 407ms
+All good
+```
