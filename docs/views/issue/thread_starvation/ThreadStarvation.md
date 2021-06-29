@@ -13,7 +13,7 @@ publish: true
 
 ## 现象
 
-流量峰值时发现大量调用超时，通过链路追踪锁定超时发生的节点，```jstack```命令追踪进程:
+流量峰值时发现大量调用超时，通过链路追踪锁定超时发生的节点，隔离节点后，在Pod中使用```jstack```命令追踪进程:
 
 ```shell
 jstack -l 1 |grep "java.lang.Thread.State"|sort -nr|uniq -c 
@@ -27,7 +27,7 @@ jstack -l 1 |grep "java.lang.Thread.State"|sort -nr|uniq -c
    8    java.lang.Thread.State: RUNNABLE
 ```
 
-Dump线程信息:```jstack -l 1 > stack.log```，分析WAITING状态的线程，发现问题出现在线程提交到线程池的Runnable中也提交了Runnable到此线程池中，造成死锁
+Dump线程信息:```jstack -l 1 > stack.log```，分析WAITING状态的线程，发现问题出现在提交到线程池的Runnable中嵌套提交了Runnable到同一线程池中，造成死锁
 
 ## 极限情况-完全死锁
 
