@@ -31,7 +31,9 @@ Dump线程信息:```jstack -l 1 > stack.log```，分析WAITING状态的线程，
 
 ## 极限情况-完全死锁
 
-完整代码见[Github](https://github.com/kkyeer/JavaPlayground/blob/fccaa0c21101d4e5b3bdc07d9fde74b4bc454331/src/main/java/issue/threadstarvation/ThreadStarvation.java)
+### 代码示例
+
+完整代码见[Github](https://github.com/kkyeer/JavaPlayground/blob/master/src/main/java/issue/threadstarvation/ThreadStarvationEmulator.java)
 
 核心代码如下，外层任务
 
@@ -90,19 +92,23 @@ private static class BadTask implements Callable<String>{
 
 或许看图解比较直观
 
+### 图解
+
 ![ThreadStarvation.svg](https://cdn.jsdelivr.net/gh/kkyeer/picbed/ThreadStarvation.svg)
+![MainTask.svg](https://cdn.jsdelivr.net/gh/kkyeer/picbed/MainTask.svg)
 
 ### 完全死锁的必要条件
 
-1. 父任务和子任务向同一个线程池提交任务【核心原因】
-2. 父任务阻塞等待所有子任务完成，子任务部分在阻塞队列里
-3. **所有**子任务都在阻塞队列里
+1. 线程池必须有阻塞队列，亦即有可能部分Runnable对象存在阻塞队列，实际上发生死锁的就是Worker里执行的Runnable和阻塞队列的Runnable
+2. 父任务和子任务向同一个线程池提交任务【核心原因】
+3. 父任务阻塞等待所有子任务完成，子任务部分在阻塞队列里
+4. Worker里全为父任务，且对应的**所有**子任务都在阻塞队列里
 
-任何一个条件不满足，都不会造成完全死锁，但是只要符合条件1，在某些情况下仍旧会造成线程执行慢
+破坏以上任何条件，都不会造成完全死锁，但是只要符合条件1,2，在某些情况下仍旧会造成线程执行慢
 
 ## 典型情况-嵌套提交导致的RT上升
 
-破坏上面的必要条件的第3点，即由于压力没有那么大导致并非所有子任务都阻塞在队列里，这样会有部分线程可以慢慢执行完子任务，但是由于执行子任务的线程数量少，最开始只有一小部分子任务有机会被执行，从宏观看约等于**子任务串行执行**，导致RT非常高，完整代码见[Github上的代码](https://github.com/kkyeer/JavaPlayground/blob/master/src/main/java/issue/threadstarvation/ThreadHalfStarvation.java)
+破坏上面的必要条件的第4点，即由于压力没有那么大导致并非所有子任务都阻塞在队列里，这样会有部分Worker线程可以拿到子任务执行，但是由于执行子任务的线程数量少，最开始只有一小部分子任务有机会被执行，从宏观看最开始约等于**子任务串行执行**，导致RT非常高，完整代码见[Github上的代码](https://github.com/kkyeer/JavaPlayground/blob/master/src/main/java/issue/threadstarvation/ThreadStarvationEmulator.java)
 
 ![20210607114327](https://cdn.jsdelivr.net/gh/kkyeer/picbed/20210607114327.png)
 
