@@ -94,8 +94,8 @@ private static class BadTask implements Callable<String>{
 
 ### 图解
 
+![MainTask.svg](https://cdn.jsdelivr.net/gh/kkyeer/picbed/sequence.svg)
 ![ThreadStarvation.svg](https://cdn.jsdelivr.net/gh/kkyeer/picbed/ThreadStarvation.svg)
-![MainTask.svg](https://cdn.jsdelivr.net/gh/kkyeer/picbed/MainTask.svg)
 
 ### 完全死锁的必要条件
 
@@ -108,21 +108,48 @@ private static class BadTask implements Callable<String>{
 
 ## 典型情况-嵌套提交导致的RT上升
 
-破坏上面的必要条件的第4点，即由于压力没有那么大导致并非所有子任务都阻塞在队列里，这样会有部分Worker线程可以拿到子任务执行，但是由于执行子任务的线程数量少，最开始只有一小部分子任务有机会被执行，从宏观看最开始约等于**子任务串行执行**，导致RT非常高，完整代码见[Github上的代码](https://github.com/kkyeer/JavaPlayground/blob/master/src/main/java/issue/threadstarvation/ThreadStarvationEmulator.java)
+**破坏上面的必要条件的第4点**，即由于压力没有那么大导致并非所有子任务都阻塞在队列里，这样会有部分Worker线程可以拿到子任务执行，但是由于执行子任务的线程数量少，最开始只有一小部分子任务有机会被执行，从宏观看最开始约等于**子任务串行执行**，导致RT非常高，完整代码见[Github上的代码](https://github.com/kkyeer/JavaPlayground/blob/master/src/main/java/issue/threadstarvation/ThreadStarvationEmulator.java)
 
 ![20210607114327](https://cdn.jsdelivr.net/gh/kkyeer/picbed/20210607114327.png)
 
 执行结果如下：
 
 ```shell
-OK,consume 310ms
-OK,consume 310ms
-OK,consume 310ms
-OK,consume 310ms
-OK,consume 334ms
-OK,consume 380ms
-OK,consume 380ms
-OK,consume 407ms
-OK,consume 407ms
-All good
+----------------------模拟半死锁--------------------
+Time consume:55ms
+Time consume:85ms
+Time consume:105ms
+Time consume:115ms
+Time consume:125ms
+Time consume:135ms
+Time consume:145ms
+Time consume:156ms
+Time consume:156ms
+----------------------完成-------------------------
+```
+
+理想的情况下，第一个任务是10ms(mainTask)+10ms(subTask)=20ms，但是由于近似死锁(开始只有一个Worker线程可以执行subTask)，导致所有任务的RT都很高
+
+## 问题解决
+
+方案围绕破坏上述[必要条件](#完全死锁的必要条件)
+
+- 不使用阻塞队列，即使用同步队列```java.util.concurrent.SynchronousQueue```
+- 父任务和子任务使用不同的线程池
+- 控制并发低于共享线程池的核心线程数（仅在无法使用上述方案时使用）
+
+使用方案1的效果如下
+
+```shell
+----------------------模拟问题解决------------------
+Time consume:22ms
+Time consume:22ms
+Time consume:23ms
+Time consume:25ms
+Time consume:26ms
+Time consume:27ms
+Time consume:31ms
+Time consume:31ms
+Time consume:31ms
+----------------------完成-------------------------
 ```
