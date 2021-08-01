@@ -134,7 +134,7 @@ module.exports = {
     "author": "kkyeer",
     "authorAvatar": "https://cdn.jsdelivr.net/gh/kkyeer/picbed/avatar_coder.png",
     "record": "浙ICP备18011775号",
-    "recordLink":"http://www.beian.miit.gov.cn",
+    "recordLink":"http://beian.miit.gov.cn",
     "startYear": "2019",
     sitemap: {
       hostname: "https://www.tpfuture.top/"
