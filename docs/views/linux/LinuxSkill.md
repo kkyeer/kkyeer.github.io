@@ -217,3 +217,26 @@ lsusb
 ```sh
 iotop -oP
 ```
+
+## Docker
+
+### 安装transmission
+
+```shell
+docker run -d \
+  --name=transmission \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ=Asia/Beijing \
+  -e TRANSMISSION_WEB_HOME=/flood-for-transmission/  \
+  -e USER=kk  \
+  -e PASS=transgui \
+  -p 9091:9091 \
+  -p 51413:51413 \
+  -p 51413:51413/udp \
+  -v /etc/transmission:/config \
+  -v /data/download:/downloads \
+  -v /var/watch:/watch \
+  --restart unless-stopped \
+  ghcr.io/linuxserver/transmission
+```
