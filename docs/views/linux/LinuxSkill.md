@@ -158,6 +158,16 @@ service smbd restart
 [简易说明](https://blog.csdn.net/w401229755/article/details/54200141)
 [详细说明](http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html)
 
+> ubuntu可以考虑搜索自动启动，GUI方式
+
+## 应用软件
+
+### 切换音频设备
+
+```shell
+snap install indicator-sound-switcher
+```
+
 ## ssh
 
 ### ssh传输文件
