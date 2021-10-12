@@ -17,7 +17,7 @@ Zerotier可以组建虚拟局域网，并且是P2P直连的，这个可以说是
 ## 安装配置ZeroTier
 
 ```sh
-curl -s <https://install.zerotier.com/> | sudo bash
+curl -s https://install.zerotier.com | sudo bash
 
 sudo systemctl start zerotier-one.service
 
@@ -70,7 +70,7 @@ sudo zerotier-idtool initmoon identity.public > moon.json
 zerotier-idtool genmoon moon.json
 ```
 
-执行之后会生产一个000000xxxx.moon的文件，将这个文件通过宝塔面板/scp/lrzsz下载本地，xxxx是随机的如图，记住这个后面要用
+执行之后会生产一个000000xxxx.moon的文件，将这个文件通过sz下载到本地
 
 ### 将moon节点加入网络
 
@@ -97,6 +97,14 @@ sudo systemctl restart zerotier-one
 对客户端安装zerotier后，将配置好的moon文件配置到客户端，并重启zerotier完成与moon的连接。
 
 ### Linux
+
+将之前下载的文件配置到对应路径
+
+```shell
+cd /var/lib/zerotier-one/
+sudo mkdir moons.d
+sudo mv ~/down/000000xxxxxx.moon moons.d/
+```
 
 使用之前步骤中 moon.json 文件中的 id 值 (10 位的字符串，就是xxxxxx），不知道的话在moon服务器上执行如下命令可以得到id。
 
