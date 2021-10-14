@@ -112,7 +112,7 @@ sudo mv ~/down/000000xxxxxx.moon moons.d/
 
 然后在客户端机器里执行命令：
 
-执行命令：zerotier-cli orbit ed2c88f24 ed2c88f24
+执行命令：```zerotier-cli orbit ed2c88f24 ed2c88f24```，**注意，这里id有两次**
 
 此处的ed2c88f24刚刚在服务器里生成moon.json得到的ID值
 
@@ -121,6 +121,10 @@ sudo mv ~/down/000000xxxxxx.moon moons.d/
 打开服务程序services.msc, 找到服务"ZeroTier One", 并且在属性内找到该服务可执行文件路径,并且在其下建立moons.d文件夹,然后将moon服务器下生成的000xxxx.moon文件,拷贝到此文件夹内..再重启该服务即可(计算机右键管理-找到服务双击打开-找到zerotier one右键重新启动即可)
 
 路径一般是Windows: C:\ProgramData\ZeroTier\One
+
+### MAC OS
+
+路径在```/Library/Application Support/ZeroTier/One/```,其他跟linux无区别
 
 ### 测试是否成功
 
