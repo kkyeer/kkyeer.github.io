@@ -33,3 +33,9 @@ docker create \
   --restart unless-stopped \
   linuxserver/qbittorrent
 ```
+
+## EMBY
+
+```shell
+docker run -d -v /etc/emby/config:/config -v /data/nas:/mnt/nas -p 8920:8920 -p8096:8096 --name emby  emby/embyserver
+```
