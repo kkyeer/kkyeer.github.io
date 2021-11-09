@@ -250,3 +250,9 @@ docker run -d \
   --restart unless-stopped \
   ghcr.io/linuxserver/transmission
 ```
+
+### v2ray-docker
+
+```shell
+docker run -d -p10800:1080 -v /etc/v2ray/:/etc/v2ray --name=v2ray v2fly/v2fly-core
+```
