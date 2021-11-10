@@ -103,12 +103,12 @@ sudo systemctl restart zerotier-one
 ```shell
 cd /var/lib/zerotier-one/
 sudo mkdir moons.d
-sudo mv ~/down/000000xxxxxx.moon moons.d/
+sudo scp username@xxxxx:/var/lib/zerotier-one/moons.d/000000xxxxxxxx.moon /var/lib/zerotier-one/moons.d
 ```
 
-使用之前步骤中 moon.json 文件中的 id 值 (10 位的字符串，就是xxxxxx），不知道的话在moon服务器上执行如下命令可以得到id。
+使用之前步骤中 moon.json 文件中的 id 值 (10 位的字符串，就是xxxxxx），不知道的话在**moon服务器**上执行如下命令可以得到id。
 
-执行命令：grep id /var/lib/zerotier-one/moon.json | head -n 1
+执行命令：```grep id /var/lib/zerotier-one/moon.json | head -n 1```
 
 然后在客户端机器里执行命令：
 
@@ -128,6 +128,6 @@ sudo mv ~/down/000000xxxxxx.moon moons.d/
 
 ### 测试是否成功
 
-执行命令：zerotier-cli listpeers，若有出现你的服务器IP地址,即可证明moon连接成功
+执行命令：```sudo zerotier-cli listpeers```，若有出现你的服务器IP地址,即可证明moon连接成功
 
 完成客户端配置
