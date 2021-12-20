@@ -30,6 +30,7 @@ docker create \
   -p 41234:41234 \
   -v /etc/qbittorrent/:/config \
   -v /data/download:/downloads \
+  -v /data/windown:/data/downloads \
   --restart unless-stopped \
   linuxserver/qbittorrent
 ```
@@ -48,3 +49,20 @@ docker run -d -v /etc/jellyfin/config:/config -v /data/nas:/mnt/nas -p 28920:892
 --device /dev/dri/card0:/dev/dri/card0
 --name jellyfin  jellyfin/jellyfin
 ```
+
+docker create \
+  --name=qbittorrent2 \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ=Asia/Shanghai \
+  -e UMASK_SET=022 \
+  -e WEBUI_PORT=41234 \
+  -e WEBUI_ADDRESS=0.0.0.0 \
+  -p 6881:6881 \
+  -p 6881:6881/udp \
+  -p 41234:41234 \
+  -v /etc/qbittorrent/:/config \
+  -v /data/download:/downloads \
+  -v /data/windown:/data/downloads \
+  --restart unless-stopped \
+  linuxserver/qbittorrent
