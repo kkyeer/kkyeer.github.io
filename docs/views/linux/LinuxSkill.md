@@ -246,6 +246,7 @@ docker run -d \
   -p 51413:51413/udp \
   -v /etc/transmission:/config \
   -v /data/download:/downloads \
+  -v /data/windown:/data/windown \
   -v /var/watch:/watch \
   --restart unless-stopped \
   ghcr.io/linuxserver/transmission
