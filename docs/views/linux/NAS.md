@@ -8,7 +8,7 @@ publish: false
 ---
 # NAS
 
-## 　SAMBA
+## SAMBA
 
 ```shell
 sudo mount -t cifs //192.168.50.150/download /mnt/download -o username=kkyeer,sec=ntlmssp,iocharset=utf8,uid=0,gid=0
@@ -66,3 +66,16 @@ docker create \
   -v /data/windown:/data/downloads \
   --restart unless-stopped \
   linuxserver/qbittorrent
+
+## PVE配置ipv6
+
+```shell
+vi /etc/network/interfaces
+```
+
+```conf
+iface vmbr0 inet6 static
+        address your ipv6 prefix::3
+        gateway your ipv6 prefix::1
+        netmask 64
+```
