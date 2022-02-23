@@ -38,17 +38,34 @@ docker create \
 ## EMBY
 
 ```shell
-docker run -d -v /etc/emby/config:/config -v /data/nas:/mnt/nas -p 8920:8920 -p8096:8096 --name emby  emby/embyserver
+
+# 找到render组的gid
+getent group render | cut -d: -f3
+
+# 假设上面是108
+
+ docker run -d -v /etc/emby/config:/config -v /data/nas:/mnt/nas -p 8920:8920 -p8096:8096 --name emby \
+ --device /dev/dri/renderD128:/dev/dri/renderD128 \
+ --env UID=1000 \
+ --env GID=108 \
+ --env GIDLIST=108 \
+ lovechen/embyserver
 ```
+
+注意这里的108是render组的id
 
 ## jellyfin
 
 ```shell
-docker run -d -v /etc/jellyfin/config:/config -v /data/nas:/mnt/nas -p 28920:8920 -p28096:8096 
---device=/dev/dri/renderD128 
---device /dev/dri/card0:/dev/dri/card0
+docker run -d -v /etc/jellyfin/config:/config -v /data/nas:/mnt/nas -p 28920:8920 -p28096:8096 \
+ --device /dev/dri/renderD128:/dev/dri/renderD128 \
+ --env UID=1000 \
+ --env GID=108 \
+ --env GIDLIST=108 \
 --name jellyfin  jellyfin/jellyfin
 ```
+
+## qbittorrent2
 
 docker create \
   --name=qbittorrent2 \
