@@ -257,3 +257,19 @@ docker run -d \
 ```shell
 docker run -d -p10800:1080 -v /etc/v2ray/:/etc/v2ray --name=v2ray v2fly/v2fly-core
 ```
+
+### clash-docker
+
+```shell
+sudo useradd -c "user for clash" -M -N -s /usr/sbin/nologin -u 1024 clash
+wget https://download.db-ip.com/free/dbip-country-lite-2022-03.mmdb.gz
+# manual create config.yaml
+docker run --user 1024:100 --name clash -d \
+--network host \
+--restart=unless-stopped \
+-e CLASH_CTL_ADDR="0.0.0.0:8082" \
+-e CLASH_SECRET="YOUR-PASSWORD-HERE" \
+-v $(pwd)/config.yaml:/etc/clash/config.yaml:ro,z \
+-v $(pwd)/dbip-country-lite-2022-03.mmdb:/etc/clash/Country.mmdb:ro,z \
+80x86/clash:v1.5.0
+```
