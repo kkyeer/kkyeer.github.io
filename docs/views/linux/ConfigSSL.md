@@ -130,9 +130,74 @@ cd tomcat-native-1.2.16-src/native/
 
 ## 附4 自签名OpenSSL 证书
 
+### 方式1：简单，适合快速操作，但是浏览器无法信任
+
 ```shell
 openssl genrsa -des3 -out ca.key 2048
 openssl rsa -in ca.key -out ca.key.nopass
 openssl req -new -key ca.key.nopass -out server.csr
 openssl x509 -req -days 365 -in server.csr -signkey ca.key.nopass -out server.crt
 ```
+
+### 方式2：全面，适合需要信任自签名证书的场景
+
+参考：[Chrome导入ca根证书后 提示subject Alternative Name Missing问题](https://icoolworld.github.io/chrome%E5%AF%BC%E5%85%A5CA%E6%A0%B9%E8%AF%81%E4%B9%A6%E5%90%8E-%E6%8F%90%E7%A4%BASubject-Alternative-Name-Missing%E9%97%AE%E9%A2%98.html#2%E5%88%9B%E5%BB%BA%E8%87%AA%E7%AD%BE%E5%90%8D%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AF%81%E4%B9%A6createselfsignedcertificatesh)
+
+新建 createCAkey.sh
+
+```shell
+#!/usr/bin/env bash
+openssl genrsa -des3 -out rootCA.key 2048
+openssl req -x509 -new -key rootCA.key.nopass -out rootCA.cer -days 700 -subj /CN="MY CA"
+# 设备上安装此CA证书并信任即可
+```
+
+执行后 创建无密码CA.key
+
+```shell
+openssl rsa -in rootCA.key -out rootCA.key.nopass
+# 输入上一步的密码
+```
+
+新建 createServerSelfSignedKey.sh
+
+```shell
+#!/usr/bin/env bash
+sudo openssl genrsa -out server.key 2048
+sudo openssl req -new -sha256 -nodes -out server.csr -key server.key -config server.csr.cnf
+
+sudo openssl x509 -req -in server.csr -CA ../rootCA.cer -CAkey ../rootCA.key.nopass -CAcreateserial -CAserial serial -out server.cer -days 700 -sha256 -extfile v3.ext
+```
+
+> v3.ext
+
+```shell
+authorityKeyIdentifier=keyid,issuer
+basicConstraints=CA:FALSE
+keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = SOME_DOMAIN_TO_BE_REPLACED
+```
+
+> server.csr.cnf
+
+```shell
+[req]
+default_bits = 2048
+prompt = no
+default_md = sha256
+distinguished_name = dn
+
+[dn]
+C=US
+ST=New York
+L=Rochester
+O=End Point
+OU=Testing Domain
+emailAddress=EMAIL_TO_BE_REPLACED
+CN = SOME_DOMAIN_TO_BE_REPLACED
+```
+
+注意: iOS安装完成CA证书后，安装成功并未授信证书, 需要到 设置 ---> 通用 ---> 关于本机 ---> 证书信任设置 下对证书开启完全信任
