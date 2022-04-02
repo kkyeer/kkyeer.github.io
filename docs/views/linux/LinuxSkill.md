@@ -273,3 +273,9 @@ docker run --user 1024:100 --name clash -d \
 -v $(pwd)/dbip-country-lite-2022-03.mmdb:/etc/clash/Country.mmdb:ro,z \
 80x86/clash:v1.5.0
 ```
+
+## ubuntu新增kylin镜像源安装原生微信
+
+```txt
+deb http://archive.ubuntukylin.com/ubuntukylin focal-partner main
+```
