@@ -25,9 +25,7 @@ docker create \
   -e UMASK_SET=022 \
   -e WEBUI_PORT=41234 \
   -e WEBUI_ADDRESS=0.0.0.0 \
-  -p 6881:6881 \
-  -p 6881:6881/udp \
-  -p 41234:41234 \
+  --net=host \
   -v /etc/qbittorrent/:/config \
   -v /data/download:/downloads \
   -v /data/windown:/data/downloads \
@@ -65,24 +63,14 @@ docker run -d -v /etc/jellyfin/config:/config -v /data/nas:/mnt/nas -p 28920:892
 --name jellyfin  jellyfin/jellyfin
 ```
 
-## qbittorrent2
+完成后，需要手动升级jellyfin-ffmpeg(10.7.0问题)
+下载路径: https://repo.jellyfin.org/releases/server/debian/stable/ffmpeg/jellyfin-ffmpeg_4.4.1-4-buster_amd64.deb
+安装:
 
-docker create \
-  --name=qbittorrent2 \
-  -e PUID=1000 \
-  -e PGID=1000 \
-  -e TZ=Asia/Shanghai \
-  -e UMASK_SET=022 \
-  -e WEBUI_PORT=41234 \
-  -e WEBUI_ADDRESS=0.0.0.0 \
-  -p 6881:6881 \
-  -p 6881:6881/udp \
-  -p 41234:41234 \
-  -v /etc/qbittorrent/:/config \
-  -v /data/download:/downloads \
-  -v /data/windown:/data/downloads \
-  --restart unless-stopped \
-  linuxserver/qbittorrent
+```shell
+docker exec -it jellyfin /bin/bash
+dpkg -i xxx.deb
+```
 
 ## PVE配置ipv6
 
@@ -95,4 +83,17 @@ iface vmbr0 inet6 static
         address your ipv6 prefix::3
         gateway your ipv6 prefix::1
         netmask 64
+```
+
+## nginx
+
+```shell
+docker run --name tmp-nginx-container -d nginx
+docker cp tmp-nginx-container:/etc/nginx/nginx.conf /etc/nginx/nginx2.conf
+docker cp tmp-nginx-container:/etc/nginx/mime.types /etc/nginx/mime.types
+docker rm -f tmp-nginx-container
+
+docker run --name nginx -d --net=host \
+-v /etc/nginx/:/etc/nginx/:rw \
+nginx
 ```
