@@ -49,6 +49,7 @@ s is the case with other ExecutorServices, there are three main task execution m
 - join的处理:joiner线程直接执行,或者补偿
 - join的处理:每个worker的currentSteal记录了最近steal的任务,currentJoin记录了在join的task
 - join的处理:对于补偿(compensation),老版本是立即补偿(即时一个线程因为gc而block),但是效果不好,原因是大部分情况下这些gc都是正常的
-- 
+- 因为线程在准备销毁时就-1了,所以实际的线程数可能(在有线程被销毁中)偶尔超过限制
+- 外部线程提交到common pool的时候,即使join了,也可以进行子线程处理,不然这些提交者等待完成时会被block,所以在不适用的场景下,额外的工作(这些工作是通过通过大量稀疏的状态检查实现的) 相当于ForkJoinTask.Join之前自旋等待的另外一种奇怪的表现形式
 
 ## 动态调整线程状态/数量
