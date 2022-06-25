@@ -28,7 +28,7 @@ docker create \
   --net=host \
   -v /etc/qbittorrent/:/config \
   -v /data/download:/downloads \
-  -v /data/windown:/data/downloads \
+  -v /data/windown/download:/data/downloads \
   --restart unless-stopped \
   linuxserver/qbittorrent
 ```
