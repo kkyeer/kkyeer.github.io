@@ -285,3 +285,34 @@ deb http://archive.ubuntukylin.com/ubuntukylin focal-partner main
 地址栏输入```chrome://settings/privacy```并回车后，虽然地址变成```vivaldi://settings/privacy```，但是界面是chromium原生界面
 
 ![Screenshot_20220417_102800](https://cdn.jsdelivr.net/gh/kkyeer/picbed/Screenshot_20220417_102800.png)
+
+## Linux下禁用swap
+
+一、不重启电脑，禁用启用swap，立刻生效
+
+> 禁用swap
+
+```shell
+sudo swapoff -a
+```
+
+> 开启swap
+
+```shell
+sudo swapon -a
+```
+
+> 查看交换分区的状态
+
+```shell
+sudo free -m
+```
+
+二、重新启动电脑，永久禁用Swap
+
+> 用vi修改/etc/fstab文件，在swap分区这行前加 # 禁用掉，保存退出
+
+```shell
+vi /etc/fstab
+reboot
+```
