@@ -29,6 +29,8 @@ docker create \
   -v /etc/qbittorrent/:/config \
   -v /data/download:/downloads \
   -v /data/windown/download:/data/downloads \
+  -v /data/nas2/tv:/data/dtv \
+  -v /data/nas2/movie:/data/dmovie \
   --restart unless-stopped \
   linuxserver/qbittorrent
 ```
@@ -55,12 +57,12 @@ getent group render | cut -d: -f3
 ## jellyfin
 
 ```shell
-docker run -d -v /etc/jellyfin/config:/config -v /data/nas:/mnt/nas -p 28920:8920 -p28096:8096 \
+docker run -d -v /etc/jellyfin/config:/config -v /data/nas:/mnt/nas -v /data/nas2:/mnt/nas2 -p 28920:8920 -p28096:8096 \
  --device /dev/dri/renderD128:/dev/dri/renderD128 \
  --env UID=1000 \
  --env GID=108 \
  --env GIDLIST=108 \
---name jellyfin  jellyfin/jellyfin
+--name jellyfin2  jellyfin/jellyfin
 ```
 
 完成后，需要手动升级jellyfin-ffmpeg(10.7.0问题)
