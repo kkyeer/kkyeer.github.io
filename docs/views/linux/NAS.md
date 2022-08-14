@@ -44,7 +44,7 @@ getent group render | cut -d: -f3
 
 # 假设上面是108
 
- docker run -d -v /etc/emby/config:/config -v /data/nas:/mnt/nas -p 8920:8920 -p8096:8096 --name emby \
+ docker run -d -v /etc/emby/config:/config -v /data/nas:/mnt/nas -v /data/nas2:/mnt/nas2 -p 8920:8920 -p8096:8096 --name emby \
  --device /dev/dri/renderD128:/dev/dri/renderD128 \
  --env UID=1000 \
  --env GID=108 \
@@ -56,13 +56,15 @@ getent group render | cut -d: -f3
 
 ## jellyfin
 
+> 10.7
+
 ```shell
 docker run -d -v /etc/jellyfin/config:/config -v /data/nas:/mnt/nas -v /data/nas2:/mnt/nas2 -p 28920:8920 -p28096:8096 \
  --device /dev/dri/renderD128:/dev/dri/renderD128 \
  --env UID=1000 \
  --env GID=108 \
  --env GIDLIST=108 \
---name jellyfin2  jellyfin/jellyfin
+--name jellyfin3  jellyfin/jellyfin
 ```
 
 完成后，需要手动升级jellyfin-ffmpeg(10.7.0问题)
@@ -73,6 +75,18 @@ docker run -d -v /etc/jellyfin/config:/config -v /data/nas:/mnt/nas -v /data/nas
 docker exec -it jellyfin /bin/bash
 dpkg -i xxx.deb
 ```
+
+> 10.8
+
+```shell
+docker run -d -v /etc/jellyfin2/jellyfin/config:/config -v /data/nas:/mnt/nas -v /data/nas2:/mnt/nas2 -p 28920:8920 -p28096:8096 \
+ --device /dev/dri/renderD128:/dev/dri/renderD128 \
+ --env UID=1000 \
+ --env GID=108 \
+ --env GIDLIST=108 \
+--name jellyfin3  jellyfin/jellyfin
+```
+
 
 ## PVE配置ipv6
 
