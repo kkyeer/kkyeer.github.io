@@ -316,3 +316,19 @@ sudo free -m
 vi /etc/fstab
 reboot
 ```
+
+## 点对点带宽测速
+
+工具:iperf，各平台安装略
+
+> 服务端
+
+```shell
+iperf -s -p 12345
+```
+
+> 客户端
+
+```shell
+iperf -c 域名 -p 刚才的端口 -t 60
+```
