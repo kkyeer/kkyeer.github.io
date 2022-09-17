@@ -42,7 +42,7 @@ git clone https://github.com/JetBrains/jcef.git
 
 
 cd jcef
-mkdir jcef_build && cd jcef_build
+mkdir  -p jcef_build && cd jcef_build
 cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ..
 make -j4
 cd ../jb/tools/linux && chmod +x *
@@ -51,11 +51,16 @@ cd ../jb/tools/linux && chmod +x *
 cd ../../../../JetBrainsRuntime/
 cp ../myJetBrainsRuntime/idea.patch ./
 git apply idea.patch
-git apply -p0 < jb/project/tools/patches/add_jcef_module.patch
+mkdir -p jcef_linux_x64
+tar xzf ../jcef/jcef_linux_x64.tar.gz -C jcef_linux_x64
+export MODULAR_SDK_PATH=jcef_linux_x64/modular-sdk
 sudo apt-get install autoconf make build-essential libx11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev libxrandr-dev libcups2-dev libfontconfig1-dev libasound2-dev openjdk-11-jdk
-sh ./configure --disable-warnings-as-errors --with-import-modules=../jcef/out/linux64/modular-sdk
-make images
+make clean
+sh ./configure --disable-warnings-as-errors --with-import-modules=jcef_linux_x64/modular-sdk
+jb/project/tools/linux/scripts/mkimages_x64.sh 11 0 13b1751 jcef
 ```
+
+最终构建产物为JetBrainsRuntime文件夹下的jbr_jcef-11-linux-x64-b13b1751.tar.gz
 
 ## 修改IDEA启动参数，使用自己编译的运行时
 
