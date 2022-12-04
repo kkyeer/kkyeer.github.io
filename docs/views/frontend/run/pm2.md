@@ -4,7 +4,7 @@ categories:
   - 前端DevOps
 tags:
   - pm2
-publish: true
+publish: false
 ---
 
 # pm2 启动脚本
@@ -20,7 +20,7 @@ module.exports = {
   apps : [{
     name: 'official-site',
     script: './bin/www',
-    cwd:'/root/mayuan-web-front',
+    cwd:'/root/xxx-web-front',
     // Options reference: https://pm2.io/doc/en/runtime/reference/ecosystem-file/
     args: './bin/www',
     instances: 1,
