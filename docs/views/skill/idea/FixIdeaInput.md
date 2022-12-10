@@ -1,10 +1,9 @@
 ---
 date: 2020-09-19
 categories:
-  - Linux
-tags:
   - IDEA
-  - BUG
+tags:
+  - Linux治理
 publish: true
 ---
 
