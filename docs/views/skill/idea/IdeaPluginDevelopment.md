@@ -41,7 +41,7 @@ publish: false
 
 ## 参考范例
 
-- [官方Code Sample](https://github.com/JetBrains/intellij-sdk-code-samples)
+- [官方Code Samples](https://github.com/JetBrains/intellij-sdk-code-samples)
 - 首先参考**project_view_pane**项目，结合[官方文档](https://plugins.jetbrains.com/docs/intellij/plugin-extensions.html#declaring-extensions)一起
 - 找到官方debugger对应的代码位置：```com.intellij.xdebugger```
 
@@ -61,7 +61,44 @@ publish: false
       ```
 
   3. 尝试获取DebuggerFramesList：参考类```com.intellij.xdebugger.impl.frame.XDebuggerFramesList```
-- 因为用的是JavaFrame，所以需要改动依赖变为IDEA专属，参考[官方资料](https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html#exploring-module-and-plugin-apis)
+- 因为用的是**Java**Frame，所以需要改动依赖变为IDEA专属，参考[官方资料](https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html#exploring-module-and-plugin-apis)
   - plugin.xml的配置修改:depends改为```<depends>com.intellij.java</depends>```
   - gradle.properties的配置新增:```platformPlugins =com.intellij.java```
-- runIDE
+- runIDE，效果达成![20221211113559](https://cdn.jsdelivr.net/gh/kkyeer/picbed/20221211113559.png)
+- 接下来需要考虑时序图生成
+
+## 生成时序图
+
+各种搜索后，准备参考这个插件的代码[SequencePlugin](https://github.com/Vanco/SequencePlugin)，尝试后发现耦合度相当高，抽离需要付出相当大的精力，暂时作为PLAN B。
+继续搜索后从[这里](https://rishirajrandive.github.io/uml-parser/)找到灵感，准备使用PlantUML+GraphViz的组合实现，效果参考![https://raw.githubusercontent.com/rishirajrandive/uml-parser/master/images/sequence.png](https://raw.githubusercontent.com/rishirajrandive/uml-parser/master/images/sequence.png)
+
+### PlantUML
+
+[官网](https://plantuml.com)，示例：
+
+```sql
+@startuml
+participant Participant as Foo
+actor       Actor       as Foo1
+boundary    Boundary    as Foo2
+control     Control     as Foo3
+entity      Entity      as Foo4
+database    Database    as Foo5
+collections Collections as Foo6
+queue       Queue       as Foo7
+Foo -> Foo1 : To actor 
+Foo -> Foo2 : To boundary
+Foo -> Foo3 : To control
+Foo -> Foo4 : To entity
+Foo -> Foo5 : To database
+Foo -> Foo6 : To collections
+Foo -> Foo7: To queue
+@enduml
+```
+
+## IDEA展示图片
+
+先使用较简单的弹窗展示图像：https://plugins.jetbrains.com/docs/intellij/dialog-wrapper.html#dialogwrapper
+
+Swing默认不支持SVG，解决方案：https://xmlgraphics.apache.org/batik/
+
