@@ -3,7 +3,8 @@ date: 2020-09-19
 categories:
   - IDEA
 tags:
-  - Linux治理
+  - Linux
+  - 输入法
 publish: true
 ---
 
