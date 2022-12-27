@@ -98,6 +98,21 @@ Foo -> Foo7: To queue
 
 ## IDEA展示图片
 
-先使用较简单的弹窗展示图像：https://plugins.jetbrains.com/docs/intellij/dialog-wrapper.html#dialogwrapper
+先使用较简单的弹窗展示图像：<https://plugins.jetbrains.com/docs/intellij/dialog-wrapper.html#dialogwrapper>
 
-Swing默认不支持SVG，解决方案：https://xmlgraphics.apache.org/batik/
+Swing默认不支持SVG，解决方案：<https://xmlgraphics.apache.org/batik/>
+
+## 发布插件
+
+1. 补充信息，参考[官方文档](https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html#idea-plugin)
+2. 签名，根据[官方文档](https://plugins.jetbrains.com/docs/intellij/plugin-signing.html#gradle-intellij-plugin)生成签名，**注意，生成签名后，不要按文档描述将key文件内容复制到环境变量，需要如下改动```build.gradle.kts```文件，并将2个文件路径配置到环境变量**，原因为[环境变量多行文本配置需要特别注意](https://intellij-support.jetbrains.com/hc/en-us/community/posts/4408839632146-Signing-Plugin-always-throws-NullPointerException-pemObject-must-not-be-null)
+
+    ```kotlin
+    signPlugin {
+        certificateChain.set(File(System.getenv("CERTIFICATE_CHAIN")).readText())
+        privateKey.set(File(System.getenv("PRIVATE_KEY")).readText())
+        password.set(System.getenv("PRIVATE_KEY_PASSWORD"))
+    }
+    ```
+
+3. 在[官网](https://plugins.jetbrains.com/plugin/add#intellij)登录并上传插件
