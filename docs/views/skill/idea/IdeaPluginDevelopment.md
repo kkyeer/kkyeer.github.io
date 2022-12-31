@@ -105,6 +105,7 @@ Swing默认不支持SVG，解决方案：<https://xmlgraphics.apache.org/batik/>
 ## 发布插件
 
 1. 补充信息，参考[官方文档](https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html#idea-plugin)
+   - 注意，插件介绍**不要**配置在plugin.xml中，打包的时候会强制从```README```中读取，配置在```Plugin description```部分后面
 2. 签名，根据[官方文档](https://plugins.jetbrains.com/docs/intellij/plugin-signing.html#gradle-intellij-plugin)生成签名，**注意，生成签名后，不要按文档描述将key文件内容复制到环境变量，需要如下改动```build.gradle.kts```文件，并将2个文件路径配置到环境变量**，原因为[环境变量多行文本配置需要特别注意](https://intellij-support.jetbrains.com/hc/en-us/community/posts/4408839632146-Signing-Plugin-always-throws-NullPointerException-pemObject-must-not-be-null)
 
     ```kotlin
@@ -116,3 +117,4 @@ Swing默认不支持SVG，解决方案：<https://xmlgraphics.apache.org/batik/>
     ```
 
 3. 在[官网](https://plugins.jetbrains.com/plugin/add#intellij)登录并上传插件
+
