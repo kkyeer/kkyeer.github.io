@@ -1,0 +1,404 @@
+<mxfile host="65bd71144e">
+    <diagram id="kVu3p7XYg-1fgJQkwLqK" name="Page-1">
+        <mxGraphModel dx="2498" dy="907" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="5" value="DispatcherServlet" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;lifelineDashed=0;" parent="1" vertex="1">
+                    <mxGeometry x="90" y="100" width="110" height="950" as="geometry"/>
+                </mxCell>
+                <mxCell id="39" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;" parent="5" vertex="1">
+                    <mxGeometry x="50" y="150" width="10" height="410" as="geometry"/>
+                </mxCell>
+                <mxCell id="40" value="doDispatch" style="html=1;verticalAlign=bottom;startArrow=oval;endArrow=block;startSize=8;" parent="5" target="39" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="-100" y="150" as="sourcePoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="17" value="全限定名对照" style="shape=table;startSize=30;container=1;collapsible=0;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;pointerEvents=1;strokeColor=default;labelBorderColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="-940" y="430" width="760" height="470" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;dropTarget=0;pointerEvents=1;fillColor=none;top=0;left=0;bottom=1;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;strokeColor=default;labelBorderColor=none;" parent="17" vertex="1">
+                    <mxGeometry y="30" width="760" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="19" value="DispatcherServlet" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;pointerEvents=1;strokeColor=default;labelBorderColor=none;" parent="18" vertex="1">
+                    <mxGeometry width="270" height="30" as="geometry">
+                        <mxRectangle width="270" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="20" value="org.springframework.web.servlet.DispatcherServlet" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;pointerEvents=1;strokeColor=default;labelBorderColor=none;" parent="18" vertex="1">
+                    <mxGeometry x="270" width="490" height="30" as="geometry">
+                        <mxRectangle width="490" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="21" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;dropTarget=0;pointerEvents=1;fillColor=none;top=0;left=0;bottom=0;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;strokeColor=default;labelBorderColor=none;" parent="17" vertex="1">
+                    <mxGeometry y="60" width="760" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="22" value="&lt;span style=&quot;text-align: left&quot;&gt;RequestMappingHandlerAdapter&lt;/span&gt;" style="shape=partialRectangle;html=1;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;pointerEvents=1;strokeColor=default;fontColor=default;whiteSpace=wrap;labelBorderColor=none;" parent="21" vertex="1">
+                    <mxGeometry width="270" height="30" as="geometry">
+                        <mxRectangle width="270" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="23" value="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;pointerEvents=1;strokeColor=default;labelBorderColor=none;" parent="21" vertex="1">
+                    <mxGeometry x="270" width="490" height="30" as="geometry">
+                        <mxRectangle width="490" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="24" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;dropTarget=0;pointerEvents=1;fillColor=none;top=0;left=0;bottom=0;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;strokeColor=default;labelBorderColor=none;" parent="17" vertex="1">
+                    <mxGeometry y="90" width="760" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="25" value="ServletInvocableHandlerMethod" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;pointerEvents=1;strokeColor=default;labelBorderColor=none;" parent="24" vertex="1">
+                    <mxGeometry width="270" height="30" as="geometry">
+                        <mxRectangle width="270" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="26" value="org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;pointerEvents=1;strokeColor=default;labelBorderColor=none;" parent="24" vertex="1">
+                    <mxGeometry x="270" width="490" height="30" as="geometry">
+                        <mxRectangle width="490" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="27" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;dropTarget=0;pointerEvents=1;fillColor=none;top=0;left=0;bottom=0;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;strokeColor=default;labelBorderColor=none;" parent="17" vertex="1">
+                    <mxGeometry y="120" width="760" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="28" value="InvocableHandlerMethod" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;pointerEvents=1;strokeColor=default;labelBorderColor=none;" parent="27" vertex="1">
+                    <mxGeometry width="270" height="30" as="geometry">
+                        <mxRectangle width="270" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="29" value="org.springframework.web.method.support.InvocableHandlerMethod" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;pointerEvents=1;strokeColor=default;labelBorderColor=none;" parent="27" vertex="1">
+                    <mxGeometry x="270" width="490" height="30" as="geometry">
+                        <mxRectangle width="490" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="30" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;dropTarget=0;pointerEvents=1;fillColor=none;top=0;left=0;bottom=0;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;strokeColor=default;labelBorderColor=none;" parent="17" vertex="1">
+                    <mxGeometry y="150" width="760" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="31" value="NativeMethodAccessorImpl" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;pointerEvents=1;strokeColor=default;labelBorderColor=none;" parent="30" vertex="1">
+                    <mxGeometry width="270" height="30" as="geometry">
+                        <mxRectangle width="270" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="32" value="sun.reflect.NativeMethodAccessorImpl" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;pointerEvents=1;strokeColor=default;labelBorderColor=none;" parent="30" vertex="1">
+                    <mxGeometry x="270" width="490" height="30" as="geometry">
+                        <mxRectangle width="490" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="33" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;dropTarget=0;pointerEvents=1;fillColor=none;top=0;left=0;bottom=0;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;strokeColor=default;labelBorderColor=none;" parent="17" vertex="1">
+                    <mxGeometry y="180" width="760" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="34" value="&lt;span style=&quot;text-align: left&quot;&gt;DemoController$$EnhancerBySpringCGLIB&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;pointerEvents=1;strokeColor=default;labelBorderColor=none;" parent="33" vertex="1">
+                    <mxGeometry width="270" height="30" as="geometry">
+                        <mxRectangle width="270" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="35" value="com.kkyeer.study.spring.controller.DemoController$$EnhancerBySpringCGLIB$$9c8a9fff" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;pointerEvents=1;strokeColor=default;labelBorderColor=none;" parent="33" vertex="1">
+                    <mxGeometry x="270" width="490" height="30" as="geometry">
+                        <mxRectangle width="490" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="66" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;dropTarget=0;pointerEvents=1;fillColor=none;top=0;left=0;bottom=0;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;strokeColor=default;labelBorderColor=none;" parent="17" vertex="1">
+                    <mxGeometry y="210" width="760" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="67" value="&lt;span style=&quot;text-align: left&quot;&gt;DynamicAdvisedInterceptor&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;pointerEvents=1;strokeColor=default;labelBorderColor=none;" parent="66" vertex="1">
+                    <mxGeometry width="270" height="30" as="geometry">
+                        <mxRectangle width="270" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="68" value="org.springframework.aop.framework.CglibAopProxy.DynamicAdvisedInterceptor" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;pointerEvents=1;strokeColor=default;labelBorderColor=none;" parent="66" vertex="1">
+                    <mxGeometry x="270" width="490" height="30" as="geometry">
+                        <mxRectangle width="490" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="69" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;dropTarget=0;pointerEvents=1;fillColor=none;top=0;left=0;bottom=0;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;strokeColor=default;labelBorderColor=none;" parent="17" vertex="1">
+                    <mxGeometry y="240" width="760" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="70" value="&lt;div style=&quot;text-align: left&quot;&gt;&lt;span&gt;ReflectiveMethodInvocation&lt;/span&gt;&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;pointerEvents=1;strokeColor=default;labelBorderColor=none;" parent="69" vertex="1">
+                    <mxGeometry width="270" height="30" as="geometry">
+                        <mxRectangle width="270" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="71" value="org.springframework.aop.framework.ReflectiveMethodInvocation#ReflectiveMethodInvocation" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;pointerEvents=1;strokeColor=default;labelBorderColor=none;" parent="69" vertex="1">
+                    <mxGeometry x="270" width="490" height="30" as="geometry">
+                        <mxRectangle width="490" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="72" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;dropTarget=0;pointerEvents=1;fillColor=none;top=0;left=0;bottom=0;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;strokeColor=default;labelBorderColor=none;" parent="17" vertex="1">
+                    <mxGeometry y="270" width="760" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="73" value="&lt;span style=&quot;text-align: left&quot;&gt;TransactionInterceptor&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;pointerEvents=1;strokeColor=default;labelBorderColor=none;" parent="72" vertex="1">
+                    <mxGeometry width="270" height="30" as="geometry">
+                        <mxRectangle width="270" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="74" value="org.springframework.transaction.interceptor.TransactionInterceptor" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;pointerEvents=1;strokeColor=default;labelBorderColor=none;" parent="72" vertex="1">
+                    <mxGeometry x="270" width="490" height="30" as="geometry">
+                        <mxRectangle width="490" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="75" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;dropTarget=0;pointerEvents=1;fillColor=none;top=0;left=0;bottom=0;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;strokeColor=default;labelBorderColor=none;" parent="17" vertex="1">
+                    <mxGeometry y="300" width="760" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="76" value="&lt;span style=&quot;text-align: left&quot;&gt;TransactionAspectSupport&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;pointerEvents=1;strokeColor=default;labelBorderColor=none;" parent="75" vertex="1">
+                    <mxGeometry width="270" height="30" as="geometry">
+                        <mxRectangle width="270" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="77" value="org.springframework.transaction.interceptor.TransactionAspectSupport" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;pointerEvents=1;strokeColor=default;labelBorderColor=none;" parent="75" vertex="1">
+                    <mxGeometry x="270" width="490" height="30" as="geometry">
+                        <mxRectangle width="490" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="91" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;dropTarget=0;pointerEvents=1;fillColor=none;top=0;left=0;bottom=1;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;strokeColor=default;labelBorderColor=none;" parent="17" vertex="1">
+                    <mxGeometry y="330" width="760" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="92" value="DispatcherServlet" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;pointerEvents=1;strokeColor=default;labelBorderColor=none;" parent="91" vertex="1">
+                    <mxGeometry width="270" height="30" as="geometry">
+                        <mxRectangle width="270" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="93" value="org.springframework.web.servlet.DispatcherServlet" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;pointerEvents=1;strokeColor=default;labelBorderColor=none;" parent="91" vertex="1">
+                    <mxGeometry x="270" width="490" height="30" as="geometry">
+                        <mxRectangle width="490" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="41" value="&lt;span style=&quot;text-align: left&quot;&gt;RequestMappingHandlerAdapter&lt;/span&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;labelBorderColor=none;pointerEvents=1;fontFamily=Helvetica;fontSize=12;fontColor=default;strokeColor=default;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="300" y="100" width="210" height="1040" as="geometry"/>
+                </mxCell>
+                <mxCell id="45" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;labelBorderColor=none;pointerEvents=1;fontFamily=Helvetica;fontSize=12;fontColor=default;strokeColor=default;fillColor=none;" parent="41" vertex="1">
+                    <mxGeometry x="100" y="180" width="10" height="390" as="geometry"/>
+                </mxCell>
+                <mxCell id="48" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;labelBorderColor=none;pointerEvents=1;fontFamily=Helvetica;fontSize=12;fontColor=default;strokeColor=default;fillColor=none;" parent="41" vertex="1">
+                    <mxGeometry x="110" y="220" width="10" height="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="49" value="invokeHandlerMethod" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;entryX=1;entryY=0;fontFamily=Helvetica;fontSize=12;fontColor=default;" parent="41" target="48" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="110" y="195" as="sourcePoint"/>
+                        <Array as="points">
+                            <mxPoint x="140" y="195"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="47" value="return ModelAndView" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;exitX=0;exitY=0.95;fontFamily=Helvetica;fontSize=12;fontColor=default;" parent="1" source="45" target="39" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="330" y="356" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="46" value="handleInternal" style="html=1;verticalAlign=bottom;endArrow=block;entryX=0;entryY=0;fontFamily=Helvetica;fontSize=12;fontColor=default;" parent="1" target="45" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="150" y="280" as="sourcePoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="50" value="ServletInvocableHandlerMethod" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;labelBorderColor=none;pointerEvents=1;fontFamily=Helvetica;fontSize=12;fontColor=default;strokeColor=default;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="600" y="100" width="200" height="1030" as="geometry"/>
+                </mxCell>
+                <mxCell id="51" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;labelBorderColor=none;pointerEvents=1;fontFamily=Helvetica;fontSize=12;fontColor=default;strokeColor=default;fillColor=none;" parent="50" vertex="1">
+                    <mxGeometry x="95" y="250" width="10" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="52" value="invokeAndHandle" style="html=1;verticalAlign=bottom;endArrow=block;entryX=0;entryY=0;fontFamily=Helvetica;fontSize=12;fontColor=default;exitX=1.181;exitY=0.179;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="48" target="51" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="640" y="350" as="sourcePoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="53" value="return" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;exitX=-0.007;exitY=1.011;fontFamily=Helvetica;fontSize=12;fontColor=default;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1;entryY=0.883;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="51" target="48" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="420" y="455" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="54" value="InvocableHandlerMethod" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;labelBorderColor=none;pointerEvents=1;fontFamily=Helvetica;fontSize=12;fontColor=default;strokeColor=default;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="880" y="100" width="180" height="1030" as="geometry"/>
+                </mxCell>
+                <mxCell id="55" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;labelBorderColor=none;pointerEvents=1;fontFamily=Helvetica;fontSize=12;fontColor=default;strokeColor=default;fillColor=none;" parent="54" vertex="1">
+                    <mxGeometry x="85" y="265" width="10" height="175" as="geometry"/>
+                </mxCell>
+                <mxCell id="56" value="doInvoke" style="html=1;verticalAlign=bottom;endArrow=block;entryX=0;entryY=0;fontFamily=Helvetica;fontSize=12;fontColor=default;exitX=1.048;exitY=0.136;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="51" target="55" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="895" y="365" as="sourcePoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="57" value="return" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;exitX=0;exitY=0.95;fontFamily=Helvetica;fontSize=12;fontColor=default;entryX=1.121;entryY=0.821;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="55" target="51" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="895" y="441" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="58" value="NativeMethodAccessorImpl" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;labelBorderColor=none;pointerEvents=1;fontFamily=Helvetica;fontSize=12;fontColor=default;strokeColor=default;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="1150" y="100" width="191" height="1040" as="geometry"/>
+                </mxCell>
+                <mxCell id="59" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;labelBorderColor=none;pointerEvents=1;fontFamily=Helvetica;fontSize=12;fontColor=default;strokeColor=default;fillColor=none;" parent="58" vertex="1">
+                    <mxGeometry x="91" y="268.75" width="10" height="111.25" as="geometry"/>
+                </mxCell>
+                <mxCell id="61" value="return" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;exitX=-0.017;exitY=1.003;fontFamily=Helvetica;fontSize=12;fontColor=default;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1.162;entryY=0.829;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="59" target="55" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1171" y="441" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="60" value="dispatch" style="html=1;verticalAlign=bottom;endArrow=block;entryX=-0.121;entryY=0.04;fontFamily=Helvetica;fontSize=12;fontColor=default;exitX=1.075;exitY=0.063;exitDx=0;exitDy=0;exitPerimeter=0;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="55" target="59" edge="1">
+                    <mxGeometry x="-0.0592" y="11" relative="1" as="geometry">
+                        <mxPoint x="1171" y="365" as="sourcePoint"/>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="63" value="&lt;span style=&quot;text-align: left&quot;&gt;DemoController$$EnhancerBySpringCGLIB&lt;/span&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;" parent="1" vertex="1">
+                    <mxGeometry x="1440" y="100" width="270" height="1040" as="geometry"/>
+                </mxCell>
+                <mxCell id="86" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;" parent="63" vertex="1">
+                    <mxGeometry x="130" y="284.43" width="10" height="125.57" as="geometry"/>
+                </mxCell>
+                <mxCell id="89" value="CGLib加强后的类" style="ellipse;" parent="63" vertex="1">
+                    <mxGeometry x="150" y="40" width="110" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="65" value="&lt;span style=&quot;text-align: left&quot;&gt;DynamicAdvisedInterceptor&lt;/span&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;" parent="1" vertex="1">
+                    <mxGeometry x="1780" y="100" width="180" height="1030" as="geometry"/>
+                </mxCell>
+                <mxCell id="94" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;strokeColor=default;" parent="65" vertex="1">
+                    <mxGeometry x="85" y="302.5" width="10" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="78" value="Spring MVC" style="shape=process2;fixedSize=1;size=5;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="140" y="40" width="920" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="79" value="Sun.reflect" style="shape=process2;fixedSize=1;size=5;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="1176" y="40" width="140" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="80" value="SpringAOP" style="shape=process2;fixedSize=1;size=5;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="1440" y="40" width="1250" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="87" value="invoke()" style="html=1;verticalAlign=bottom;endArrow=block;entryX=0;entryY=0;exitX=1.159;exitY=0.19;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" target="86" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1250.9999999999998" y="384.3174999999998" as="sourcePoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="88" value="return" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;exitX=0;exitY=0.95;entryX=1.191;entryY=0.824;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="86" target="59" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1269.41" y="460.43" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="90" value="ReflectiveMethodInvocation" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;" parent="1" vertex="1">
+                    <mxGeometry x="2040" y="100" width="180" height="1030" as="geometry"/>
+                </mxCell>
+                <mxCell id="100" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;strokeColor=default;" parent="90" vertex="1">
+                    <mxGeometry x="85" y="312.5" width="10" height="547.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="95" value="intercept()" style="html=1;verticalAlign=bottom;endArrow=block;entryX=0;entryY=0;exitX=1;exitY=0.124;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="86" target="94" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1600" y="400" as="sourcePoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="96" value="return" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;exitX=0;exitY=0.95;entryX=1.137;entryY=0.882;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="94" target="86" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1600" y="476" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="101" value="dispatch" style="html=1;verticalAlign=bottom;endArrow=block;entryX=0;entryY=0;" parent="1" source="94" target="100" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1900" y="407" as="sourcePoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="102" value="return" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;exitX=0;exitY=0.95;entryX=1.06;entryY=0.83;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="100" target="94" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1900" y="483" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="103" value="&lt;span style=&quot;text-align: left&quot;&gt;TransactionInterceptor&lt;/span&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;strokeColor=default;" parent="1" vertex="1">
+                    <mxGeometry x="2300" y="100" width="140" height="1030" as="geometry"/>
+                </mxCell>
+                <mxCell id="107" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;strokeColor=default;" parent="103" vertex="1">
+                    <mxGeometry x="65" y="330" width="10" height="480" as="geometry"/>
+                </mxCell>
+                <mxCell id="108" value="invoke()" style="html=1;verticalAlign=bottom;endArrow=block;entryX=-0.097;entryY=-0.004;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1.135;exitY=0.031;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="100" target="107" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="2150" y="428" as="sourcePoint"/>
+                        <mxPoint x="2250" y="423" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="109" value="return" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;exitX=0;exitY=0.95;entryX=0.934;entryY=0.861;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="107" target="100" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="2160" y="506" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="110" value="TransactionAspectSupport" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;strokeColor=default;" parent="1" vertex="1">
+                    <mxGeometry x="2510" y="100" width="180" height="1030" as="geometry"/>
+                </mxCell>
+                <mxCell id="114" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;strokeColor=default;" parent="110" vertex="1">
+                    <mxGeometry x="85" y="350" width="10" height="430" as="geometry"/>
+                </mxCell>
+                <mxCell id="121" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;strokeColor=default;" parent="110" vertex="1">
+                    <mxGeometry x="90" y="390" width="10" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="122" value="打开事务" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;entryX=1;entryY=0;" parent="110" target="121" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="95" y="370" as="sourcePoint"/>
+                        <Array as="points">
+                            <mxPoint x="125" y="370"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="127" value="异常？" style="rhombus;strokeColor=default;" parent="110" vertex="1">
+                    <mxGeometry x="95" y="540" width="65" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="128" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;strokeColor=default;" parent="110" vertex="1">
+                    <mxGeometry x="90" y="670" width="10" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="129" value="回滚事务" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;entryX=1;entryY=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="110" source="127" target="128" edge="1">
+                    <mxGeometry x="-0.2632" relative="1" as="geometry">
+                        <mxPoint x="165" y="560" as="sourcePoint"/>
+                        <Array as="points">
+                            <mxPoint x="195" y="565"/>
+                            <mxPoint x="195" y="670"/>
+                        </Array>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="130" value="是" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="129" vertex="1" connectable="0">
+                    <mxGeometry x="-0.8794" relative="1" as="geometry">
+                        <mxPoint x="5" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="132" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;strokeColor=default;" parent="110" vertex="1">
+                    <mxGeometry x="90" y="620" width="10" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="133" value="提交事务" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;entryX=1;entryY=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="110" source="127" target="132" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="95" y="600" as="sourcePoint"/>
+                        <Array as="points">
+                            <mxPoint x="125" y="590"/>
+                            <mxPoint x="125" y="620"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="134" value="否" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="133" vertex="1" connectable="0">
+                    <mxGeometry x="-0.6755" relative="1" as="geometry">
+                        <mxPoint x="3" y="3" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="115" value="invokeWithinTransaction" style="html=1;verticalAlign=bottom;endArrow=block;entryX=0;entryY=0;" parent="1" source="103" target="114" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="2410" y="450" as="sourcePoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="116" value="return" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;exitX=0;exitY=0.95;entryX=1.167;entryY=0.891;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="114" target="107" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="2410" y="849" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="120" value="拦截器" style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=1;strokeColor=default;" parent="1" vertex="1">
+                    <mxGeometry x="2410" y="160" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="123" value="DemoController" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;strokeColor=default;" parent="1" vertex="1">
+                    <mxGeometry x="2800" y="100" width="100" height="1030" as="geometry"/>
+                </mxCell>
+                <mxCell id="124" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;strokeColor=default;" parent="123" vertex="1">
+                    <mxGeometry x="45" y="445" width="10" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="125" value="业务处理方法" style="html=1;verticalAlign=bottom;endArrow=block;entryX=0;entryY=0;" parent="1" source="110" target="124" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="2640" y="545" as="sourcePoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="126" value="return" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;exitX=0;exitY=0.95;" parent="1" source="124" target="114" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="2660" y="621" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
