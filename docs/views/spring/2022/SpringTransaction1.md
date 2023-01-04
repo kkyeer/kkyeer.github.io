@@ -13,7 +13,7 @@ SpringTx为开发者提供了声明式和注解时声明的支持，为了更好
 
 ## 启动时扫描与代理组装
 
-![SequenceDiagram](https://cdn.jsdelivr.net/gh/kkyeer/picbed/spring-tx-2.svg.svg)
+![SequenceDiagram](https://cdn.jsdelivr.net/gh/kkyeer/picbed/spring-tx-simple.svg)
 
 ### BeanPostProcessor
 
@@ -84,7 +84,7 @@ public List<Advisor> findAdvisorBeans() {
 ```
 
 其中会扫描到```org.springframework.transaction.interceptor.BeanFactoryTransactionAttributeSourceAdvisor```，在这个类中封装了事务与AOP需要用到的组件和方法，包括Pointcut,Advice等，在获取到Advisor后，还需要判断当前是否适用此Advisor
-![findAdvisorThatCanApply](https://cdn.jsdelivr.net/gh/kkyeer/picbed/findAdvisorThatCanApply.svg)
+![findAdvisorThatCanApply2](https://cdn.jsdelivr.net/gh/kkyeer/picbed/findAdvisorThatCanApply2.svg)
 
 org.springframework.aop.support.AopUtils#findAdvisorsThatCanApply  ->
 org.springframework.aop.support.AopUtils#canApply(org.springframework.aop.Pointcut, java.lang.Class<?>, boolean) ->
@@ -321,4 +321,4 @@ public class DemoController {
 
 下一章更新SpringTx具体的内部逻辑，包含TransactionAttribute等的实现
 
-![spring-tx-running](https://cdn.jsdelivr.net/gh/kkyeer/picbed/spring-tx-running.svg)
+![transactionInner](https://cdn.jsdelivr.net/gh/kkyeer/picbed/transactionInner.svg)
