@@ -5,7 +5,7 @@ categories:
 tags:
   - Ubuntu
   - KDE
-  - 自启
+  - 快捷方式
 publish: true
 ---
 
