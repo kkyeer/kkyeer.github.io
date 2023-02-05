@@ -32,7 +32,7 @@ publish: true
 
 ## 2. 健康检查失败同时调用方超时的一般思路
 
-### 2.1 RT高的时间线
+### 2.1 RT高时的一般现象
 
 ![RTHighHealthCheck](https://cdn.jsdelivr.net/gh/kkyeer/picbed/RTHighHealthCheck.png)
 
@@ -50,16 +50,26 @@ publish: true
 5. 随着被注册中心摘除，新请求暂时不会调用到问题pod，积压请求处理完成后，pod恢复正常，健康检查成功，重新放入注册中心
 6. 由于接口RT仍旧存在问题，如此往复
 
-根据上面的分析，碰到双超时出现，首先分析接口RT，90%的情况下通过接口监控定位到特别慢的接口，再结合调用链监控或者性能剖析，定位到具体的代码位置可解决。
+### 2.2 问题排查与解决
+
+> 一般思路
+
+根据上面的分析，碰到双超时出现，首先分析接口RT，90%的情况下通过接口监控定位到特别慢的接口，再结合调用链监控或者性能剖析，定位到具体的代码、服务、依赖可解决。
+
+> 问题原因
 
 但是这次通过接口定位发现所有接口的RT都有大幅上升，排查性能瓶颈与依赖后，发现根本原因是某处请求处理代码，实现时未考虑大数据量的处理，导致出现OOM报错，代码修改后问题解决。
 
-但是深入观察发现，问题代码需要某条特殊的响应才会触发（1小时以上才会有1次请求），确实导致了1分钟的FullGC和OOM异常，经验来说，请求处理线程因为OOM报错后，线程销毁，栈上引用消失，最多1次FullGC后，容器会恢复正常响应，但是现象中说超时持续了半小时没有自动恢复，为什么？
+> 延伸
+
+深入观察发现，问题代码需要某条特殊的响应才会触发（1小时以上才会有1次请求），确实导致了1分钟的FullGC和OOM异常，经验来说，请求处理线程因为OOM报错后，线程销毁，栈上引用消失，最多1次FullGC后，容器会恢复正常响应，但是现象中说超时持续了半小时没有自动恢复，为什么？
 
 详细排查日志后发现，在MQ线程OOM报错的同时，Tomcat有个Acceptor线程同时OOM异常，以往碰到的情况都是exec线程崩溃但会自动恢复，会不会这个线程不一样？
 ![TomcatAcceptorOOM](https://cdn.jsdelivr.net/gh/kkyeer/picbed/TomcatAcceptorOOM.png)
 
 ## 3. Accetpor线程不会自动恢复
+
+### 3.1 Tomcat线程模型
 
 Tomcat的核心Acceptor线程在建连后崩溃，但是端口仍旧绑定中，最终的结果是TCP连接可以建立（系统内核处理的部分），但是TCP请求体无法被取回处理（Tomcat的Acceptor线程处理的部分），这个时候需要了解下Tomcat的线程模型(图引用自 [Tomcat线程模型全面解析](https://zhuanlan.zhihu.com/p/555519862))，以及线程（池）恢复机制
 
@@ -67,16 +77,25 @@ Tomcat的核心Acceptor线程在建连后崩溃，但是端口仍旧绑定中，
 
 以上是模型图，事实上不同的线程初始化的数量是不一致的，线程崩溃后的恢复策略也不一致
 
+### 3.2 问题模拟与现象观测
+
 下面是具体的实例，在5分钟左右模拟了一次OOM导致的Acceptor线程崩溃（代码参见[Github](https://github.com/kkyeer/lab/tree/explore/oom_kill_tomcat_acceptor))
 
 ![TomcatRunningThread](https://cdn.jsdelivr.net/gh/kkyeer/picbed/TomcatRunningThread.png)
 
 进一步的观测网络异常栈
+> 服务正常
 ![20230205182952](https://cdn.jsdelivr.net/gh/kkyeer/picbed/20230205182952.png)
+> Acceptor线程崩溃
 ![20230205183107](https://cdn.jsdelivr.net/gh/kkyeer/picbed/20230205183107.png)
+> 崩溃后新请求进入
 ![20230205183225](https://cdn.jsdelivr.net/gh/kkyeer/picbed/20230205183225.png)
 
-从模型、模拟以及现象观察中可以得出初步结论：**程序启动时，Acceptor线程只有一个，此线程OOM后没有被恢复，导致新请求阻塞在内核的TCP队列中**，更进一步的论证需要Tomcat源码解析，与下文代码有关，可以看到，只有一个线程，且无异常恢复机制
+从模型、模拟以及现象观察中可以得出初步结论：**程序启动时，Acceptor线程只有一个，此线程OOM后没有被恢复，导致新请求阻塞在内核的TCP队列中**
+
+### 3.3 简单源码剖析
+
+下述代码为Tomcat启动Acceptor线程的代码，可以看到，只有一个线程，且无异常恢复机制（线程，内部对象均为方法本地变量）
 
 ```Java
 // org.apache.tomcat.util.net.AbstractEndpoint#startAcceptorThread
