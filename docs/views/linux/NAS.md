@@ -29,6 +29,7 @@ docker create \
   -v /etc/qbittorrent/:/config \
   -v /data/download:/downloads \
   -v /data/windown/download:/data/downloads \
+  -v /data/windown/done:/data/done \
   -v /data/nas2/tv:/data/dtv \
   -v /data/nas2/movie:/data/dmovie \
   --restart unless-stopped \
@@ -86,7 +87,6 @@ docker run -d -v /etc/jellyfin2/jellyfin/config:/config -v /data/nas:/mnt/nas -v
  --env GIDLIST=108 \
 --name jellyfin3  jellyfin/jellyfin
 ```
-
 
 ## PVE配置ipv6
 
