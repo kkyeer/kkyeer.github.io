@@ -96,3 +96,9 @@ Theme=summer
 sudo trust anchor --store ~/Downloads/rootCA.cer 
 sudo update-ca-trust
 ```
+
+## 基本组件
+
+```bash
+sudo pacman -S net-tools dnsutils inetutils
+```
