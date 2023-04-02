@@ -342,6 +342,25 @@ iperf -c 域名 -p 刚才的端口 -t 60
 ipv6场景下需要增加```-V```参数
 
 ```shell
-iperf -c 域名 -p 刚才的端口 -t 60
- -V
+iperf -c 域名 -p 刚才的端口 -t 60 -V
+```
+
+## 1.22. Discover取消代理设置
+
+这个是有解决方案的，就是很费劲。Discover 和 pkcon 是依赖 packagekit 的，这玩意是用 sql 存储配置的（在 /var/lib/PackageKit/transactions.db），你设置系统代理在哪儿设置都行，packagekit 会把代理写到 sql 里，你改代理也行，但是删代理删不了
+
+于是解决方案就是用 sqlitebrowser 自己去数据库的 proxy 表里删…删完重启 packagekit service…
+
+[https://forum.kde.org/viewtopic.php?f=309&t=161739](https://forum.kde.org/viewtopic.php?f=309&t=161739)
+
+想自动删可以给你写一个 systemd timer，每隔一段时间去看看有没有 proxy 要是没有就去清空 proxy 表
+
+[https://github.com/PackageKit/PackageKit/issues/392](https://github.com/PackageKit/PackageKit/issues/392)
+
+```shell
+sudo apt install sqlite3
+sudo sqlite3 /var/lib/PackageKit/transactions.db
+DELETE FROM proxy;
+.exit
+sudo systemctl restart packagekit
 ```
