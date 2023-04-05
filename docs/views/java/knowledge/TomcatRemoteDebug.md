@@ -1,7 +1,7 @@
 ---
 date: 2019-12-14
 categories:
-  - 懂
+  - 知识&技巧
 tags:
   - Debug
 publish: true

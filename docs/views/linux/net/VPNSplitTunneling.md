@@ -1,7 +1,7 @@
 ---
 date: 2021-01-19
 categories:
-  - 懂
+  - 知识&技巧
 tags:
   - VPN
 publish: true

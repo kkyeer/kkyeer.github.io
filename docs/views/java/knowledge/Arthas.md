@@ -1,7 +1,7 @@
 ---
 date: 2020-09-16
 categories:
-  - 懂
+  - 知识&技巧
 tags:
   - 调试
 publish: false

@@ -1,15 +1,15 @@
 ---
 date: 2019-05-14
 categories:
-  - 懂
+  - 知识&技巧
 tags:
   - Linux
 publish: true
 ---
 
-# Linux小技巧
+# 1. Linux小技巧
 
-## redis配置
+## 1.1. redis配置
 
 - 查看Redis配置文件路径：redis-cli -p 6379 info | grep 'config_file'
 [相关网址](http://pingredis.blogspot.com/2016/12/how-to-get-rdb-location-and-config-file.html)
@@ -27,7 +27,7 @@ requirepass foobared
 config set requirepass foobared
 ```
 
-## 文件按时间排序
+## 1.2. 文件按时间排序
 
 从旧到新：
 
@@ -44,13 +44,13 @@ ls -tl
 -t表示按修改时间排序，最新的在最上
 -r表示反向排序
 
-## dns修改
+## 1.3. dns修改
 
 ```sh
 vim /etc/resolv.conf
 ```
 
-## 安装多版本的Python
+## 1.4. 安装多版本的Python
 
 1. 下载pyenv脚本
 
@@ -102,25 +102,25 @@ vim /etc/resolv.conf
 
 9. to be continue
 
-## 查看文件夹大小
+## 1.5. 查看文件夹大小
 
 ```sh
 du -h {dir_path}
 ```
 
-## SSH添加本地key到远程服务器
+## 1.6. SSH添加本地key到远程服务器
 
 ```sh
 ssh-copy-id root@服务器域名或IP
 ```
 
-## 杀掉指定关键词的进程
+## 1.7. 杀掉指定关键词的进程
 
 ```sh
 ps -ef|grep XXXXXXX|grep -v grep|cut -c 9-15|xargs kill -9
 ```
 
-## 格式化和分区操作
+## 1.8. 格式化和分区操作
 
 ```shell
 查看分区表
@@ -147,43 +147,43 @@ dump选项–这一项为0，就表示从不备份。如果上次用dump备份�
 fsck选项 –启动时fsck检查的顺序。为0就表示不检查，（/）分区永远都是1，其它的分区只能从2开始，当数字相同就同时检查（但不能有两1）
 ```
 
-## ubuntu中的samba配置
+## 1.9. ubuntu中的samba配置
 
 vim /etc/samba/smb.conf
 重启samba服务
 service smbd restart
 
-## 开机启动
+## 1.10. 开机启动
 
 [简易说明](https://blog.csdn.net/w401229755/article/details/54200141)
 [详细说明](http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html)
 
 > ubuntu可以考虑搜索自动启动，GUI方式
 
-## 应用软件
+## 1.11. 应用软件
 
-### 切换音频设备
+### 1.11.1. 切换音频设备
 
 ```shell
 snap install indicator-sound-switcher
 ```
 
-## ssh
+## 1.12. ssh
 
-### ssh传输文件
+### 1.12.1. ssh传输文件
 
 ```shell
 scp /path/filename username@servername:/path   
 ```
 
-## Ubuntu修复DNS开机重置
+## 1.13. Ubuntu修复DNS开机重置
 
 执行```sudo vim /etc/network/interfaces```
     添加一行DNS配置，比如```dns-nameservers 8.8.8.8```
 
-## du dh
+## 1.14. du dh
 
-### du与df查看已使用空间不一致的原因及解决办法
+### 1.14.1. du与df查看已使用空间不一致的原因及解决办法
 
 问题发现：
 linux df -h 显示使用空间已满，用du -sh查看哪个文件夹占用空间比较大时显示只使用了26G 差距很大，例如：
@@ -208,9 +208,9 @@ Filesystem Size Used Avail Use% Mounted on
 3、more sort_deleted_file 查看前面那些文件，将占用空间大的程序kill掉
 kill 进程号
 
-## PCI设备
+## 1.15. PCI设备
 
-### 列出所有PCI设备
+### 1.15.1. 列出所有PCI设备
 
 ```sh
 lspci
@@ -222,15 +222,15 @@ lspci
 lsusb
 ```
 
-## 查看io占用高进程
+## 1.16. 查看io占用高进程
 
 ```sh
 iotop -oP
 ```
 
-## Docker
+## 1.17. Docker
 
-### 安装transmission
+### 1.17.1. 安装transmission
 
 ```shell
 docker run -d \
@@ -252,13 +252,13 @@ docker run -d \
   ghcr.io/linuxserver/transmission
 ```
 
-### v2ray-docker
+### 1.17.2. v2ray-docker
 
 ```shell
 docker run -d -p10800:1080 -v /etc/v2ray/:/etc/v2ray --name=v2ray v2fly/v2fly-core
 ```
 
-### clash-docker
+### 1.17.3. clash-docker
 
 ```shell
 sudo useradd -c "user for clash" -M -N -s /usr/sbin/nologin -u 1024 clash
@@ -274,19 +274,19 @@ docker run --user 1024:100 --name clash -d \
 80x86/clash:v1.5.0
 ```
 
-## ubuntu新增kylin镜像源安装原生微信
+## 1.18. ubuntu新增kylin镜像源安装原生微信
 
 ```txt
 deb http://archive.ubuntukylin.com/ubuntukylin focal-partner main
 ```
 
-## Ubuntu下Vivaldi浏览器进入Chromium原生设置
+## 1.19. Ubuntu下Vivaldi浏览器进入Chromium原生设置
 
 地址栏输入```chrome://settings/privacy```并回车后，虽然地址变成```vivaldi://settings/privacy```，但是界面是chromium原生界面
 
 ![Screenshot_20220417_102800](https://cdn.jsdelivr.net/gh/kkyeer/picbed/Screenshot_20220417_102800.png)
 
-## Linux下禁用swap
+## 1.20. Linux下禁用swap
 
 一、不重启电脑，禁用启用swap，立刻生效
 
@@ -317,7 +317,7 @@ vi /etc/fstab
 reboot
 ```
 
-## 点对点带宽测速
+## 1.21. 点对点带宽测速
 
 工具:iperf，各平台安装略
 

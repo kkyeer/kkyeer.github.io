@@ -1,7 +1,7 @@
 ---
 date: 2017-05-14
 categories:
-  - 懂
+  - 知识&技巧
 tags:
   - Encode
 publish: true

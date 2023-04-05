@@ -1,7 +1,7 @@
 ---
 date: 2020-08-16
 categories:
-  - 懂
+  - 知识&技巧
 tags:
   - Docker
 publish: true

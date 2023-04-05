@@ -1,22 +1,22 @@
 ---
 date: 2019-11-22
 categories:
-  - 懂
+  - 知识&技巧
 tags:
   - 
 publish: true
 ---
 
-# SPI的实现
+# 1. SPI的实现
 
 java.util.ServiceLoader
 
-## 定义
+## 1.1. 定义
 
 Service Provider Interface
 面向接口编程的重要思路
 
-## 实现过程
+## 1.2. 实现过程
 
 1. 定义接口
 

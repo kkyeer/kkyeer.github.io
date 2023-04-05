@@ -1,7 +1,7 @@
 ---
 date: 2021-05-18 15:26:01
 categories:
-  - 懂
+  - 知识&技巧
 tags:
   - IDEA
 publish: true

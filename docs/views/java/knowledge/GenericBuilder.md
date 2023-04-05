@@ -1,7 +1,7 @@
 ---
 date: 2019-05-14
 categories:
-  - 懂
+  - 知识&技巧
 tags:
   - 泛型
 publish: true
