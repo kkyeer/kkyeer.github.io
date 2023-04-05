@@ -48,6 +48,26 @@ sudo pacman -S archlinuxcn-keyring
 
 [archlinuxcn源镜像列表](https://github.com/archlinuxcn/mirrorlist-repo)
 
+## pacman基本命令
+
+### 搜索
+
+```shell
+sudo pacman -Ss
+```
+
+### 卸载
+
+```shell
+pacman -R 软件名: 该命令将只删除包，保留其全部已经安装的依赖关系
+pacman -Rv 软件名: 删除软件，并显示详细的信息
+pacman -Rs 软件名: 删除软件，同时删除本机上只有该软件依赖的软件。
+pacman -Rsc 软件名: 删除软件，并删除所有依赖这个软件的程序，慎用
+pacman -Ru 软件名: 删除软件,同时删除不再被任何软件所需要的依赖
+```
+
+[参考资料](https://hustlei.github.io/2018/11/msys2-pacman.html)
+
 ## fcitx5与rime安装与美化
 
 ### 安装
