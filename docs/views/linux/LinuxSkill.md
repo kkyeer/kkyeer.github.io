@@ -327,8 +327,21 @@ reboot
 iperf -s -p 12345
 ```
 
+ipv6场景下需要增加```-V```参数
+
+```shell
+iperf -s -p 12345 -V
+```
+
 > 客户端
 
 ```shell
 iperf -c 域名 -p 刚才的端口 -t 60
+```
+
+ipv6场景下需要增加```-V```参数
+
+```shell
+iperf -c 域名 -p 刚才的端口 -t 60
+ -V
 ```
