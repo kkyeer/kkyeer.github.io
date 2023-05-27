@@ -1,3 +1,11 @@
+---
+date: 2023-05-27 18:58:22
+categories:
+  - MySQL
+tags:
+  - MySQL
+publish: false
+---
 # MySQL性能优化
 
 ## 简单情况，缺少索引
