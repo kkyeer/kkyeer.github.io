@@ -4,11 +4,11 @@ categories:
   - 知识&技巧
 tags:
   - 
-publish: true
+publish: false
 ---
 
-# 1. 应用使用小技巧
+# 应用使用小技巧
 
-## 1.1. Vivaldi访问Chromium原生配制页面
+## 1. Vivaldi访问Chromium原生配制页面
 
 地址栏输入```vivaldi://settings/privacy```
