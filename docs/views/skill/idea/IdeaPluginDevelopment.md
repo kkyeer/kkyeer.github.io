@@ -118,3 +118,37 @@ Swing默认不支持SVG，解决方案：<https://xmlgraphics.apache.org/batik/>
 
 3. 在[官网](https://plugins.jetbrains.com/plugin/add#intellij)登录并上传插件
 
+### 附:生成签名
+
+ Generate Private Key
+    To generate an RSA private.pem private key, run the openssl genpkey command in the terminal, as below:
+
+```shell
+openssl genpkey\
+-aes-256-cbc\
+-algorithm RSA\
+-out private_encrypted.pem\
+-pkeyopt rsa_keygen_bits:4096
+```
+
+After that, it's required to convert it into the RSA form with:
+
+```shell
+openssl rsa\
+-in private_encrypted.pem\
+-out private.pem
+```
+
+At this point, the generated private.pem content should be provided to the signPlugin.privateKey property. Provided password should be specified as the signPlugin.password property in the signPlugin configuration.
+As a next step, we will generate a chain.crt certificate chain with:
+
+```shell
+openssl req\
+-key private.pem\
+-new\
+-x509\
+-days 365\
+-out chain.crt
+```
+
+The content of the chain.crt file will be used for the signPlugin.certificateChain property.
