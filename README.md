@@ -14,3 +14,7 @@ yarn build
 yarn dev
 ```
 基于 vuepress-theme-reco-1.x
+
+## TODO
+
+[ ] 升级到 vuepress-theme-reco-2.x
