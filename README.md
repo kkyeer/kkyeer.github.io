@@ -11,4 +11,4 @@ yarn build
 # 启动
 yarn dev
 ```
-基于 vuepress-theme-reco
+基于 vuepress-theme-reco-1.x
