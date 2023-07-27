@@ -133,7 +133,7 @@ module.exports = {
     "lastUpdated": "Last Updated",
     "author": "kkyeer",
     "authorAvatar": "https://cdn.jsdelivr.net/gh/kkyeer/picbed/avatar_coder.png",
-    "record": "浙ICP备18011775号",
+    "record": "浙ICP备2023021217号",
     "recordLink":"http://beian.miit.gov.cn",
     "startYear": "2019",
     sitemap: {
