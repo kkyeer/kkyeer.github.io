@@ -1,6 +1,9 @@
 # 博客
 [![Node.js CI](https://github.com/kkyeer/kkyeer.github.io/actions/workflows/blog.yml/badge.svg?branch=master)](https://github.com/kkyeer/kkyeer.github.io/actions/workflows/blog.yml)
-基于 vuepress-theme-reco
+
+kkyeer的博客
+
+## 编译与启动
 
 ```bash
 # 编译
@@ -10,3 +13,8 @@ yarn build
 # 启动
 yarn dev
 ```
+基于 vuepress-theme-reco-1.x
+
+## TODO
+
+[ ] 升级到 vuepress-theme-reco-2.x
