@@ -13,6 +13,13 @@ module.exports = {
       }
     ],
     [
+      "link",
+      {
+        "rel": "stylesheet",
+        "href": "https://cdn.staticfile.org/lxgw-wenkai-webfont/1.6.0/style.css"
+      }
+    ],
+    [
       "meta",
       {
         "name": "viewport",
@@ -23,52 +30,52 @@ module.exports = {
   "theme": "reco",
   "themeConfig": {
     "nav": [
-      
+
       {
         "text": "Home",
         "link": "/",
         "icon": "reco-home"
       },
       {
-        "text":"Category",
-        "icon":"reco-category",
-        "items":[
+        "text": "Category",
+        "icon": "reco-category",
+        "items": [
           {
-            "text":"服务端",
-            "items":[
-              {"text":"JDK源码","link":"/categories/JDK源码/"},
-              {"text":"JVM","link":"/categories/JVM/"},
-              {"text":"Java进阶","link":"/categories/Java进阶/"},
-              {"text":"设计模式","link":"/categories/设计模式/"}
+            "text": "服务端",
+            "items": [
+              { "text": "JDK源码", "link": "/categories/JDK源码/" },
+              { "text": "JVM", "link": "/categories/JVM/" },
+              { "text": "Java进阶", "link": "/categories/Java进阶/" },
+              { "text": "设计模式", "link": "/categories/设计模式/" }
             ]
           },
           {
-            "text":"中间件",
-            "items":[
-              {"text":"Spring","link":"/categories/Spring/"},
-              {"text":"Dubbo","link":"/categories/Dubbo/"},
-              {"text":"Redis","link":"/categories/Redis/"}
+            "text": "中间件",
+            "items": [
+              { "text": "Spring", "link": "/categories/Spring/" },
+              { "text": "Dubbo", "link": "/categories/Dubbo/" },
+              { "text": "Redis", "link": "/categories/Redis/" }
             ]
           },
           {
-            "text":"前端",
-            "items":[
-              {"text":"JS","link":"/categories/JS/"},
-              {"text":"前端DevOps","link":"/categories/前端DevOps/"}
+            "text": "前端",
+            "items": [
+              { "text": "JS", "link": "/categories/JS/" },
+              { "text": "前端DevOps", "link": "/categories/前端DevOps/" }
             ]
           },
           {
-            "text":"问题解决",
-            "items":[
-              {"text":"线上问题","link":"/categories/线上问题/"},
-              {"text":"开发问题","link":"/categories/开发问题/"},
+            "text": "问题解决",
+            "items": [
+              { "text": "线上问题", "link": "/categories/线上问题/" },
+              { "text": "开发问题", "link": "/categories/开发问题/" },
             ]
           },
           {
-            "text":"其他",
-            "items":[
-              {"text":"懂","link":"/categories/懂/"},
-              {"text":"Linux","link":"/categories/Linux/"},
+            "text": "其他",
+            "items": [
+              { "text": "懂", "link": "/categories/懂/" },
+              { "text": "Linux", "link": "/categories/Linux/" },
             ]
           }
         ]
@@ -134,7 +141,7 @@ module.exports = {
     "author": "kkyeer",
     "authorAvatar": "https://cdn.jsdelivr.net/gh/kkyeer/picbed/avatar_coder.png",
     "record": "浙ICP备2023021217号",
-    "recordLink":"http://beian.miit.gov.cn",
+    "recordLink": "http://beian.miit.gov.cn",
     "startYear": "2019",
     sitemap: {
       hostname: "https://www.tpfuture.top/"
@@ -149,7 +156,7 @@ module.exports = {
   },
   "markdown": {
     "lineNumbers": true,
-    "extractHeaders": [ 'h2', 'h3', 'h4' ]
+    "extractHeaders": ['h2', 'h3', 'h4']
   },
   plugins: [
     'flowchart'
@@ -158,7 +165,7 @@ module.exports = {
   configureWebpack: () => {
     const NODE_ENV = process.env.NODE_ENV
     //判断是否是生产环境
-    if(NODE_ENV === 'production'){
+    if (NODE_ENV === 'production') {
       return {
         output: {
           publicPath: 'https://cdn.jsdelivr.net/gh/kkyeer/kkyeer.github.io@gh-pages/'
@@ -166,16 +173,16 @@ module.exports = {
         resolve: {
           //配置路径别名
           alias: {
-            'public': path.resolve(__dirname, './public') 
+            'public': path.resolve(__dirname, './public')
           }
         }
       }
-    }else{
+    } else {
       return {
         resolve: {
           //配置路径别名
           alias: {
-            'public': path.resolve(__dirname, './public') 
+            'public': path.resolve(__dirname, './public')
           }
         }
       }
