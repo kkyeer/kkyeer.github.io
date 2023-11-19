@@ -7,7 +7,7 @@ tags:
 publish: true
 ---
 
-# LVM分区扩容
+# LVM扩容
 
 ## LVM基本拓扑
 
