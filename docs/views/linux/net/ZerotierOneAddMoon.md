@@ -131,3 +131,9 @@ sudo scp username@xxxxx:/var/lib/zerotier-one/moons.d/000000xxxxxxxx.moon /var/l
 执行命令：```sudo zerotier-cli listpeers```，若有出现你的服务器IP地址,即可证明moon连接成功
 
 完成客户端配置
+
+## 取消Orbit
+
+```bash
+sudo zerotier-cli deorbit worldid
+```
