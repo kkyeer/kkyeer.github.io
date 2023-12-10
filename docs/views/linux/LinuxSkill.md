@@ -92,8 +92,7 @@ vim /etc/resolv.conf
   pyenv install 3.5.0 -v
   ```
 
-7. 上面直接安装较慢，可以考虑手动下载对应的安装包后，放入
-{user-home}/.pyenv/cache目录下,重新执行上面的命令进行安装
+7. 上面直接安装较慢，可以考虑手动下载对应的安装包后，放入```{user-home}/.pyenv/cache```目录下,重新执行上面的命令进行安装
 8. 查看安装版本
 
   ```sh
@@ -105,7 +104,14 @@ vim /etc/resolv.conf
 ## 1.5. 查看文件夹大小
 
 ```sh
+## 简单查看
 du -h {dir_path}
+
+## 查看子文件夹（1层）大小
+du -h -c -d 1
+
+## 从大到小排序，使用管道运算并与sort命令结合
+du -h -c -d 1 | sort -rh
 ```
 
 ## 1.6. SSH添加本地key到远程服务器
