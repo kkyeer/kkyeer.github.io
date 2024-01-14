@@ -1,11 +1,11 @@
 ---
 date: 2021-04-22
 categories:
-  - 懂
+  - 知识&技巧
 tags:
   - MySQL
   - InnoDB
-publish: true
+publish: false
 ---
 
 # MySQL中InnoDB引擎的死锁检测
