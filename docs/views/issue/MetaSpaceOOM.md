@@ -94,9 +94,7 @@ public class TestReflection {
     }
 ```
 
-```
 问题就出在多次反射调用的```new MethodAccessorGenerator().generateMethod```方法，此方法内部最终会调用如下代码来生成一个类，可以看到这个类是用一个新创建的```sun.reflect.DelegatingClassLoader```来加载的，这个新的ClassLoader仅用来加载一个class，且父类加载器是**调用者**的类加载器
-```
 
 ```java
 static Class<?> defineClass(String name, byte[] bytes, int off, int len,
