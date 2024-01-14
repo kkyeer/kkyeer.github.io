@@ -9,7 +9,7 @@ tags:
 publish: true
 ---
 
-# 一次OOM问题分析
+# 一次元空间FullGC导致OOM问题分析
 
 ## 现象
 
