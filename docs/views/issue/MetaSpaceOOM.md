@@ -9,7 +9,7 @@ tags:
 publish: true
 ---
 
-# 一次虚拟机OOM问题分析
+# 一次OOM问题分析
 
 ## 现象
 
