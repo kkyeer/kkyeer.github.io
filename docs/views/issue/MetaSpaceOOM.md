@@ -16,16 +16,20 @@ publish: true
 ```
 1. 观测平台告警：FullGC次数大于阈值，5分钟内大于11次，频次大概1-2周有一次
 2. 告警后服务概率性会自动恢复，控制台打印
-Exception: java.lang.OutOfMemoryError thrown from the UncaughtExceptionHandler in thread "Thread-17"
-Exception: java.lang.OutOfMemoryError thrown from the UncaughtExceptionHandler in thread "SimpleAsyncTaskExecutor-1"
+
+    ```shell
+    Exception: java.lang.OutOfMemoryError thrown from the UncaughtExceptionHandler in thread "Thread-17"
+    Exception: java.lang.OutOfMemoryError thrown from the UncaughtExceptionHandler in thread "SimpleAsyncTaskExecutor-1"
+    ```
+
 3. 不自动恢复时，服务对应容器会挂掉，需要被kill
 ```
 
 ## 过程
 
-1.  首先查看GC日志，发现FullGC出现在MetaSpace元空间
+1.  首先查看监控平台截取的部分GC日志，发现FullGC出现在MetaSpace元空间
     
-2.  下载FullGC日志分析，暂时未发现线索
+2.  下载完整的GC日志分析，暂时未发现更多线索
     
 3.  将堆整体Dump下来，上传[HeapDump](https://memory.console.heapdump.cn)网站分析，在“类加载器”视图发现有大量的`sun.reflect.DelegatingClassLoader`类加载器，且大部分只加载了1个类: `sun.reflect.GeneratedMethodAccessor6036`。
     
@@ -34,7 +38,7 @@ Exception: java.lang.OutOfMemoryError thrown from the UncaughtExceptionHandler i
     3.  疑问3: 为什么类加载器只加载1个类？`sun.reflect.GeneratedMethodAccessor6036`相似的类为什么有7000多个
     4.  疑问4: 为什么这些类加载器的parent类加载器是`org.springframework.boot.loader.LaunchedURLClassLoader`？
     
-    解决了上面的上面的3个疑问，对于问题最终的定位应该有极大的帮助
+    解决了上面的上面的疑问，对于问题最终的定位应该有极大的帮助
     
 
 ![20240114090610](https://cdn.jsdelivr.net/gh/kkyeer/picbed/20240114090610.png)
@@ -69,8 +73,8 @@ public class TestReflection {
 
 在`sun.reflect.NativeMethodAccessorImpl#invoke`方法里，针对某个方法反射的次数不同有2种方案
 
-1.  反射调用15次及以下的时候，使用字节码编译执行
-2.  反射调用15次以上的时候，值得为此构建一个专门的类来调用反射，虽然这低16次会慢，但是后续因为JIT的原因会大大变快
+1.  反射调用15次及以下的时候，使用字节码解释执行
+2.  反射调用15次以上的时候，值得为此构建一个专门的类来调用反射，虽然这第16次会慢，但是后续因为JIT的原因会大大变快
 
 ```java
     public Object invoke(Object obj, Object[] args)
@@ -89,12 +93,15 @@ public class TestReflection {
                                    method.getModifiers());
             parent.setDelegate(acc);
         }
-    // 当反射调用次数<=阈值15次的时候，使用native的字节码编译执行来实现invoke
+    // 当反射调用次数<=阈值15次的时候，使用native的字节码解释执行来实现invoke
         return invoke0(method, obj, args);
     }
 ```
 
-问题就出在多次反射调用的```new MethodAccessorGenerator().generateMethod```方法，此方法内部最终会调用如下代码来生成一个类，可以看到这个类是用一个新创建的```sun.reflect.DelegatingClassLoader```来加载的，这个新的ClassLoader仅用来加载一个class，且父类加载器是**调用者**的类加载器
+问题就出在多次反射调用的```new MethodAccessorGenerator().generateMethod```方法，此方法内部最终会调用如下代码来生成一个Class，过程中有2步操作涉及到类的创建
+
+1. 新创建一个ClassLoader:```sun.reflect.DelegatingClassLoader```,父类加载器是**反射调用者**的类加载器
+2. 新构造一个类，使用上面新的ClassLoader来加载
 
 ```java
 static Class<?> defineClass(String name, byte[] bytes, int off, int len,
@@ -185,7 +192,7 @@ stack sun.reflect.MethodAccessorGenerator generateMethod >> stack-monitor-reflec
 
 3. 一定要**正常exit**
 
-最后拿到如下输出，Mock如下
+最后拿到输出举例如下
 
 ```shell
 ts=2024-01-10 16:22:32;thread_name=http-nio-8080-exec-1;id=17;is_daemon=true;priority=5;TCCL=org.springframework.boot.web.embedded.tomcat.TomcatEmbeddedWebappClassLoader@3ee0fea4
