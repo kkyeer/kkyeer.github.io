@@ -11,4 +11,6 @@ publish: false
 
 ## 1. Vivaldi访问Chromium原生配制页面
 
-地址栏输入```vivaldi://settings/privacy```
+地址栏输入```chrome://settings```并回车后，虽然地址变成```vivaldi://settings```，但是界面是chromium原生界面
+
+![Screenshot_20220417_102800](https://cdn.jsdelivr.net/gh/kkyeer/picbed/Screenshot_20220417_102800.png)

@@ -286,9 +286,9 @@ docker run --user 1024:100 --name clash -d \
 deb http://archive.ubuntukylin.com/ubuntukylin focal-partner main
 ```
 
-## 1.19. Ubuntu下Vivaldi浏览器进入Chromium原生设置
+## 1.19. ivaldi浏览器进入Chromium原生设置
 
-地址栏输入```chrome://settings/privacy```并回车后，虽然地址变成```vivaldi://settings/privacy```，但是界面是chromium原生界面
+地址栏输入```chrome://settings```并回车后，虽然地址变成```vivaldi://settings```，但是界面是chromium原生界面
 
 ![Screenshot_20220417_102800](https://cdn.jsdelivr.net/gh/kkyeer/picbed/Screenshot_20220417_102800.png)
 
