@@ -370,3 +370,19 @@ DELETE FROM proxy;
 .exit
 sudo systemctl restart packagekit
 ```
+
+## 1.23. 定位并释放占用显存的进程
+
+使用下列命令定位占用显存的进程
+
+```shell
+sudo fuser -v /dev/nvidia*
+```
+
+如果提示没有此命令，使用下列命令安装
+
+```shell
+apt-get install  psmisc
+```
+
+定位到进程后，可以使用```ps -ef```命令具体查看进程的细节，并自行决定kill哪些进程
