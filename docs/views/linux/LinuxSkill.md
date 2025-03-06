@@ -123,7 +123,7 @@ ssh-copy-id root@服务器域名或IP
 ## 1.7. 杀掉指定关键词的进程
 
 ```sh
-ps -ef|grep XXXXXXX|grep -v grep|cut -c 9-15|xargs kill -9
+ps aux|grep XXXXXX|awk '{print $2}'|xargs kill -9
 ```
 
 ## 1.8. 格式化和分区操作
