@@ -1,0 +1,57 @@
+<mxfile host="65bd71144e">
+    <diagram id="JoR1aCjRPywW9IHvJJni" name="Page-1">
+        <mxGraphModel dx="3522" dy="1348" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="20" value="&lt;div style=&quot;font-family: &amp;quot;Monaspace Neon Var&amp;quot;, monospace-fallback, &amp;quot;monospace&amp;quot;; font-size: 14px; white-space-collapse: preserve;&quot;&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="-1629" y="335" width="20" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="31" value="&lt;div style=&quot;white-space-collapse: preserve; font-family: &amp;quot;Monaspace Neon Var&amp;quot;, monospace-fallback, &amp;quot;monospace&amp;quot;; font-size: 14px;&quot;&gt;$ free -mh&lt;/div&gt;&lt;div style=&quot;white-space-collapse: preserve; font-family: &amp;quot;Monaspace Neon Var&amp;quot;, monospace-fallback, &amp;quot;monospace&amp;quot;; font-size: 14px;&quot;&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;               total        used        free      shared  buff/cache   available&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;white-space-collapse: preserve; font-family: &amp;quot;Monaspace Neon Var&amp;quot;, monospace-fallback, &amp;quot;monospace&amp;quot;; font-size: 14px;&quot;&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;Mem:            31Gi        15Gi       235Mi       194Mi        15Gi        15Gi&lt;/span&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=default;fillStyle=solid;" vertex="1" parent="1">
+                    <mxGeometry x="-1580" y="605" width="720" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="32" value="总物理内存：32GiB" style="swimlane;whiteSpace=wrap;html=1;rounded=0;startSize=30;shadow=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+                    <mxGeometry x="-1504" y="365" width="480" height="240" as="geometry">
+                        <mxRectangle x="130" y="80" width="150" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="33" value="&lt;div style=&quot;font-size: 14px; color: rgb(31, 35, 41);&quot;&gt;&lt;p style=&quot;&quot;&gt;内核+用户态总可用内存&lt;/p&gt;&lt;/div&gt;&lt;span style=&quot;white-space-collapse: preserve;&quot;&gt;&lt;/span&gt;" style="swimlane;whiteSpace=wrap;html=1;startSize=30;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="32">
+                    <mxGeometry x="120" y="30" width="360" height="210" as="geometry"/>
+                </mxCell>
+                <mxCell id="34" value="used&lt;div&gt;进程占用&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f9f7ed;strokeColor=#36393d;" vertex="1" parent="33">
+                    <mxGeometry y="30" width="120" height="180" as="geometry"/>
+                </mxCell>
+                <mxCell id="35" value="free&lt;div&gt;&lt;span style=&quot;font-size: 14px; background-color: transparent;&quot;&gt;空闲，可被分配&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;white-space-collapse: preserve;&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f9f7ed;strokeColor=#36393d;" vertex="1" parent="33">
+                    <mxGeometry x="120" y="30" width="120" height="180" as="geometry"/>
+                </mxCell>
+                <mxCell id="36" value="buff/cache&lt;div&gt;&lt;span style=&quot;font-size: 14px; background-color: transparent;&quot;&gt;缓存，可回收&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;white-space-collapse: preserve;&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f9f7ed;strokeColor=#36393d;" vertex="1" parent="33">
+                    <mxGeometry x="240" y="30" width="120" height="180" as="geometry"/>
+                </mxCell>
+                <mxCell id="37" value="" style="shape=flexArrow;endArrow=classic;html=1;" edge="1" parent="33">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="70" y="230" as="sourcePoint"/>
+                        <mxPoint x="70" y="170" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="38" value="" style="shape=flexArrow;endArrow=classic;html=1;" edge="1" parent="33">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="170" y="230" as="sourcePoint"/>
+                        <mxPoint x="170" y="170" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="39" value="" style="shape=flexArrow;endArrow=classic;html=1;entryX=0.583;entryY=0.833;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="33" target="36">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="350" y="230" as="sourcePoint"/>
+                        <mxPoint x="350" y="170" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="40" value="预留内存" style="swimlane;whiteSpace=wrap;html=1;startSize=30;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="32">
+                    <mxGeometry y="30" width="120" height="210" as="geometry"/>
+                </mxCell>
+                <mxCell id="41" value="&lt;p style=&quot;font-size: 14px; text-wrap-mode: nowrap;&quot;&gt;kdump预留&lt;/p&gt;&lt;p style=&quot;font-size: 14px; text-wrap-mode: nowrap;&quot;&gt;kernel预留&lt;/p&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="40">
+                    <mxGeometry y="30" width="120" height="180" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
