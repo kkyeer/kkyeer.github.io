@@ -28,7 +28,7 @@ make images
 
 如果使用上面的JDK启动IDEA，出现下面报错，说明有插件使用了JCEF，则编译时需要带入jcef
 
-![IDEA_missing_jcef](https://cdn.jsdelivr.net/gh/kkyeer/picbed/IDEA_missing_jcef.png)
+![IDEA_missing_jcef](https://cdn.jsdmirror.com/gh/kkyeer/picbed/IDEA_missing_jcef.png)
 
 > 带JCEF的版本
 
@@ -68,7 +68,7 @@ jb/project/tools/linux/scripts/mkimages_x64.sh 11 0 13b1751 jcef
 
 IDEA内双击shift按键，输入Choose Boot 后，出现下面提示，根据提示选择刚才编译后的JDK
 
-![IDEA_Choose_Runtime](https://cdn.jsdelivr.net/gh/kkyeer/picbed/IDEA_Choose_Runtime.png)
+![IDEA_Choose_Runtime](https://cdn.jsdmirror.com/gh/kkyeer/picbed/IDEA_Choose_Runtime.png)
 
 ### 方法2 修改文件参数
 

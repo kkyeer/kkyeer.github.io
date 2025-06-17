@@ -23,7 +23,7 @@ public HashMap(int initialCapacity, float loadFactor)
 
 #### 2.1.1 流程图
 
-![hashmap_put](https://cdn.jsdelivr.net/gh/kkyeer/picbed/hashmap_put.png)
+![hashmap_put](https://cdn.jsdmirror.com/gh/kkyeer/picbed/hashmap_put.png)
 
 1. 内部table的初始化：调用resize方法来进行table初始化及相关threshold计算
 2. key已存在：返回值为原value
@@ -40,7 +40,7 @@ public HashMap(int initialCapacity, float loadFactor)
 
 ### 3.1 计算table大小和下次扩容阈值
 
-![hashmap_resize](https://cdn.jsdelivr.net/gh/kkyeer/picbed/hashmap_resize.png)
+![hashmap_resize](https://cdn.jsdmirror.com/gh/kkyeer/picbed/hashmap_resize.png)
 
 ### 3.2 原table中的Node元素拷贝到新table
 

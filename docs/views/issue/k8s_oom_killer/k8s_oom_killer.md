@@ -56,7 +56,7 @@ $ free -mh
 Mem:            31Gi        15Gi       235Mi       194Mi        15Gi        15Gi
 ```
 
-![linux_memory2](https://cdn.jsdelivr.net/gh/kkyeer/picbed/linux_memory2.svg)
+![linux_memory2](https://cdn.jsdmirror.com/gh/kkyeer/picbed/linux_memory2.svg)
 
 
 
@@ -106,7 +106,7 @@ $ man proc
 
 从下面的图片可以看出，buffer位于相对底层，是文件系统和物理磁盘（块设备）之间的缓冲区，而PageCache是系统内核和文件系统之间的缓冲区。
 
-![20250612111718](https://cdn.jsdelivr.net/gh/kkyeer/picbed/20250612111718.png)
+![20250612111718](https://cdn.jsdmirror.com/gh/kkyeer/picbed/20250612111718.png)
 
 另外，linux内核使用 Slab 机制，管理文件系统的目录项和索引节点的缓存。Slab 包括两部分，其中的可回收部分，是指可以被回收的内核内存，包括目录项（dentry） 和索引节点（ inode ）的缓存等，用 SReclaimable 记录；而不可回收部分，用 SUnreclaim 记录。
 
@@ -129,7 +129,7 @@ $ man proc
    3. 共享匿名映射：基于/tmpfs的映射，理论上也属于mmap的一种，区别是**Linux系统下/tmpfs通常对应物理内存空间而不是磁盘**，常用于父子进程通信
 2. 匿名内存页，anno-rss：对应通过malloc方法申请的内存
 
-![process_memory](https://cdn.jsdelivr.net/gh/kkyeer/picbed/process_memory.svg)
+![process_memory](https://cdn.jsdmirror.com/gh/kkyeer/picbed/process_memory.svg)
 
 ### 常见内存统计工具
 

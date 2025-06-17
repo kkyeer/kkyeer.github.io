@@ -18,7 +18,7 @@ publish: true
 
 但近日在工作中由于某项业务的需求，评估后需要使用ClickHouse作为OLAP分析底层数据源，结合MySQL进行一些元数据存储。对于这种场景下ORM框架层的初始化，网上搜索得到的资料良莠不齐，有的不考虑连接池配置，也有的从```Class.forName()```开始，没有考虑到SpringBoot已有的基建，有重复造轮子的嫌疑。基于此，决定花一点时间探究SpringBoot，MyBatis(iBatis)，以及连接池实现(HikariCP,DBCP,Druid)之间的配置、Bean注入和引用关系，得到下面的关系图。
 
-![SpringBootDataSource](https://cdn.jsdelivr.net/gh/kkyeer/picbed/SpringBootDataSource.svg)
+![SpringBootDataSource](https://cdn.jsdmirror.com/gh/kkyeer/picbed/SpringBootDataSource.svg)
 
 > 说明
 

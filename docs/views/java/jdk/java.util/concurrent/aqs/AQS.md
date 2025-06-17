@@ -16,7 +16,7 @@ AQS位于```java.util.concurrent.locks```包作为JDK实现并发处理的核心
 
 AQS内部维护一个双向链表(CLH Queue)，链表内部存储Node实例，Node实例存储了线程/ConditionQueue的状态，当获取锁/释放锁等操作发生时，通过轻量级的CAS操作来提高效率。
 
-![AQS_try_aquire](https://cdn.jsdelivr.net/gh/kkyeer/picbed/AQS_try_aquire.png)
+![AQS_try_aquire](https://cdn.jsdmirror.com/gh/kkyeer/picbed/AQS_try_aquire.png)
 
 ## 2. Node类
 
@@ -45,7 +45,7 @@ static final class Node {
 
 ## 3. 可重入互斥锁的上锁过程
 
-![ReentrantLock_lock](https://cdn.jsdelivr.net/gh/kkyeer/picbed/ReentrantLock_lock1.svg)
+![ReentrantLock_lock](https://cdn.jsdmirror.com/gh/kkyeer/picbed/ReentrantLock_lock1.svg)
 
 1. 首次上锁:AQS的state为0，线程通过cas操作将state设置为1
 2. 重入:state通过cas(0,1)失败，判断当前线程是否为互斥锁线程（保存在AQS的父类Field）中
@@ -233,4 +233,4 @@ addWaiter的源码解析如下：
 
 考虑同时有节点在获取锁的情况，如果采用head向后遍历，则参考lock过程，可能存在一个时间点，tail指针已经指向node，但是node的前指针还未赋值，此时从当前线程的视角看，队列似乎已经没有下一个线程，然而其实是有的，参考下图
 
-![AQS_unpark_successor_bankwards](https://cdn.jsdelivr.net/gh/kkyeer/picbed/AQS_unpark_successor_bankwards.png)
+![AQS_unpark_successor_bankwards](https://cdn.jsdmirror.com/gh/kkyeer/picbed/AQS_unpark_successor_bankwards.png)

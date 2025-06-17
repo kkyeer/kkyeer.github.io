@@ -15,7 +15,7 @@ LinkedList同时实现了List和Deque两个接口，考虑到底层用链表实�
 
 LinkedList底层为双向链表，每个节点为Node对象，内部分别有Prev和Next两个指针指向前后节点
 
-![LinkedList](https://cdn.jsdelivr.net/gh/kkyeer/picbed/LinkedList.png)
+![LinkedList](https://cdn.jsdmirror.com/gh/kkyeer/picbed/LinkedList.png)
 
 ## LinkedHashMap
 
@@ -23,7 +23,7 @@ LinkedList底层为双向链表，每个节点为Node对象，内部分别有Pre
 
 但是两者不同的是```LinkedHashMap```的Node节点进行了改造，除了保存key-value信息外，还保存了两个指针before和after，分别指向**序列**前后两个Node，整体结构如下：
 
-![LinkedHashMap](https://cdn.jsdelivr.net/gh/kkyeer/picbed/LinkedHashMap.svg)
+![LinkedHashMap](https://cdn.jsdmirror.com/gh/kkyeer/picbed/LinkedHashMap.svg)
 
 默认情况下，before和after指针串联的列表维持**对象放入的顺序**，但是可以通过下面的构造器，在构造LinkedHashMap时指定参数```accessOrder=true```，来使这个顺序变为访问顺序：
 

@@ -12,7 +12,7 @@ publish: true
 ## 初始化插件工程
 
 1. 在GitHub页面使用[官方模板](https://github.com/JetBrains/intellij-platform-plugin-template)创建一个仓库
-    ![20221210105755](https://cdn.jsdelivr.net/gh/kkyeer/picbed/20221210105755.png)
+    ![20221210105755](https://cdn.jsdmirror.com/gh/kkyeer/picbed/20221210105755.png)
 2. ```git clone```仓库到本地，使用idea打开
 3. 配置Gradle镜像：修改```build.gradle.kts```文件，在20行左右添加如下配置
 
@@ -64,7 +64,7 @@ publish: true
 - 因为用的是**Java**Frame，所以需要改动依赖变为IDEA专属，参考[官方资料](https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html#exploring-module-and-plugin-apis)
   - plugin.xml的配置修改:depends改为```<depends>com.intellij.java</depends>```
   - gradle.properties的配置新增:```platformPlugins =com.intellij.java```
-  - runIDE，效果达成![20221211113559](https://cdn.jsdelivr.net/gh/kkyeer/picbed/20221211113559.png)
+  - runIDE，效果达成![20221211113559](https://cdn.jsdmirror.com/gh/kkyeer/picbed/20221211113559.png)
 - 接下来需要考虑时序图生成
 
 ## 生成时序图

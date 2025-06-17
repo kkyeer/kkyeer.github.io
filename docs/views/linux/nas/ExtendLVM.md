@@ -11,7 +11,7 @@ publish: true
 
 ## LVM基本拓扑
 
-![LVMTopology](https://cdn.jsdelivr.net/gh/kkyeer/picbed/LVMTopology.svg)
+![LVMTopology](https://cdn.jsdmirror.com/gh/kkyeer/picbed/LVMTopology.svg)
 
 LVM构建在物理磁盘的分区之上，分别映射到各种文件系统的路径中
 

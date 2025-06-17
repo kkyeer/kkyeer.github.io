@@ -59,7 +59,7 @@ public class ToArrayBugExperiment {
 ```
 
 此代码可以**正常编译**，但是**运行时抛出异常**:
-![toArrayException.png](https://cdn.jsdelivr.net/gh/kkyeer/picbed/toArrayException.png.png)
+![toArrayException.png](https://cdn.jsdmirror.com/gh/kkyeer/picbed/toArrayException.png.png)
 
 - 报错1:将一个Child类型的array,通过Arrays.asList转化成了一个```List<Object>```，理论上此类型的List可以存储任何Object类型（及其子类型）的对象，下面的set方法理应可以正常执行，但是报错了
 - 报错2:```Arrays.asList```转换而成的List，再次执行```toArray()```后的```Object[]```数组，放入```Object```对象报错

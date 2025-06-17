@@ -13,7 +13,7 @@ publish: true
 
 IDEA提供了配置同步的功能，支持将配置保存到Git仓库，然后各台电脑/系统上的客户端自动同步仓库中的配置，入口如下：
 
-![20210518165623](https://cdn.jsdelivr.net/gh/kkyeer/picbed/20210518165623.png)
+![20210518165623](https://cdn.jsdmirror.com/gh/kkyeer/picbed/20210518165623.png)
 
 使用说明见[官方文档](https://www.jetbrains.com/help/idea/sharing-your-ide-settings.html)
 
@@ -21,16 +21,16 @@ IDEA提供了配置同步的功能，支持将配置保存到Git仓库，然后�
 
 在新版Mac OS系统下（我的是11.2），新生成ssh key并在远程Git仓库配置ssh授权，确认本地用户可以正常ssh登陆到服务器，Git Clone也正常，但是在上述IDEA配置中填入SSH登陆的仓库的时候，会提示需要登录服务器
 
-![20210518170040](https://cdn.jsdelivr.net/gh/kkyeer/picbed/20210518170040.png)
+![20210518170040](https://cdn.jsdmirror.com/gh/kkyeer/picbed/20210518170040.png)
 
 idea日志如下
 
-![20210518171123](https://cdn.jsdelivr.net/gh/kkyeer/picbed/20210518171123.png)
+![20210518171123](https://cdn.jsdmirror.com/gh/kkyeer/picbed/20210518171123.png)
 
 ## 原因
 
 Mac OS的ssh组件进行了升级，默认生成高版本的key，特征是私钥的开头为```-----BEGIN OPENSSH PRIVATE KEY-----```
-![20210518171958](https://cdn.jsdelivr.net/gh/kkyeer/picbed/20210518171958.png)
+![20210518171958](https://cdn.jsdmirror.com/gh/kkyeer/picbed/20210518171958.png)
 
 IDEA的Settings Repository插件使用的JSch组件不支持此key，导致报错
 

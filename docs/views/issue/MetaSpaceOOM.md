@@ -39,7 +39,7 @@ publish: true
     解决了上面的上面的疑问，对于问题最终的定位应该有极大的帮助
     
 
-![20240114090610](https://cdn.jsdelivr.net/gh/kkyeer/picbed/20240114090610.png)
+![20240114090610](https://cdn.jsdmirror.com/gh/kkyeer/picbed/20240114090610.png)
 
 ## 反射与sun.reflect.DelegatingClassLoader
 
@@ -117,7 +117,7 @@ static Class<?> defineClass(String name, byte[] bytes, int off, int len,
 
 核心代码的时序见下图：
 
-![Sequence_20240104213019](https://cdn.jsdelivr.net/gh/kkyeer/picbed/Sequence_20240104213019.svg)
+![Sequence_20240104213019](https://cdn.jsdmirror.com/gh/kkyeer/picbed/Sequence_20240104213019.svg)
 
 
 上面可以解释疑问1和疑问3，疑问2也很简单，既然反射调用的时候会对**每一个方法**来调用上面的逻辑，在POJO很多的服务中，大量应用反射来调用```settter```和```gettter```方法，自然会导致**7000+**的```DelegatingClassLoader```类加载器和对应的```sun.reflect.GeneratedMethodAccessor```
@@ -163,10 +163,10 @@ private static synchronized String generateName(boolean isConstructor,
 定位上述原因有多种方案，比如临时扩容元空间，查看内存占用是否会无序增长。在运维修改发布参数的同时，好奇看看生成的`GeneratedMethodAccessor`在堆快照里是否有线索？
 
 考虑到`sun.reflect.GeneratedMethodAccessor6036`类名后缀的4位是自增的，而应用启动越往后生成的越有可能是最终导致OOM的罪魁祸首（也有可能是冲垮大堤的最后一只蚂蚁），因此从类名+后缀4位入手倒着查。  
-![20240114090654](https://cdn.jsdelivr.net/gh/kkyeer/picbed/20240114090654.png)
+![20240114090654](https://cdn.jsdmirror.com/gh/kkyeer/picbed/20240114090654.png)
 
 最后的680x这些类，看到一片待回收的对象，抽查后发现类加载器的父类加载器都是 `org.springframework.boot.loader.LaunchedURLClassLoader`  
-![20240114090721](https://cdn.jsdelivr.net/gh/kkyeer/picbed/20240114090721.png)
+![20240114090721](https://cdn.jsdmirror.com/gh/kkyeer/picbed/20240114090721.png)
 
 在堆上更进一步的挖掘，没有找到更多有用的信息，考虑使用Arthas的stack命令来监控Spring的哪些位置使用了反射？以及为什么容器运行了7天后还有反射，是invoke的次数少没有达到15次？还是边缘代码路径？
 

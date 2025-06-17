@@ -11,4 +11,4 @@ publish: false
 
 ## 生命周期
 
-![JavaThreadLifeCircle](https://cdn.jsdelivr.net/gh/kkyeer/picbed/JavaThreadLifeCircle.png)
+![JavaThreadLifeCircle](https://cdn.jsdmirror.com/gh/kkyeer/picbed/JavaThreadLifeCircle.png)

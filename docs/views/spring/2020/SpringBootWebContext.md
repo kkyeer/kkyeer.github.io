@@ -11,7 +11,7 @@ publish: false
 
 ## 1. UML图
 
-![AnnotationConfigServletWebServerApplicationContext.png](https://cdn.jsdelivr.net/gh/kkyeer/picbed/AnnotationConfigServletWebServerApplicationContext.svg)
+![AnnotationConfigServletWebServerApplicationContext.png](https://cdn.jsdmirror.com/gh/kkyeer/picbed/AnnotationConfigServletWebServerApplicationContext.svg)
 
 ## 2. 初始化
 

@@ -13,15 +13,15 @@ SpringTx为开发者提供了声明式和注解时声明的支持，为了更好
 
 ## 启动时扫描与代理组装
 
-![SequenceDiagram](https://cdn.jsdelivr.net/gh/kkyeer/picbed/spring-tx-simple.svg)
+![SequenceDiagram](https://cdn.jsdmirror.com/gh/kkyeer/picbed/spring-tx-simple.svg)
 
 ### BeanPostProcessor
 
 Spring启动时，在组装bean的过程中（具体是Bean初始化后），会扫描上下文的**BeanPostProcessor**并执行，其中包含SpringAOP包提供的```org.springframework.aop.framework.autoproxy.InfrastructureAdvisorAutoProxyCreator```，这个类(的父类)会负责后续的SpringAOP相关的代理对象的创建
 
-![20221206140716](https://cdn.jsdelivr.net/gh/kkyeer/picbed/20221206140716.png)
+![20221206140716](https://cdn.jsdmirror.com/gh/kkyeer/picbed/20221206140716.png)
 
-![InfrastructureAdvisorAutoProxyCreator](https://cdn.jsdelivr.net/gh/kkyeer/picbed/InfrastructureAdvisorAutoProxyCreator.svg)
+![InfrastructureAdvisorAutoProxyCreator](https://cdn.jsdmirror.com/gh/kkyeer/picbed/InfrastructureAdvisorAutoProxyCreator.svg)
 
 实际的执行逻辑在上述类的父类```org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator```的```wrapIfNecessary```方法中，在具体研究代码之前，先看看SpringAOP中的几个重要角色和概念
 
@@ -84,7 +84,7 @@ public List<Advisor> findAdvisorBeans() {
 ```
 
 其中会扫描到```org.springframework.transaction.interceptor.BeanFactoryTransactionAttributeSourceAdvisor```，在这个类中封装了事务与AOP需要用到的组件和方法，包括Pointcut,Advice等，在获取到Advisor后，还需要判断当前是否适用此Advisor
-![findAdvisorThatCanApply2](https://cdn.jsdelivr.net/gh/kkyeer/picbed/findAdvisorThatCanApply2.svg)
+![findAdvisorThatCanApply2](https://cdn.jsdmirror.com/gh/kkyeer/picbed/findAdvisorThatCanApply2.svg)
 
 org.springframework.aop.support.AopUtils#findAdvisorsThatCanApply  ->
 org.springframework.aop.support.AopUtils#canApply(org.springframework.aop.Pointcut, java.lang.Class<?>, boolean) ->
@@ -315,10 +315,10 @@ public class DemoController {
 
 注意下面图里，注入的对象和this之间的Class区别
 
-![20230101161902](https://cdn.jsdelivr.net/gh/kkyeer/picbed/20230101161902.png)
+![20230101161902](https://cdn.jsdmirror.com/gh/kkyeer/picbed/20230101161902.png)
 
 ## SpringTx时序
 
 下一章更新SpringTx具体的内部逻辑，包含TransactionAttribute等的实现
 
-![transactionInner](https://cdn.jsdelivr.net/gh/kkyeer/picbed/transactionInner.svg)
+![transactionInner](https://cdn.jsdmirror.com/gh/kkyeer/picbed/transactionInner.svg)

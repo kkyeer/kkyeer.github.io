@@ -64,4 +64,4 @@ RUN dpkg -i /tmp/EasyConnect.deb
 对于浏览器，使用Omega进行切换，协议socks5，端口1080
 
 对于Java程序，在RUN配置中的VM options增加选项:```-DsocksProxyHost=127.0.0.1 -DsocksProxyPort=1080```
-![20220828113953](https://cdn.jsdelivr.net/gh/kkyeer/picbed/20220828113953.png)
+![20220828113953](https://cdn.jsdmirror.com/gh/kkyeer/picbed/20220828113953.png)

@@ -13,7 +13,7 @@ publish: true
 
 某个网站，当用户手机访问的时候，**偶尔出现**无法访问，报错如下，点击显示详细信息发现访问```a.my-domain.com```时，返回了```b.my-domain.com```的证书
 
-![nginx_ipv6_ssl_cert_error_msg](https://cdn.jsdelivr.net/gh/kkyeer/picbed/nginx_ipv6_ssl_cert_error_msg.png)
+![nginx_ipv6_ssl_cert_error_msg](https://cdn.jsdmirror.com/gh/kkyeer/picbed/nginx_ipv6_ssl_cert_error_msg.png)
 
 ## 排查
 
@@ -29,7 +29,7 @@ publish: true
 
 ### 过程
 
-1. 了解目标网络拓扑：![nginx_ipv6_ssl_cert_error_topolory](https://cdn.jsdelivr.net/gh/kkyeer/picbed/nginx_ipv6_ssl_cert_error_topolory.svg)
+1. 了解目标网络拓扑：![nginx_ipv6_ssl_cert_error_topolory](https://cdn.jsdmirror.com/gh/kkyeer/picbed/nginx_ipv6_ssl_cert_error_topolory.svg)
 2. 可以看到证书由SLB服务（此处是nginx）进行管理与应答
 3. 【排查配置】SSL证书错乱，以往的经验都是错误配置导致，因此首先排查了域名与证书的对应关系，未发现问题
 4. 此时事情已经比较蹊跷，因为目前看正常的场景和错误的场景没有什么关联关系，不同的设备/网络接入/运营商都有可能出现正常或者不正常
@@ -82,7 +82,7 @@ publish: true
 
  ```
 
-![nginx-ipv6-ssl-cert-error-docker-log](https://cdn.jsdelivr.net/gh/kkyeer/picbed/nginx-ipv6-ssl-cert-error-docker-log.png)
+![nginx-ipv6-ssl-cert-error-docker-log](https://cdn.jsdmirror.com/gh/kkyeer/picbed/nginx-ipv6-ssl-cert-error-docker-log.png)
 
 3. 当客户端与网站握手时，比如上面的```c.my-domain.com```，如果使用IPv6协议栈（比如使用手机的移动网络），由于原因2，```c.my-domain.com```没有接入ipv6协议栈的监听，这时候nginx随机返回一个证书（比如a.my-domain.com），由于证书与域名不匹配，被系统拦截（证书校验不通过）
 4. 上述原因也能解释故障不能稳定复现的原因，因为设备不是在所有场景下都能获取到IPv6地址，即使获取到也不一定使用IPv6协议，导致出现偶发的诡异现象

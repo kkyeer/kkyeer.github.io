@@ -18,7 +18,7 @@ publish: true
 宾语：中国人
 
 更进一步的抽象，可以认为上面这句话是图关系  
-![20240122103421](https://cdn.jsdelivr.net/gh/kkyeer/picbed/20240122103421.png)
+![20240122103421](https://cdn.jsdmirror.com/gh/kkyeer/picbed/20240122103421.png)
 
 ## 构建知识图谱
 

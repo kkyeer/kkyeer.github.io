@@ -27,20 +27,20 @@ publish: true
 
 - 查看注册中心事件日志发现确实持续有节点健康检查失败事件
 - 容器内部检查后发现服务进程正常，8080端口正常绑定，但是```netstat```指令的输出，第2列和第3列与平时貌似不太一样
-![tcprecvnotempty](https://cdn.jsdelivr.net/gh/kkyeer/picbed/tcprecvnotempty.png)
+![tcprecvnotempty](https://cdn.jsdmirror.com/gh/kkyeer/picbed/tcprecvnotempty.png)
 - 经验判断服务出现了某些异常导致健康检查失败，考虑到调用方有较多的超时报错，从此处入手是一个不错的思路
 
 ## 2. 健康检查失败同时调用方超时的一般思路
 
 ### 2.1 RT高时的一般现象
 
-![RTHighHealthCheck](https://cdn.jsdelivr.net/gh/kkyeer/picbed/RTHighHealthCheck.png)
+![RTHighHealthCheck](https://cdn.jsdmirror.com/gh/kkyeer/picbed/RTHighHealthCheck.png)
 
 接口调用超时一般分为2种，建连超时（```connectionTimeout```）和响应发送/读取超时（```socketReadTimeout```）,按一般经验，当出现某接口RT高时，两者会交替出现
 
 1. 最初是接口RT高，调用方报错超时（也有可能不报错，看调用方的容忍度），本服务Tomcat线程堆积
    - 这里与接口RT(ms)，QPS，Tomcat最大线程数3个参数有关，当3者出现如下关系时，会导致Tomcat线程持续堆积，即线程无法即使处理请求并释放到线程池
-   - ![QpsRTThread2](https://cdn.jsdelivr.net/gh/kkyeer/picbed/QpsRTThread2.svg)
+   - ![QpsRTThread2](https://cdn.jsdmirror.com/gh/kkyeer/picbed/QpsRTThread2.svg)
    - 注意这里是假定服务只有一个接口，实际上服务同时有很多接口所以会有所偏差
    - 举例，一般来说Tomcat线程池默认200，假设某接口集群QPS为20000，集群规模50，则单节点承受400QPS压力，此时接口RT至少要保持在 200*1000/400=500ms 以下才可保证线程池始终有可用的线程
 
@@ -65,7 +65,7 @@ publish: true
 深入观察发现，问题代码需要某条特殊的响应才会触发（1小时以上才会有1次请求），确实导致了1分钟的FullGC和OOM异常，经验来说，请求处理线程因为OOM报错后，线程销毁，栈上引用消失，最多1次FullGC后，容器会恢复正常响应，但是现象中说超时持续了半小时没有自动恢复，为什么？
 
 详细排查日志后发现，在MQ线程OOM报错的同时，Tomcat有个Acceptor线程同时OOM异常，以往碰到的情况都是exec线程崩溃但会自动恢复，会不会这个线程不一样？
-![TomcatAcceptorOOM](https://cdn.jsdelivr.net/gh/kkyeer/picbed/TomcatAcceptorOOM.png)
+![TomcatAcceptorOOM](https://cdn.jsdmirror.com/gh/kkyeer/picbed/TomcatAcceptorOOM.png)
 
 ## 3. Accetpor线程不会自动恢复
 
@@ -73,7 +73,7 @@ publish: true
 
 Tomcat的核心Acceptor线程在建连后崩溃，但是端口仍旧绑定中，最终的结果是TCP连接可以建立（系统内核处理的部分），但是TCP请求体无法被取回处理（Tomcat的Acceptor线程处理的部分），这个时候需要了解下Tomcat的线程模型(图引用自 [Tomcat线程模型全面解析](https://zhuanlan.zhihu.com/p/555519862))，以及线程（池）恢复机制
 
-![TomcatNioThreadPool](https://cdn.jsdelivr.net/gh/kkyeer/picbed/TomcatNioThreadPool.png)
+![TomcatNioThreadPool](https://cdn.jsdmirror.com/gh/kkyeer/picbed/TomcatNioThreadPool.png)
 
 以上是模型图，事实上不同的线程初始化的数量是不一致的，线程崩溃后的恢复策略也不一致
 
@@ -81,15 +81,15 @@ Tomcat的核心Acceptor线程在建连后崩溃，但是端口仍旧绑定中，
 
 下面是具体的实例，在5分钟左右模拟了一次OOM导致的Acceptor线程崩溃（代码参见[Github](https://github.com/kkyeer/lab/tree/explore/oom_kill_tomcat_acceptor))
 
-![TomcatRunningThread](https://cdn.jsdelivr.net/gh/kkyeer/picbed/TomcatRunningThread.png)
+![TomcatRunningThread](https://cdn.jsdmirror.com/gh/kkyeer/picbed/TomcatRunningThread.png)
 
 进一步的观测网络异常栈
 > 服务正常
-![20230205182952](https://cdn.jsdelivr.net/gh/kkyeer/picbed/20230205182952.png)
+![20230205182952](https://cdn.jsdmirror.com/gh/kkyeer/picbed/20230205182952.png)
 > Acceptor线程崩溃
-![20230205183107](https://cdn.jsdelivr.net/gh/kkyeer/picbed/20230205183107.png)
+![20230205183107](https://cdn.jsdmirror.com/gh/kkyeer/picbed/20230205183107.png)
 > 崩溃后新请求进入
-![20230205183225](https://cdn.jsdelivr.net/gh/kkyeer/picbed/20230205183225.png)
+![20230205183225](https://cdn.jsdmirror.com/gh/kkyeer/picbed/20230205183225.png)
 
 从模型、模拟以及现象观察中可以得出初步结论：**程序启动时，Acceptor线程只有一个，此线程OOM后没有被恢复，导致新请求阻塞在内核的TCP队列中**
 

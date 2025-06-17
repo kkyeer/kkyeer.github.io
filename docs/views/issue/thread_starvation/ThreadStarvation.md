@@ -94,8 +94,8 @@ private static class BadTask implements Callable<String>{
 
 ### 图解
 
-![MainTask.svg](https://cdn.jsdelivr.net/gh/kkyeer/picbed/sequence.svg)
-![ThreadStarvation.svg](https://cdn.jsdelivr.net/gh/kkyeer/picbed/ThreadStarvation.svg)
+![MainTask.svg](https://cdn.jsdmirror.com/gh/kkyeer/picbed/sequence.svg)
+![ThreadStarvation.svg](https://cdn.jsdmirror.com/gh/kkyeer/picbed/ThreadStarvation.svg)
 
 ### 完全死锁的必要条件
 
@@ -110,7 +110,7 @@ private static class BadTask implements Callable<String>{
 
 **破坏上面的必要条件的第4点**，即由于压力没有那么大导致并非所有子任务都阻塞在队列里，这样会有部分Worker线程可以拿到子任务执行，但是由于执行子任务的线程数量少，最开始只有一小部分子任务有机会被执行，从宏观看最开始约等于**子任务串行执行**，导致RT非常高，完整代码见[Github上的代码](https://github.com/kkyeer/JavaPlayground/blob/master/src/main/java/issue/threadstarvation/ThreadStarvationEmulator.java)
 
-![20210607114327](https://cdn.jsdelivr.net/gh/kkyeer/picbed/20210607114327.png)
+![20210607114327](https://cdn.jsdmirror.com/gh/kkyeer/picbed/20210607114327.png)
 
 执行结果如下：
 

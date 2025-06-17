@@ -34,7 +34,7 @@ ThreadFactory: 初始化Thread实例的工厂类
 
 一般来说，调用execute方法来提交Runnable对象到线程池中，对于JUC包中的ThreadPool实现，大概流程如下
 
-![execute.svg](https://cdn.jsdelivr.net/gh/kkyeer/picbed/execute.svg)
+![execute.svg](https://cdn.jsdmirror.com/gh/kkyeer/picbed/execute.svg)
 
 代码及解析
 
@@ -108,7 +108,7 @@ private static int workerCountOf(int c)  { return c & CAPACITY; }
 private static int ctlOf(int rs, int wc) { return rs | wc; }
 ```
 
-![ThreadPoolLifeCycle](https://cdn.jsdelivr.net/gh/kkyeer/picbed/ThreadPoolLifeCycle.svg)
+![ThreadPoolLifeCycle](https://cdn.jsdmirror.com/gh/kkyeer/picbed/ThreadPoolLifeCycle.svg)
 
 注意线程池状态字段，RUNNING是唯一一个非负数，因此判断线程池是否在运行时状态可以使用```rs >= SHUTDOWN```来判断。
 
@@ -122,7 +122,7 @@ private static int ctlOf(int rs, int wc) { return rs | wc; }
 
 ### addWorker方法
 
-![addworker](https://cdn.jsdelivr.net/gh/kkyeer/picbed/addworker.svg)
+![addworker](https://cdn.jsdmirror.com/gh/kkyeer/picbed/addworker.svg)
 
 ```java
 private boolean addWorker(Runnable firstTask, boolean core) {
@@ -216,7 +216,7 @@ public void run() {
 
 ### runWorker方法
 
-![runWorker](https://cdn.jsdelivr.net/gh/kkyeer/picbed/runWorker.svg)
+![runWorker](https://cdn.jsdmirror.com/gh/kkyeer/picbed/runWorker.svg)
 
 ```java
 final void runWorker(Worker w) {
@@ -275,7 +275,7 @@ final void runWorker(Worker w) {
 
 ### getTask方法
 
-![ThreadPoolGetTask](https://cdn.jsdelivr.net/gh/kkyeer/picbed/ThreadPoolGetTask.svg)
+![ThreadPoolGetTask](https://cdn.jsdmirror.com/gh/kkyeer/picbed/ThreadPoolGetTask.svg)
 
 ```java
 private Runnable getTask() {
