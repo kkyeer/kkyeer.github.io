@@ -33,6 +33,9 @@ publish: True
 4. 排查k8s日志，发现对应时间点，容器进程内存占用超过了k8s配置文件对requests.limit的限制，最终导致k8s强制关闭容器
 5. 排查容器内存指标，能看到容器的物理内存在30%~40%左右，但是容器内存持续保持在100%接近1分钟
 
+![memUsage_aom_combined](https://cdn.jsdmirror.com/gh/kkyeer/picbed/memUsage_aom_combined.svg)
+![memUsed_aom_combined](https://cdn.jsdmirror.com/gh/kkyeer/picbed/memUsed_aom_combined.svg)
+
 经过上述的快速排查，引入了几个问题
 
 问题1: 物理内存和容器内存为什么差距这么大？
