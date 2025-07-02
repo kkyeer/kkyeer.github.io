@@ -61,8 +61,6 @@ Mem:            31Gi        15Gi       235Mi       194Mi        15Gi        15Gi
 
 ![linux_memory2](https://cdn.jsdmirror.com/gh/kkyeer/picbed/linux_memory2.svg)
 
-
-
 1. total：系统物理内存，在启动时会被启动过程，kdump等组件用掉一部分，剩下的是内核和应用程序可以使用的内存，也是free命令中输出的total字段，比物理内存略小一些
 2. free：完全未分配的内存
 3. buff/cache：由系统管理的缓存
