@@ -648,4 +648,5 @@ pageCache总计有1G左右，与上面的统计对应，能看到最大的是sky
 - [OpenJDK ZGC 源码分析（三）内存管理](https://blog.csdn.net/a860MHz/article/details/99435257)
 - [技术翻译」JVM研究系列「绝版敲门砖」带你进入JVM-ZGC垃圾回收器的时代和未来](https://juejin.cn/post/7016936265161375752)
 - [ZGC内存分配源码](https://github.com/openjdk/jdk/blob/master/src/hotspot/os/linux/gc/z/zPhysicalMemoryBacking_linux.cpp#L202)
-[参考资料](https://zhuanlan.zhihu.com/p/645904515)
+- [参考资料](https://zhuanlan.zhihu.com/p/645904515)
+- [一步一图带你深入理解 Linux 虚拟内存管理](https://mp.weixin.qq.com/s?__biz=Mzg2MzU3Mjc3Ng==&mid=2247486732&idx=1&sn=435d5e834e9751036c96384f6965b328&chksm=ce77cb4bf900425d33d2adfa632a4684cf7a63beece166c1ffedc4fdacb807c9413e8c73f298&scene=178&cur_album_id=2559805446807928833#rd)
