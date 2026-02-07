@@ -1,11 +1,12 @@
 ---
 date: 2026-01-26 15:18:03
 categories:
-  - AI
+  - Vibe Coding
 tags:
-  - ai
+  - Vibe Coding
   - opencode
   - claude code
+  - ai
 publish: true
 ---
 
