@@ -116,4 +116,4 @@ opencode
 
 - [官网](https://opencode.ai)
 - [官网文档](https://opencode.ai/docs)
-- [中文指南](OpenCode 使用文档)
+- [三方中文使用文档](https://opencodeguide.com/zh/docs/intro/)
