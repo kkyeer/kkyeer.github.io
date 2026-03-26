@@ -18,5 +18,6 @@
     "vuepress-plugin-flowchart": "^1.5.0",
     "vuepress-theme-reco": "1.6.17"
   },
-  "description": "born to code"
+  "description": "born to code",
+  "packageManager": "yarn@1.22.19"
 }
