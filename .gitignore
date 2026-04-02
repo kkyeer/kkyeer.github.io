@@ -3,3 +3,6 @@ public/
 !docs/.vuepress/public
 .DS_Store
 *.vsix
+.superpowers/
+docs/.vitepress/cache/
+docs/.vitepress/dist/
