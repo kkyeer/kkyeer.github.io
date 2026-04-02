@@ -3,6 +3,9 @@ import { getThemeConfig } from '@sugarat/theme/node'
 export const blogTheme = getThemeConfig({
   author: 'kkyeer',
   themeColor: 'el-blue',
+  article: {
+    readingTimePosition: 'inline'
+  },
   home: {
     pageSize: 8,
     blogInfoCollapsible: true

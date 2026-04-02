@@ -22,24 +22,13 @@
   letter-spacing: 0.02em;
 }
 
-.kk-post-meta {
-  margin: 0 0 24px;
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 16px;
-  background: linear-gradient(180deg, rgba(93, 103, 232, 0.07), transparent);
-  padding: 14px 18px;
+#hack-article-des > .kk-post-meta__item {
+  order: 0;
+  margin-right: 16px;
 }
 
-.kk-post-meta__item {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--vp-c-text-2);
-  font-size: 14px;
-}
-
-.kk-post-meta__item strong {
-  color: var(--vp-c-text-1);
+#hack-article-des > .tags {
+  order: 1;
 }
 
 .kk-comments {
@@ -334,10 +323,6 @@
 }
 
 @media (max-width: 640px) {
-  .kk-post-meta {
-    padding: 12px 14px;
-  }
-
   .kk-archive-page__hero {
     padding: 18px;
   }

@@ -23,10 +23,13 @@ test('site extends sugar theme and home route uses native home layout', () => {
 })
 
 test('local wrapper keeps read count and comments without reintroducing custom footer layout', () => {
+  const blogTheme = fs.readFileSync('docs/.vitepress/blog-theme.ts', 'utf8')
+  const customCss = fs.readFileSync('docs/.vitepress/theme/custom.css', 'utf8')
   const themeIndex = fs.readFileSync('docs/.vitepress/theme/index.ts', 'utf8')
   const postMeta = fs.readFileSync('docs/.vitepress/theme/components/PostMeta.vue', 'utf8')
   const comments = fs.readFileSync('docs/.vitepress/theme/components/ValineComments.vue', 'utf8')
 
+  assert.match(blogTheme, /readingTimePosition:\s*'inline'/)
   assert.match(themeIndex, /ValineComments/)
   assert.match(themeIndex, /PostMeta/)
   assert.match(themeIndex, /doc-after/)
@@ -34,7 +37,11 @@ test('local wrapper keeps read count and comments without reintroducing custom f
   assert.doesNotMatch(themeIndex, /SiteFooter/)
 
   assert.match(postMeta, /AccessNumber/)
-  assert.doesNotMatch(postMeta, /分类/)
-  assert.doesNotMatch(postMeta, /标签/)
+  assert.match(postMeta, /#hack-article-des/)
+  assert.match(postMeta, /route\.path\.startsWith\('\/views\/'\)/)
+  assert.match(postMeta, /\.kk-post-meta__item \.icon svg/)
+  assert.match(customCss, /#hack-article-des\s*>\s*\.kk-post-meta__item/)
+  assert.match(customCss, /#hack-article-des\s*>\s*\.kk-post-meta__item\s*\{[^}]*margin-right:\s*16px;/)
+  assert.match(customCss, /#hack-article-des\s*>\s*\.tags/)
   assert.match(comments, /route\.path\.startsWith\('\/views\/'\)/)
 })
