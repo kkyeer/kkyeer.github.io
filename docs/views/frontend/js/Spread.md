@@ -9,10 +9,12 @@ publish: true
 
 # JS的展开语法(...)
 
-1.rest操作符，用在函数参数列表里，结构参数列表...args
-function [funcName](...args){
+1.rest操作符，用在函数参数列表里，结构参数列表 `...args`
+```js
+function funcName(...args){
 /* 此时args等同于arguments，参数名args可随意定义 */
 }
+```
 示例：
 
 ```js

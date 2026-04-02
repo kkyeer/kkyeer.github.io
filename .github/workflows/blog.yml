@@ -19,31 +19,36 @@ jobs:
     - name: Install NodeJS
       uses: actions/setup-node@v3
       with:
-        node-version: '16.16.0'
+        node-version: '20.x'
         cache: 'yarn'
     - name: install
-      run: yarn install
+      run: yarn install --frozen-lockfile
     - name: build blog
-      run: yarn build
+      run: yarn vitepress:build
     - name: GitHub Pages
+      if: ${{ github.event_name == 'push' }}
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./public
+        publish_dir: ./docs/.vitepress/dist
     - name: Install SSH key
+      if: ${{ github.event_name == 'push' }}
       uses: shimataro/ssh-key-action@v2
       with:
         key: ${{ secrets.SSHKEY }}
         name: id_rsa # optional
         known_hosts: ${{ secrets.KNOWN_HOSTS }}
     - name: Compress
-      run: tar Jcf /tmp/blog.tar.xz ./public
+      if: ${{ github.event_name == 'push' }}
+      run: yarn vitepress:archive
     - name: upload
+      if: ${{ github.event_name == 'push' }}
       run: node upload.js
     - name: ls -a via ssh
+      if: ${{ github.event_name == 'push' }}
       uses: garygrossgarten/github-action-ssh@release
       with:
-        command: tar -xf /tmp/blog.tar.xz -C /tmp/&&rm -rf /home/ngmng/data/dist/&&ls -al /tmp&&ls -al /home/ngmng/data/&&mv /tmp/public/ /home/ngmng/data/dist/&&ls -al /home/ngmng/data/
+        command: tar -xf /tmp/blog.tar.xz -C /tmp/ && rm -rf /home/ngmng/data/dist/ && ls -al /tmp && ls -al /home/ngmng/data/ && mv /tmp/dist/ /home/ngmng/data/dist/ && ls -al /home/ngmng/data/
         host: www.tpfuture.top
         username: ngmng
         privateKey: ${{ secrets.NGMNG_SSH_KEY }}

@@ -1,19 +1,36 @@
 {
   "name": "blog",
   "version": "1.0.0",
-  "author": "reco_luan",
+  "author": "kkyeer",
   "scripts": {
     "dev": "vuepress dev docs",
     "build": "vuepress build docs",
-    "upload": "node upload.js"
+    "upload": "node upload.js",
+    "test:content-audit": "node --test tests/content-audit.test.mjs",
+    "test:feed-sitemap": "node --test tests/feed-sitemap.test.mjs",
+    "test:deploy-cutover": "node --test tests/deploy-cutover.test.mjs",
+    "test:sugar-theme-baseline": "node --test tests/sugar-theme-baseline.test.mjs",
+    "test:sugar-archive-data": "node --test tests/sugar-archive-data.test.mjs",
+    "test:homepage-route": "node --test tests/homepage-route.test.mjs",
+    "test:archive-page-structure": "node --test tests/archive-page-structure.test.mjs",
+    "vitepress:audit": "node scripts/vitepress/content-audit.mjs",
+    "vitepress:archive": "node scripts/vitepress/archive-dist.mjs",
+    "vitepress:dev": "vitepress dev docs",
+    "vitepress:build": "vitepress build docs && node scripts/vitepress/feed-sitemap.mjs",
+    "vitepress:preview": "vitepress preview docs"
   },
   "devDependencies": {
+    "@sugarat/theme": "0.5.17",
     "acorn": "^8.4.0",
     "kind-of": "^6.0.3",
     "lodash": "^4.17.21",
     "mixin-deep": "^2.0.1",
+    "pagefind": "^1.3.0",
     "scp2": "^0.5.0",
     "set-value": "^4.0.0",
+    "valine": "^1.5.3",
+    "vitepress": "^1.6.4",
+    "vue": "^3.5.13",
     "vuepress": "1.9.9",
     "vuepress-plugin-flowchart": "^1.5.0",
     "vuepress-theme-reco": "1.6.17"

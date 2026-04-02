@@ -77,7 +77,7 @@ publish: true
 1. 复制当前的beanDefinitionNames数组到方法本地变量进行迭代，这样允许在bean初始化过程中注册新的bean到beanDefinitionNames而不影响迭代过程
 2. 对于每一个bean，执行下面的过程来初始化
     1. 合并所有的BeanDefinition
-    2. 对于非Abstract、非懒加载的SingletonBean，如果是FactoryBean，则先调用getBean(beanName)方法初始化名为"&"+beanName的FactoryBean，再调用getBean(beanName)方法来初始化bean，如果不是FactoryBean，则直接调用getBean(beanName)方法，getBean(beanName)方法具体执行bean的初始化、连接、注入等功能，详情见[初始化bean的过程](XmlContext_5_BeanDefinitionToBean.md)
+    2. 对于非Abstract、非懒加载的SingletonBean，如果是FactoryBean，则先调用getBean(beanName)方法初始化名为"&"+beanName的FactoryBean，再调用getBean(beanName)方法来初始化bean，如果不是FactoryBean，则直接调用getBean(beanName)方法，getBean(beanName)方法具体执行bean的初始化、连接、注入等功能，详情见[初始化 bean 的过程](./SpringContext_5_BeanDefinitionToBean.md)
 3. 调用所有SmartInitializingSingleton类型的单例Bean的afterSingletonsInstantiated()方法
 
 BeanFactory和FactoryBean的区别：
@@ -353,7 +353,7 @@ AbstractBeanFacory内关于获取Singleton类型bean的代码如下
 1. 确认this.singletonObjects里没有实例，否则直接返回已创建好的实例
 2. 确保当前没有在销毁Singleton阶段(this.singletonsCurrentlyInDestruction作为flag字段),如果是则报错
 3. 检查beanName对应的inCreationg状态:```!this.inCreationCheckExclusions.contains(beanName) && !this.singletonsCurrentlyInCreation.add(beanName)```，两个容器均为存储当前正在创建的singletonBean的beanName的set，任一个存在则表明此beanName对应的bean已在创建，则报错
-4. 调用传入的ObjectFactory\<T>类型的Lambda表达式，获取单例对象，传入的Lambda表达式中，调用的是AbstractAutowireCapableBeanFactory的createBean方法，这个方法是整个bean创建过程的核心方法，过程参见[createBean的过程](./XmlContext_6_CreateBean.md)，并且newSingleton这个flag属性置为true
+4. 调用传入的ObjectFactory\<T>类型的Lambda表达式，获取单例对象，传入的Lambda表达式中，调用的是AbstractAutowireCapableBeanFactory的createBean方法，这个方法是整个bean创建过程的核心方法，过程参见[createBean的过程](./SpringContext_6_CreateBean.md)，并且newSingleton这个flag属性置为true
 5. afterSingleton创建过程：确保当前bean正在创建，然后移除”正在创建"状态
 6. 将创建好的Bean放入BeanRegistry的对应缓存中，同时移除中间态的缓存：
     1. this.singletonObjects.put(beanName, singletonObject);

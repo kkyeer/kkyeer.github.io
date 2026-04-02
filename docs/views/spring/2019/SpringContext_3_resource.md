@@ -27,11 +27,11 @@ publish: true
 
 ## AbstractBeanDefinitionReader从Resource对象中加载Bean定义
 
-AbstractBeanDefinitionReader获取到Resource数组后，会迭代数组元素，对每个Resource执行```loadBeanDefinitions(Resource resource)```方法来加载Bean定义，并将读取到的Bean定义数目加和后返回，具体的读取流程见下一节[AbstractBeanDefinitionReader从Resource对象中加载Bean定义](XmlContext_3_LoadResource.md)
+AbstractBeanDefinitionReader获取到Resource数组后，会迭代数组元素，对每个Resource执行```loadBeanDefinitions(Resource resource)```方法来加载Bean定义，并将读取到的Bean定义数目加和后返回，具体的读取流程见下一节[AbstractBeanDefinitionReader从Resource对象中加载Bean定义](./SpringContext_3_resource.md)
 
 每个configLocation的每个Resource对象的Bean全部加载完成后，beanFactory被存入ApplicationContext，继续进行refresh操作
 
-在[第二节:规整configLocation成Resource数组](./XmlContext_2_refresh.md)中，在初始化完BeanFactory和XmlBeanDefinitionReader对象后，XmlBeanDefinitionReader对象将每一个configLocation字符串规整为Resource数组完成后，开始遍历获取到的Resource数组，并在每个对象上调用的loadBeanDefinitions(Resource resource)方法来加载BeanDefinition到reader内部的BeanFactory中，代码如下：
+在[第二节:规整configLocation成Resource数组](./SpringContext_2_refresh.md)中，在初始化完BeanFactory和XmlBeanDefinitionReader对象后，XmlBeanDefinitionReader对象将每一个configLocation字符串规整为Resource数组完成后，开始遍历获取到的Resource数组，并在每个对象上调用的loadBeanDefinitions(Resource resource)方法来加载BeanDefinition到reader内部的BeanFactory中，代码如下：
 
 ```java
     public int loadBeanDefinitions(Resource resource) throws BeanDefinitionStoreException {
@@ -284,6 +284,6 @@ Spring采用SAX方式读取xml配置文件，实际调用的是DefaultDocumentLo
 
 通过判断DOM节点的name或localname，比对预定义的三种bean类型(import，alias，bean)来调用对应的process方法，如果发现是嵌套的\<beans\>对象，则递归调用doRegisterBeanDefinitions(ele)方法。
 
-对于当前实例，xml定义了一个\<bean>节点，因此调用processBeanDefinition(Element ele, BeanDefinitionParserDelegate delegate)方法，此方法的具体加载过程参见[第四节](XmlContext_4_NodeToBeanDefinition.md)
+对于当前实例，xml定义了一个\<bean>节点，因此调用processBeanDefinition(Element ele, BeanDefinitionParserDelegate delegate)方法，此方法的具体加载过程参见[第四节](./SpringContext_4_NodeToBeanDefinition.md)
 
 所有节点parse完毕后，由于处理完毕后没有操作，因此，将当前reader的delegate回溯到parent，如此循环到整个DOM树处理完毕，此时，当前Resource处理完毕，计算Resource处理前后beanDefinition数量的变化，返回变化值，此时整个XmlBeanDefinitionReader的loadBeanDefinitions方法执行完成

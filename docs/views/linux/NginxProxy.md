@@ -1,4 +1,15 @@
- Nginx服务器的反向代理proxy_pass配置方法讲解
+---
+title: Nginx 反向代理 proxy_pass 配置
+date: 2020-10-23
+categories:
+  - Linux
+tags:
+  - nginx
+  - 代理
+publish: true
+---
+
+# Nginx服务器的反向代理proxy_pass配置方法讲解
 
 Nginx的配置还是比较简单的，如：
 1

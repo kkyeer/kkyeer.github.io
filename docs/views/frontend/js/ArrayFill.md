@@ -2,6 +2,9 @@
 date: 2018-11-24
 categories:
   - JS
+tags:
+  - JavaScript
+  - Array
 publish: true
 ---
 

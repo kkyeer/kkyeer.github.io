@@ -68,7 +68,7 @@ publish: true
 此变量即ApplicationContext的refresh方法新创建的beanFactory，在初始化reader的过程中被关联进来
 3. 返回加载的BeanDefinition的数量
 
-在[第三节:加载Resource对象成BeanDefinition](./XmlContext_3_LoadResource.md)中，已经将Resource解析成Document对象，并且遍历调用相关方法来对不同的DOM节点方法来加载内部定义，对于当前实例来说，Bean定义节点加载成BeanDefinition对象调用的是org.springframework.beans.factory.xml.DefaultBeanDefinitionDocumentReader对象的processBeanDefinition方法：
+在[第三节:加载Resource对象成BeanDefinition](./SpringContext_3_resource.md)中，已经将Resource解析成Document对象，并且遍历调用相关方法来对不同的DOM节点方法来加载内部定义，对于当前实例来说，Bean定义节点加载成BeanDefinition对象调用的是org.springframework.beans.factory.xml.DefaultBeanDefinitionDocumentReader对象的processBeanDefinition方法：
 
 ```java
     protected void processBeanDefinition(Element ele, BeanDefinitionParserDelegate delegate) {

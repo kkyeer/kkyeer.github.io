@@ -1,0 +1,105 @@
+{
+  "summary": {
+    "totalPosts": 137,
+    "missingDate": 0,
+    "missingCategories": 0,
+    "missingTags": 0,
+    "postsWithAnyFrontmatterGap": 0,
+    "diagramUsage": {
+      "flowchart": 0,
+      "mermaid": 0,
+      "plantuml": 0
+    },
+    "compatibilityIssues": {
+      "rawHtmlPosts": 0,
+      "legacyDeepSelectorPosts": 0
+    },
+    "oldMarkdownLinks": 15,
+    "brokenInternalLinks": 0
+  },
+  "missingFrontmatter": {
+    "date": [],
+    "categories": [],
+    "tags": []
+  },
+  "diagramPosts": [],
+  "compatibilityPosts": [],
+  "oldMarkdownLinks": [
+    {
+      "file": "docs/views/issue/k8s_oom_killer/k8s_oom_killer.md",
+      "target": "./pgcacher.md",
+      "kind": "markdown"
+    },
+    {
+      "file": "docs/views/java/dubbo/2020/DubboInit.md",
+      "target": "./DubboRPC.md",
+      "kind": "markdown"
+    },
+    {
+      "file": "docs/views/spring/2019/SpringContext_1_init_get.md",
+      "target": "./SpringContext_2_refresh.md",
+      "kind": "markdown"
+    },
+    {
+      "file": "docs/views/spring/2019/SpringContext_3_resource.md",
+      "target": "./SpringContext_2_refresh.md",
+      "kind": "markdown"
+    },
+    {
+      "file": "docs/views/spring/2019/SpringContext_3_resource.md",
+      "target": "./SpringContext_3_resource.md",
+      "kind": "markdown"
+    },
+    {
+      "file": "docs/views/spring/2019/SpringContext_3_resource.md",
+      "target": "./SpringContext_4_NodeToBeanDefinition.md",
+      "kind": "markdown"
+    },
+    {
+      "file": "docs/views/spring/2019/SpringContext_4_NodeToBeanDefinition.md",
+      "target": "./SpringContext_3_resource.md",
+      "kind": "markdown"
+    },
+    {
+      "file": "docs/views/spring/2019/SpringContext_5_BeanDefinitionToBean.md",
+      "target": "./SpringContext_5_BeanDefinitionToBean.md",
+      "kind": "markdown"
+    },
+    {
+      "file": "docs/views/spring/2019/SpringContext_5_BeanDefinitionToBean.md",
+      "target": "./SpringContext_6_CreateBean.md",
+      "kind": "markdown"
+    },
+    {
+      "file": "docs/views/spring/2019/SpringContext_6_CreateBean.md",
+      "target": "./SpringContext_7_CachedIntrospectionResults.md",
+      "kind": "markdown"
+    },
+    {
+      "file": "docs/views/spring/2019/SpringContext_6_CreateBean.md",
+      "target": "./SpringContext_8_PropertyValueSetToBean.md",
+      "kind": "markdown"
+    },
+    {
+      "file": "docs/views/spring/2020/SpringBootAppStart.md",
+      "target": "./SpringBootWebContext.md",
+      "kind": "markdown"
+    },
+    {
+      "file": "docs/views/spring/2020/SpringBootAppStart.md",
+      "target": "./SpringBootWebContext.md",
+      "kind": "markdown"
+    },
+    {
+      "file": "docs/views/spring/2020/SpringBootAppStart.md",
+      "target": "./SpringBootWebContext.md",
+      "kind": "markdown"
+    },
+    {
+      "file": "docs/views/spring/2020/SpringBootWebContext.md",
+      "target": "./SpringConfigurationClass.md",
+      "kind": "markdown"
+    }
+  ],
+  "brokenInternalLinks": []
+}

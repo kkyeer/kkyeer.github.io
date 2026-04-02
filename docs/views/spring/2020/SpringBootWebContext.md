@@ -43,7 +43,7 @@ publish: false
 7. beanFacotry注册Bean```springBootBanner```
 8. 根据先前读取的值设置beanFactory的allowBeanDefinitionOverriding属性，Dubbo会默认将其设为true
 9. 根据SpringApplication.run()中的参数列表，读取主source，一般来说就是run方法的Class变量
-10. 解析上一步配置的resource为BeanDefinition，并放入BeanFactory，详情见[Bean读取](./ReadBeanDefinition.md)
+10. 解析上一步配置的resource为BeanDefinition，并放入BeanFactory，详情见[@Configuration 配置处理](./SpringConfigurationClass.md)
 11. 广播ApplicationPreparedEvent事件:
     - ConfigFileApplicationListener:注册BeanFactoryPostProcessor：PropertySourceOrderingPostProcessor
     - LoggingApplicationListener：注册Bean：```springBootLoggingSystem:this.loggerSystem```

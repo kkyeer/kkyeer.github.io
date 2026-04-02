@@ -276,7 +276,7 @@ AbstractEnvironment的无参构造方法调用了customizePropertySources(this.p
 
 ### 2.1.4. refresh过程
 
-ClassPathXmlApplicationContext没有复写此方法，实际调用的是父类AbstractApplicationContext的refresh方法，在这个方法中会进行Bean的初始化，具体的过程参考[refresh过程](./XmlContext_2_refresh.md)
+ClassPathXmlApplicationContext没有复写此方法，实际调用的是父类AbstractApplicationContext的refresh方法，在这个方法中会进行Bean的初始化，具体的过程参考[refresh过程](./SpringContext_2_refresh.md)
 
 ## 2.2 获取单例Bean
 

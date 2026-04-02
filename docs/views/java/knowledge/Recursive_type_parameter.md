@@ -36,8 +36,8 @@ publish: true
     }
 ```
 
-方法定义中用到了泛型中循环形参表示法<E extends Comparable<E>>，按Effective Java的说法，此表示法的意义是，E为任何可与自身比较的类
->The type bound <E extends Comparable<E>> may be read as “any type E that can
+方法定义中用到了泛型中循环形参表示法 `<E extends Comparable<E>>`，按Effective Java的说法，此表示法的意义是，E为任何可与自身比较的类
+>The type bound `<E extends Comparable<E>>` may be read as “any type E that can
 be compared to itself,” which corresponds more or less precisely to the notion of
 mutual comparability
 

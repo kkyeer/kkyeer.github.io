@@ -112,7 +112,7 @@ DubboDefaultPropertiesEnvironmentPostProcessor：读取application.name等信息
     1. 查找@Reference注解，获取注解配置信息
     2. 根据注解构造一个ReferenceBean,这个Bean里保存了后续生成代理所需要的必要属性信息，比如version等
     3. 把上面的ReferenceBean注入到@Reference注解对应的Field中
-    4. 创建代理：Invoker，根据Protocol对应的实例，默认使用RegistryProtocol，调用其refer方法，见[DubboReference源码解析](./DubboReference.md)
+    4. 创建代理：Invoker，根据Protocol对应的实例，默认使用RegistryProtocol，调用其refer方法，见[Dubbo RPC 源码解析](./DubboRPC.md)
 
 ## 4. 自定义的事件监听，在上下文事件中处理并启动Dubbo
 

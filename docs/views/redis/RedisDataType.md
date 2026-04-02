@@ -2,6 +2,9 @@
 date: 2020-05-21
 categories:
   - Redis
+tags:
+  - Redis
+  - 数据结构
 publish: true
 ---
 

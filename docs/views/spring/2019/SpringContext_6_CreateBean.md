@@ -562,13 +562,13 @@ BeanWrapperImpl的类关系图如下：
         1. 判断propertyName是否可写：
             1. 获取PropertyHandler：
                 1. 以"."为分割符切分propertyName，获取最后部分
-                2. 根据上面的结果，在BeanWrapper里寻找缓存的CachedIntrospectionResults对象中对应的属性的PropertyDescriptor（具体缓存过程参考[获取CachedIntrospectionResults并缓存到BeanWrapper](XmlContext_7_CachedIntrospectionResults.md))，将之包装到BeanPropertyHandler中并返回，此ph中writable字段根据PropertyDescriptor对象是否有WriteMethod决定
+                2. 根据上面的结果，在BeanWrapper里寻找缓存的CachedIntrospectionResults对象中对应的属性的PropertyDescriptor（具体缓存过程参考[获取 CachedIntrospectionResults 并缓存到 BeanWrapper](./SpringContext_7_CachedIntrospectionResults.md)），将之包装到BeanPropertyHandler中并返回，此ph中writable字段根据PropertyDescriptor对象是否有WriteMethod决定
             2. 判断此Property是否可写：上一步PropertyHandler非空的话返回其writable属性，如果为空的话，调用getPropertyValue判断是否为数组属性("a[0]")或者嵌套属性("p.name")，是的话尝试获取Value，如果成功说明可写
         2. 判断是不是数组或者嵌套属性：校验propertyName中是否有"["或者"."
     5. 如果上一步判断PropertyValue可转换，则调用convertForProperty方法来转换值
     6. 将上一步转换后的值，放入propertyValue的convertedValue属性中缓存起来，下次不需要重新转换（pv是从BeanDefinition中取出的）
 6. 设置PropertyValues为converted状态
-7. 将解析出的所有的PropertyValue包裹到一个新的MutablePropertyValues对象中，调用BeanWrapper对象的setPropertyValues方法，具体从MutablePropertyValues对象集成到Bean的过程参考[PropertyValue到Bean内部属性](XmlContext_10_PropertyValueSetToBean.md)
+7. 将解析出的所有的PropertyValue包裹到一个新的MutablePropertyValues对象中，调用BeanWrapper对象的setPropertyValues方法，具体从MutablePropertyValues对象集成到Bean的过程参考[PropertyValue 到 Bean 内部属性](./SpringContext_8_PropertyValueSetToBean.md)
 
 ##### 1.4.4.3.1 TypedStringValue的处理
 
@@ -929,4 +929,3 @@ BeanWrapperImpl的类关系图如下：
     2. 其他非空Name
 
 如果Bean有自己的Destroy方法，或者BeanFactory有DestructionAwareBeanPostProcessor，说明需要注册DisposableBean，那么初始化一个DisposableBeanAdapter适配器，与BeanName关联
-
