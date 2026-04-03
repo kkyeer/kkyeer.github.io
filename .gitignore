@@ -4,5 +4,6 @@ public/
 .DS_Store
 *.vsix
 .superpowers/
+.worktrees/
 docs/.vitepress/cache/
 docs/.vitepress/dist/
