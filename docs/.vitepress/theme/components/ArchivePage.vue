@@ -30,6 +30,33 @@ function syncActiveTag() {
   activeTag.value = new URLSearchParams(window.location.search).get('tag')?.trim() ?? ''
 }
 
+function syncTagQuery(tag: string) {
+  if (!inBrowser || props.type !== 'tags') {
+    return
+  }
+
+  const nextUrl = new URL(window.location.href)
+
+  if (tag) {
+    nextUrl.searchParams.set('tag', tag)
+  } else {
+    nextUrl.searchParams.delete('tag')
+  }
+
+  const nextPath = `${nextUrl.pathname}${nextUrl.search}${nextUrl.hash}`
+  window.history.pushState({}, '', nextPath)
+}
+
+function toggleTagFilter(tag: string) {
+  if (props.type !== 'tags') {
+    return
+  }
+
+  const nextTag = activeTag.value === tag ? '' : tag
+  activeTag.value = nextTag
+  syncTagQuery(nextTag)
+}
+
 onMounted(() => {
   syncActiveTag()
   if (inBrowser) {
@@ -67,34 +94,6 @@ const summaryLabel = computed(() => {
   }
   return '时间线'
 })
-
-const pageTitle = computed(() => {
-  if (props.type === 'categories') {
-    return '按分类整理主题脉络'
-  }
-  if (props.type === 'tags') {
-    return '按标签回看知识节点'
-  }
-  return '按年份回看更新轨迹'
-})
-
-const pageDescription = computed(() => {
-  if (props.type === 'categories') {
-    return '保留独立分类页，直接查看每个主题下的文章集合。'
-  }
-  if (props.type === 'tags') {
-    return '标签页基于 sugar 文章元数据生成，并支持通过 URL 参数直接筛选单个标签。'
-  }
-  return '时间线页保留独立入口，按年份倒序组织所有公开文章。'
-})
-
-const totalPosts = computed(() => {
-  const urls = new Set(visibleSections.value.flatMap((section) => section.posts.map((post) => post.url)))
-  return urls.size
-})
-
-const totalTerms = computed(() => visibleSections.value.length)
-const latestPostDate = computed(() => visibleSections.value[0]?.posts[0]?.date || '未知')
 const highlightSections = computed(() => sections.value.slice(0, props.type === 'timeline' ? 10 : 24))
 
 function formatTaxonomy(label: string, values: string[]) {
@@ -121,44 +120,33 @@ function metaLinesFor(post: {
 }
 
 function topHrefFor(section: { name: string; slug: string }) {
-  if (props.type === 'tags') {
-    return withBase(`/tags/?tag=${encodeURIComponent(section.name)}`)
-  }
   return `#${section.slug}`
 }
 </script>
 
 <template>
   <section class="kk-archive-page">
-    <header class="kk-archive-page__hero">
-      <div class="kk-archive-page__intro">
-        <p class="kk-archive-page__eyebrow">{{ summaryLabel }}归档</p>
-        <h1>{{ pageTitle }}</h1>
-        <p>{{ pageDescription }}</p>
-      </div>
-      <div class="kk-archive-page__stats">
-        <article class="kk-archive-metric">
-          <span>文章</span>
-          <strong>{{ totalPosts }}</strong>
-        </article>
-        <article class="kk-archive-metric">
-          <span>{{ summaryLabel }}</span>
-          <strong>{{ totalTerms }}</strong>
-        </article>
-        <article class="kk-archive-metric">
-          <span>最近更新</span>
-          <strong>{{ latestPostDate }}</strong>
-        </article>
-      </div>
-    </header>
-
     <div v-if="props.type === 'tags' && activeTag" class="kk-archive-page__filter">
       <span>当前标签：{{ activeTag }}</span>
       <a :href="withBase('/tags/')">查看全部</a>
     </div>
 
     <nav v-if="highlightSections.length" class="kk-archive-page__top-nav" :aria-label="`${summaryLabel}快速导航`">
+      <button
+        v-if="props.type === 'tags'"
+        v-for="section in highlightSections"
+        :key="section.slug"
+        class="kk-archive-chip"
+        :class="{ 'is-active': activeTag === section.name }"
+        type="button"
+        :aria-pressed="props.type === 'tags' && activeTag === section.name"
+        @click="toggleTagFilter(section.name)"
+      >
+        <span>{{ section.name }}</span>
+        <span class="kk-archive-chip__count">{{ section.count }}</span>
+      </button>
       <a
+        v-else
         v-for="section in highlightSections"
         :key="section.slug"
         class="kk-archive-chip"
