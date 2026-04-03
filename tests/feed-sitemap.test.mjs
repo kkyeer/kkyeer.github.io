@@ -45,7 +45,7 @@ test('renderFeedXml emits RSS with canonical site metadata and newest post first
 test('renderSitemapXml emits static routes and article routes with canonical URLs', () => {
   const xml = renderSitemapXml({
     site,
-    routes: ['/', '/categories/', '/tags/', '/timeline/', '/friends/'],
+    routes: ['/', '/categories/', '/tags/', '/timeline/'],
     posts
   })
 

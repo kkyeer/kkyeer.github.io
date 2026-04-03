@@ -4,7 +4,6 @@ import SugarTheme from '@sugarat/theme'
 import './custom.css'
 
 import ArchivePage from './components/ArchivePage.vue'
-import FriendLinksPage from './components/FriendLinksPage.vue'
 import PostMeta from './components/PostMeta.vue'
 import ValineComments from './components/ValineComments.vue'
 
@@ -19,7 +18,6 @@ const theme: Theme = {
   enhanceApp({ app, ...rest }) {
     SugarTheme.enhanceApp?.({ app, ...rest })
     app.component('ArchivePage', ArchivePage)
-    app.component('FriendLinksPage', FriendLinksPage)
   }
 }
 

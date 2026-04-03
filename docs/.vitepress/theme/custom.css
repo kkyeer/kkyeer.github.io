@@ -94,6 +94,14 @@
   color: var(--vp-c-brand-2);
 }
 
+.blog-info > .tags {
+  order: 3;
+}
+
+.blog-info > .friend-wrapper {
+  order: 4;
+}
+
 .kk-archive-page {
   display: grid;
   gap: 24px;

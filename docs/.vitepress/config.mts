@@ -109,7 +109,6 @@ export default defineConfig({
       { text: '分类', link: '/categories/' },
       { text: '标签', link: '/tags/' },
       { text: '时间线', link: '/timeline/' },
-      { text: '友链', link: '/friends/' },
       { text: 'GitHub', link: 'https://github.com/kkyeer' }
     ],
     socialLinks: [{ icon: 'github', link: 'https://github.com/kkyeer' }],

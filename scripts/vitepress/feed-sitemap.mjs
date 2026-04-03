@@ -8,7 +8,7 @@ const site = {
   baseUrl: 'https://www.tpfuture.top/'
 }
 
-const staticRoutes = ['/', '/categories/', '/tags/', '/timeline/', '/friends/']
+const staticRoutes = ['/', '/categories/', '/tags/', '/timeline/']
 
 function escapeXml(value) {
   return String(value ?? '')
