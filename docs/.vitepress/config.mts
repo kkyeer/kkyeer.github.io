@@ -1,6 +1,7 @@
 import path from 'node:path'
 import { defineConfig } from 'vitepress'
 import { blogTheme } from './blog-theme'
+import { getCategoryNavItems } from './theme/lib/category-tree.mjs'
 
 function escapeGenericMarkdown() {
   return {
@@ -106,7 +107,7 @@ export default defineConfig({
     logo: 'https://cdn.jsdmirror.com/gh/kkyeer/picbed/avatar_coder.png',
     nav: [
       { text: '首页', link: '/' },
-      { text: '分类', link: '/categories/' },
+      { text: '分类', items: getCategoryNavItems() },
       { text: '标签', link: '/tags/' },
       { text: '时间线', link: '/timeline/' },
       { text: 'GitHub', link: 'https://github.com/kkyeer' }
