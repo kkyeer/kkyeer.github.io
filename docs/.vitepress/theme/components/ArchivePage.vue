@@ -80,7 +80,12 @@ watch(
 
 const sections = computed(() => buildArchiveSectionsFromTheme(pagesData.value, props.type))
 const categoryArchive = computed(() => buildCategoryArchiveFromTheme(pagesData.value, categoryTree))
-const categoryGroups = computed(() => categoryArchive.value.topGroups.filter((group) => group.children.length > 0))
+const categoryLinks = computed(() =>
+  categoryArchive.value.topGroups.flatMap((group) => group.children.map((item) => ({
+    ...item,
+    primaryName: group.primaryName
+  })))
+)
 const visibleSections = computed(() => {
   if (props.type === 'categories') {
     return categoryArchive.value.sections
@@ -182,26 +187,19 @@ function sectionCountLabel(section: {
       </a>
     </nav>
     <nav v-else-if="props.type === 'categories'" class="kk-category-groups" aria-label="分类快速导航">
-      <section
-        v-for="group in categoryGroups"
-        :key="group.primarySlug"
-        class="kk-category-group"
-      >
-        <h2 class="kk-category-group__title">{{ group.primaryName }}</h2>
-        <div class="kk-category-group__grid">
-          <a
-            v-for="item in group.children"
-            :key="item.slug"
-            class="kk-category-group__link"
-            :href="`#${item.slug}`"
-          >
-            <span>{{ item.name }}</span>
-            <span class="kk-category-group__count" :style="{ backgroundColor: `var(--${item.colorToken})` }">
-              {{ item.count }}
-            </span>
-          </a>
-        </div>
-      </section>
+      <div class="kk-category-grid">
+        <a
+          v-for="item in categoryLinks"
+          :key="item.slug"
+          class="kk-category-link"
+          :href="`#${item.slug}`"
+        >
+          <span>{{ item.name }}</span>
+          <span class="kk-category-link__count" :style="{ backgroundColor: `var(--${item.colorToken})` }">
+            {{ item.count }}
+          </span>
+        </a>
+      </div>
     </nav>
 
     <p v-if="props.type === 'tags' && activeTag && !visibleSections.length" class="kk-archive-page__empty">

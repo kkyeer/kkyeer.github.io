@@ -39,18 +39,21 @@ test('archive categories page uses dedicated category archive pipeline and squar
   )
   assert.match(
     archivePage,
-    /const\s+categoryGroups\s*=\s*computed\(\s*\(\)\s*=>\s*categoryArchive\.value\.topGroups\.filter\(\s*\(group\)\s*=>\s*group\.children\.length\s*>\s*0\s*\)\s*\)/
+    /const\s+categoryLinks\s*=\s*computed\(\s*\(\)\s*=>[\s\S]*categoryArchive\.value\.topGroups\.flatMap/
   )
   assert.match(archivePage, /visibleSections[\s\S]*props\.type === 'categories'[\s\S]*categoryArchive\.value\.sections/)
   assert.match(archivePage, /v-else-if="props.type === 'categories'"/)
   assert.match(archivePage, /<nav[\s\S]*class="kk-category-groups"[\s\S]*aria-label=/)
-  assert.match(archivePage, /v-for="group in categoryGroups"/)
+  assert.match(archivePage, /v-for="item in categoryLinks"/)
   assert.match(archivePage, /class="kk-category-groups"/)
-  assert.match(archivePage, /class="kk-category-group__grid"/)
-  assert.match(archivePage, /class="kk-category-group__count"/)
+  assert.doesNotMatch(archivePage, /kk-category-group__title/)
+  assert.doesNotMatch(archivePage, /class="kk-category-group"/)
+  assert.match(archivePage, /class="kk-category-grid"/)
+  assert.match(archivePage, /class="kk-category-link"/)
+  assert.match(archivePage, /class="kk-category-link__count"/)
   assert.match(
     archivePage,
-    /class="kk-category-group__count"[\s\S]*:style="\{\s*backgroundColor:\s*`var\(--\$\{item\.colorToken\}\)`\s*\}"/
+    /class="kk-category-link__count"[\s\S]*:style="\{\s*backgroundColor:\s*`var\(--\$\{item\.colorToken\}\)`\s*\}"/
   )
 
   assert.match(customCss, /--kk-category-tint-1:/)
@@ -64,11 +67,15 @@ test('archive categories page uses dedicated category archive pipeline and squar
     /\.VPFlyout\s+\.VPMenuLink\s+\.link\s*,[\s\S]*\.VPNavScreenMenuGroupLink\s*{[\s\S]*font-size:\s*12px;[\s\S]*line-height:\s*28px;/
   )
   assert.match(customCss, /\.kk-category-groups\s*{/)
-  assert.match(customCss, /\.kk-category-group__grid\s*{[\s\S]*grid-template-columns:\s*repeat\(auto-fit,\s*minmax\(/)
-  assert.match(customCss, /\.kk-category-group__link\s*{[\s\S]*aspect-ratio:\s*1\s*\/\s*1/)
-  assert.match(customCss, /\.kk-category-group__count\s*{[\s\S]*border-radius:\s*999px/)
-  assert.match(customCss, /\.kk-category-group__count\s*{[\s\S]*background:/)
-  assert.match(customCss, /@media\s*\(max-width:\s*640px\)[\s\S]*\.kk-category-group__grid/)
+  assert.match(customCss, /\.kk-category-grid\s*{[\s\S]*grid-template-columns:\s*repeat\(auto-fit,\s*minmax\(/)
+  assert.match(customCss, /\.kk-category-link\s*{[\s\S]*min-height:\s*44px/)
+  assert.match(customCss, /\.kk-category-link\s*{[\s\S]*display:\s*inline-flex/)
+  assert.match(customCss, /\.kk-category-link\s*{[\s\S]*align-items:\s*center/)
+  assert.match(customCss, /\.kk-category-link\s*{[\s\S]*justify-content:\s*center/)
+  assert.doesNotMatch(customCss, /\.kk-category-link\s*{[\s\S]*aspect-ratio:\s*1\s*\/\s*1/)
+  assert.match(customCss, /\.kk-category-link__count\s*{[\s\S]*border-radius:\s*999px/)
+  assert.match(customCss, /\.kk-category-link__count\s*{[\s\S]*background:/)
+  assert.match(customCss, /@media\s*\(max-width:\s*640px\)[\s\S]*\.kk-category-grid[\s\S]*repeat\(3,\s*minmax/)
 })
 
 test('archive tag chips use in-page single-select filtering instead of anchor navigation', () => {
