@@ -59,6 +59,10 @@ test('archive categories page uses dedicated category archive pipeline and squar
   assert.match(customCss, /--kk-category-tint-4:/)
   assert.match(customCss, /--kk-category-tint-5:/)
   assert.match(customCss, /--kk-category-tint-6:/)
+  assert.match(
+    customCss,
+    /\.VPFlyout\s+\.VPMenuLink\s+\.link\s*,[\s\S]*\.VPNavScreenMenuGroupLink\s*{[\s\S]*font-size:\s*12px;[\s\S]*line-height:\s*28px;/
+  )
   assert.match(customCss, /\.kk-category-groups\s*{/)
   assert.match(customCss, /\.kk-category-group__grid\s*{[\s\S]*grid-template-columns:\s*repeat\(auto-fit,\s*minmax\(/)
   assert.match(customCss, /\.kk-category-group__link\s*{[\s\S]*aspect-ratio:\s*1\s*\/\s*1/)

@@ -130,6 +130,12 @@
   text-decoration: none;
 }
 
+.VPFlyout .VPMenuLink .link,
+.VPNavScreenMenuGroupLink {
+  font-size: 12px;
+  line-height: 28px;
+}
+
 .kk-archive-page__top-nav {
   display: flex;
   flex-wrap: wrap;
