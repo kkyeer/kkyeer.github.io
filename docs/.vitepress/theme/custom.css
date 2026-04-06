@@ -7,6 +7,12 @@
   --vp-c-brand-2: #4f58d8;
   --vp-c-brand-3: #3f47be;
   --vp-c-brand-soft: rgba(93, 103, 232, 0.14);
+  --kk-category-tint-1: #64748b;
+  --kk-category-tint-2: #0f766e;
+  --kk-category-tint-3: #0ea5e9;
+  --kk-category-tint-4: #2563eb;
+  --kk-category-tint-5: #7c3aed;
+  --kk-category-tint-6: #c2410c;
   --vp-home-hero-name-color: #111827;
   --vp-home-hero-image-background-image:
     radial-gradient(circle at 20% 20%, rgba(93, 103, 232, 0.2), transparent 45%),
@@ -172,6 +178,66 @@
   color: var(--vp-c-text-2);
 }
 
+.kk-category-groups {
+  display: grid;
+  gap: 14px;
+}
+
+.kk-category-group {
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 14px;
+  background: var(--vp-c-bg-soft);
+  padding: 14px;
+  display: grid;
+  gap: 10px;
+}
+
+.kk-category-group__title {
+  margin: 0;
+  font-size: 16px;
+}
+
+.kk-category-group__grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+}
+
+.kk-category-group__link {
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 10px;
+  background: var(--vp-c-bg);
+  display: grid;
+  place-content: center;
+  gap: 6px;
+  padding: 8px;
+  text-decoration: none;
+  color: var(--vp-c-text-1);
+  text-align: center;
+  aspect-ratio: 1 / 1;
+  transition: border-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
+}
+
+.kk-category-group__link:hover {
+  border-color: var(--vp-c-brand-1);
+  color: var(--vp-c-brand-1);
+  transform: translateY(-1px);
+}
+
+.kk-category-group__count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2em;
+  border-radius: 999px;
+  background: var(--kk-category-tint-1);
+  color: #fff;
+  padding: 2px 8px;
+  font-size: 20px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
 .kk-archive-section {
   scroll-margin-top: 88px;
   display: grid;
@@ -281,6 +347,10 @@
 }
 
 @media (max-width: 640px) {
+  .kk-category-group__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .kk-archive-section__header {
     flex-direction: column;
   }

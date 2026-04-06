@@ -2,7 +2,8 @@
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { inBrowser, useData, useRoute, withBase } from 'vitepress'
 
-import { buildArchiveSectionsFromTheme } from '../lib/sugar-archive-data.mjs'
+import { categoryTree } from '../lib/category-tree.mjs'
+import { buildArchiveSectionsFromTheme, buildCategoryArchiveFromTheme } from '../lib/sugar-archive-data.mjs'
 
 const props = defineProps<{
   type: 'categories' | 'tags' | 'timeline'
@@ -78,7 +79,12 @@ watch(
 )
 
 const sections = computed(() => buildArchiveSectionsFromTheme(pagesData.value, props.type))
+const categoryArchive = computed(() => buildCategoryArchiveFromTheme(pagesData.value, categoryTree))
+const categoryGroups = computed(() => categoryArchive.value.topGroups.filter((group) => group.children.length > 0))
 const visibleSections = computed(() => {
+  if (props.type === 'categories') {
+    return categoryArchive.value.sections
+  }
   if (props.type === 'tags' && activeTag.value) {
     return sections.value.filter((section) => section.name === activeTag.value)
   }
@@ -94,7 +100,12 @@ const summaryLabel = computed(() => {
   }
   return '时间线'
 })
-const highlightSections = computed(() => sections.value.slice(0, props.type === 'timeline' ? 10 : 24))
+const highlightSections = computed(() => {
+  if (props.type === 'categories') {
+    return []
+  }
+  return sections.value.slice(0, props.type === 'timeline' ? 10 : 24)
+})
 
 function formatTaxonomy(label: string, values: string[]) {
   if (!values.length) {
@@ -122,6 +133,16 @@ function metaLinesFor(post: {
 function topHrefFor(section: { name: string; slug: string }) {
   return `#${section.slug}`
 }
+
+function sectionCountLabel(section: {
+  count: number
+  primaryName?: string
+}) {
+  if (props.type === 'categories' && section.primaryName) {
+    return `${section.primaryName} · ${section.count} 篇文章`
+  }
+  return `${section.count} 篇文章`
+}
 </script>
 
 <template>
@@ -131,7 +152,11 @@ function topHrefFor(section: { name: string; slug: string }) {
       <a :href="withBase('/tags/')">查看全部</a>
     </div>
 
-    <nav v-if="highlightSections.length" class="kk-archive-page__top-nav" :aria-label="`${summaryLabel}快速导航`">
+    <nav
+      v-if="props.type !== 'categories' && highlightSections.length"
+      class="kk-archive-page__top-nav"
+      :aria-label="`${summaryLabel}快速导航`"
+    >
       <button
         v-if="props.type === 'tags'"
         v-for="section in highlightSections"
@@ -156,6 +181,28 @@ function topHrefFor(section: { name: string; slug: string }) {
         <span class="kk-archive-chip__count">{{ section.count }}</span>
       </a>
     </nav>
+    <nav v-else-if="props.type === 'categories'" class="kk-category-groups" aria-label="分类快速导航">
+      <section
+        v-for="group in categoryGroups"
+        :key="group.primarySlug"
+        class="kk-category-group"
+      >
+        <h2 class="kk-category-group__title">{{ group.primaryName }}</h2>
+        <div class="kk-category-group__grid">
+          <a
+            v-for="item in group.children"
+            :key="item.slug"
+            class="kk-category-group__link"
+            :href="`#${item.slug}`"
+          >
+            <span>{{ item.name }}</span>
+            <span class="kk-category-group__count" :style="{ backgroundColor: `var(--${item.colorToken})` }">
+              {{ item.count }}
+            </span>
+          </a>
+        </div>
+      </section>
+    </nav>
 
     <p v-if="props.type === 'tags' && activeTag && !visibleSections.length" class="kk-archive-page__empty">
       未找到标签 “{{ activeTag }}” 对应的文章。
@@ -169,7 +216,7 @@ function topHrefFor(section: { name: string; slug: string }) {
       <header class="kk-archive-section__header">
         <div>
           <h2 :id="section.slug">{{ section.name }}</h2>
-          <p>{{ section.count }} 篇文章</p>
+          <p>{{ sectionCountLabel(section) }}</p>
         </div>
         <a v-if="props.type !== 'tags'" class="kk-archive-section__anchor" :href="`#${section.slug}`">#</a>
       </header>
