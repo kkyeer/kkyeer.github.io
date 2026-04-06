@@ -1,10 +1,10 @@
-function slugify(value) {
-  return String(value ?? '')
-    .toLowerCase()
-    .trim()
-    .replace(/\s+/g, '-')
-    .replace(/[^\w\u4e00-\u9fa5-]/g, '')
-}
+import {
+  categoryTree,
+  findPrimaryCategoryBySecondary,
+  getCategoryAnchor,
+  getCategoryColorToken,
+  slugify
+} from './category-tree.mjs'
 
 function asArray(value) {
   if (Array.isArray(value)) {
@@ -75,11 +75,19 @@ export function buildArchiveSectionsFromTheme(pages, type) {
     }))
   }
 
-  const key = type === 'categories' ? 'categories' : 'tags'
+  if (type === 'categories') {
+    return buildCategoryArchiveFromTheme(pages).sections
+  }
+
+  if (type !== 'tags') {
+    throw new Error(`Unsupported archive type: ${type}`)
+  }
+
   const groups = new Map()
 
   for (const post of posts) {
-    for (const item of post[key]) {
+    const uniqueTags = Array.from(new Set(post.tags))
+    for (const item of uniqueTags) {
       groups.set(item, [...(groups.get(item) || []), post])
     }
   }
@@ -92,4 +100,57 @@ export function buildArchiveSectionsFromTheme(pages, type) {
       posts: items
     }))
     .sort((left, right) => right.count - left.count || left.name.localeCompare(right.name, 'zh-CN'))
+}
+
+export function buildCategoryArchiveFromTheme(pages, tree = categoryTree) {
+  const posts = normalizeThemePages(pages)
+  const groupedPosts = new Map()
+  const unmapped = new Set()
+
+  for (const post of posts) {
+    const secondaryName = post.categories[0]
+    if (!secondaryName) {
+      continue
+    }
+
+    const primary = findPrimaryCategoryBySecondary(secondaryName, tree)
+    if (!primary) {
+      unmapped.add(secondaryName)
+      continue
+    }
+
+    const current = groupedPosts.get(secondaryName) || []
+    groupedPosts.set(secondaryName, [...current, post])
+  }
+
+  const topGroups = tree.map((group) => ({
+    primaryName: group.name,
+    primarySlug: group.slug,
+    children: group.children
+      .filter((name) => groupedPosts.has(name))
+      .map((name) => ({
+        name,
+        slug: getCategoryAnchor(name),
+        count: groupedPosts.get(name).length,
+        colorToken: getCategoryColorToken(name)
+      }))
+  }))
+
+  const sections = tree.flatMap((group) =>
+    group.children
+      .filter((name) => groupedPosts.has(name))
+      .map((name) => ({
+        name,
+        slug: getCategoryAnchor(name),
+        primaryName: group.name,
+        count: groupedPosts.get(name).length,
+        posts: groupedPosts.get(name)
+      }))
+  )
+
+  return {
+    topGroups,
+    sections,
+    unmappedSecondaryCategories: [...unmapped]
+  }
 }
