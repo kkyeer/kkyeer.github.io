@@ -10,7 +10,7 @@ export const categoryTree = [
   {
     name: '服务端',
     slug: 'server',
-    children: ['JDK源码', 'JVM', 'Java进阶', '设计模式']
+    children: ['JDK源码', 'JVM', 'Java', 'Java进阶', 'MySQL', '设计模式']
   },
   {
     name: '中间件',
@@ -25,12 +25,12 @@ export const categoryTree = [
   {
     name: '问题解决',
     slug: 'troubleshooting',
-    children: ['线上问题', '开发问题']
+    children: ['线上问题', '开发问题', '疑难问题', '经验&教训']
   },
   {
     name: '其他',
     slug: 'others',
-    children: ['懂', 'Linux']
+    children: ['懂', 'Linux', '知识&技巧', '技巧', 'IDEA', 'Vibe Coding', '项目']
   }
 ]
 
