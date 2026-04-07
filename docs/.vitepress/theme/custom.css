@@ -113,23 +113,6 @@
   gap: 24px;
 }
 
-.kk-archive-page__filter {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 999px;
-  background: var(--vp-c-bg-soft);
-  padding: 10px 14px;
-  color: var(--vp-c-text-2);
-  font-size: 14px;
-}
-
-.kk-archive-page__filter a {
-  color: var(--vp-c-brand-1);
-  text-decoration: none;
-}
-
 .VPFlyout .VPMenuLink .link,
 .VPNavScreenMenuGroupLink {
   font-size: 12px;
@@ -216,6 +199,22 @@
   border-color: var(--vp-c-brand-1);
   color: var(--vp-c-brand-1);
   transform: translateY(-1px);
+}
+
+.kk-tag-filter {
+  -webkit-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  text-align: center;
+  cursor: pointer;
+}
+
+.kk-tag-filter.is-active {
+  border-color: var(--vp-c-brand-1);
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
 }
 
 .kk-category-link__count {

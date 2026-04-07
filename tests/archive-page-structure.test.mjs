@@ -80,13 +80,33 @@ test('archive categories page uses dedicated category archive pipeline and squar
 
 test('archive tag chips use in-page single-select filtering instead of anchor navigation', () => {
   const archivePage = fs.readFileSync('docs/.vitepress/theme/components/ArchivePage.vue', 'utf8')
+  const customCss = fs.readFileSync('docs/.vitepress/theme/custom.css', 'utf8')
   const tagsPage = fs.readFileSync('docs/tags/index.md', 'utf8')
 
   assert.match(archivePage, /toggleTagFilter/)
-  assert.match(archivePage, /v-if="props.type === 'tags'"/)
+  assert.match(archivePage, /v-if="props.type === 'tags' && highlightSections.length"/)
   assert.match(archivePage, /@click="toggleTagFilter\(section.name\)"/)
   assert.match(archivePage, /:aria-pressed="props.type === 'tags' && activeTag === section.name"/)
-  assert.match(archivePage, /v-else/)
+  assert.match(archivePage, /class="kk-category-groups"/)
+  assert.match(archivePage, /class="kk-category-grid"/)
+  assert.match(archivePage, /class="kk-category-link kk-tag-filter"/)
+  assert.match(archivePage, /class="kk-category-link__count"/)
+  assert.match(archivePage, /getCategoryColorToken/)
+  assert.match(
+    archivePage,
+    /class="kk-category-link__count"[\s\S]*:style="\{\s*backgroundColor:\s*`var\(--\$\{section\.colorToken\}\)`\s*\}"/
+  )
+  assert.match(archivePage, /v-else-if="props.type === 'timeline' && highlightSections.length"[\s\S]*class="kk-archive-chip"/)
+  assert.match(customCss, /\.kk-tag-filter\s*{[\s\S]*appearance:\s*none;/)
+  assert.match(customCss, /\.kk-tag-filter\s*{[\s\S]*-webkit-appearance:\s*none;/)
+  assert.match(customCss, /\.kk-tag-filter\s*{[\s\S]*width:\s*100%;/)
+  assert.match(customCss, /\.kk-tag-filter\.is-active\s*{[\s\S]*border-color:\s*var\(--vp-c-brand-1\);/)
+  assert.match(customCss, /\.kk-tag-filter\.is-active\s*{[\s\S]*background:\s*var\(--vp-c-brand-soft\);/)
+  assert.match(customCss, /\.kk-tag-filter\.is-active\s*{[\s\S]*color:\s*var\(--vp-c-brand-1\);/)
+  assert.doesNotMatch(customCss, /\.kk-tag-filter\s*{[\s\S]*font:\s*inherit;/)
+  assert.doesNotMatch(customCss, /\.kk-tag-filter\s*{[\s\S]*line-height:\s*inherit;/)
+  assert.doesNotMatch(archivePage, /kk-archive-page__filter/)
+  assert.match(archivePage, /v-else-if="props.type === 'timeline' && highlightSections.length"/)
   assert.doesNotMatch(archivePage, /pageTitle/)
   assert.doesNotMatch(archivePage, /pageDescription/)
   assert.match(tagsPage, /author:\s*false/)

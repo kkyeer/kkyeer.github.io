@@ -2,7 +2,7 @@
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { inBrowser, useData, useRoute, withBase } from 'vitepress'
 
-import { categoryTree } from '../lib/category-tree.mjs'
+import { categoryTree, getCategoryColorToken } from '../lib/category-tree.mjs'
 import { buildArchiveSectionsFromTheme, buildCategoryArchiveFromTheme } from '../lib/sugar-archive-data.mjs'
 
 const props = defineProps<{
@@ -111,6 +111,12 @@ const highlightSections = computed(() => {
   }
   return sections.value.slice(0, props.type === 'timeline' ? 10 : 24)
 })
+const tagHighlightSections = computed(() =>
+  highlightSections.value.map((section) => ({
+    ...section,
+    colorToken: getCategoryColorToken(section.name)
+  }))
+)
 
 function formatTaxonomy(label: string, values: string[]) {
   if (!values.length) {
@@ -152,31 +158,34 @@ function sectionCountLabel(section: {
 
 <template>
   <section class="kk-archive-page">
-    <div v-if="props.type === 'tags' && activeTag" class="kk-archive-page__filter">
-      <span>当前标签：{{ activeTag }}</span>
-      <a :href="withBase('/tags/')">查看全部</a>
-    </div>
-
     <nav
-      v-if="props.type !== 'categories' && highlightSections.length"
+      v-if="props.type === 'tags' && highlightSections.length"
+      class="kk-category-groups"
+      :aria-label="`${summaryLabel}快速导航`"
+    >
+      <div class="kk-category-grid">
+        <button
+          v-for="section in tagHighlightSections"
+          :key="section.slug"
+          class="kk-category-link kk-tag-filter"
+          :class="{ 'is-active': activeTag === section.name }"
+          type="button"
+          :aria-pressed="props.type === 'tags' && activeTag === section.name"
+          @click="toggleTagFilter(section.name)"
+        >
+          <span>{{ section.name }}</span>
+          <span class="kk-category-link__count" :style="{ backgroundColor: `var(--${section.colorToken})` }">
+            {{ section.count }}
+          </span>
+        </button>
+      </div>
+    </nav>
+    <nav
+      v-else-if="props.type === 'timeline' && highlightSections.length"
       class="kk-archive-page__top-nav"
       :aria-label="`${summaryLabel}快速导航`"
     >
-      <button
-        v-if="props.type === 'tags'"
-        v-for="section in highlightSections"
-        :key="section.slug"
-        class="kk-archive-chip"
-        :class="{ 'is-active': activeTag === section.name }"
-        type="button"
-        :aria-pressed="props.type === 'tags' && activeTag === section.name"
-        @click="toggleTagFilter(section.name)"
-      >
-        <span>{{ section.name }}</span>
-        <span class="kk-archive-chip__count">{{ section.count }}</span>
-      </button>
       <a
-        v-else
         v-for="section in highlightSections"
         :key="section.slug"
         class="kk-archive-chip"
