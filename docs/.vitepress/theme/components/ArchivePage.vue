@@ -224,7 +224,7 @@ function sectionCountLabel(section: {
           :aria-pressed="props.type === 'tags' && activeTag === section.name"
           @click="toggleTagFilter(section.name)"
         >
-          <span>{{ section.name }}</span>
+          <span class="kk-category-link__label">{{ section.name }}</span>
           <span class="kk-category-link__count" :style="{ backgroundColor: `var(--${section.colorToken})` }">
             {{ section.count }}
           </span>
@@ -243,7 +243,7 @@ function sectionCountLabel(section: {
           class="kk-category-link kk-tag-filter"
           :href="topHrefFor(section)"
         >
-          <span>{{ section.name }}</span>
+          <span class="kk-category-link__label">{{ section.name }}</span>
           <span class="kk-category-link__count" :style="{ backgroundColor: `var(--${section.colorToken})` }">
             {{ section.count }}
           </span>
@@ -261,7 +261,7 @@ function sectionCountLabel(section: {
           :aria-pressed="props.type === 'categories' && activeCategory === item.name"
           @click="toggleCategoryFilter(item.name)"
         >
-          <span>{{ item.name }}</span>
+          <span class="kk-category-link__label">{{ item.name }}</span>
           <span class="kk-category-link__count" :style="{ backgroundColor: `var(--${item.colorToken})` }">
             {{ item.count }}
           </span>

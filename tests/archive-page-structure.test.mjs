@@ -75,7 +75,8 @@ test('archive categories page uses dedicated category archive pipeline and squar
   assert.doesNotMatch(customCss, /\.kk-category-link\s*{[\s\S]*aspect-ratio:\s*1\s*\/\s*1/)
   assert.match(customCss, /\.kk-category-link__count\s*{[\s\S]*border-radius:\s*999px/)
   assert.match(customCss, /\.kk-category-link__count\s*{[\s\S]*background:/)
-  assert.match(customCss, /@media\s*\(max-width:\s*640px\)[\s\S]*\.kk-category-grid[\s\S]*repeat\(3,\s*minmax/)
+  assert.match(customCss, /@media\s*\(max-width:\s*640px\)[\s\S]*\.kk-category-grid[\s\S]*repeat\(2,\s*minmax/)
+  assert.match(customCss, /@media\s*\(max-width:\s*420px\)[\s\S]*\.kk-category-grid[\s\S]*grid-template-columns:\s*minmax\(0,\s*1fr\)/)
 })
 
 test('archive categories page uses in-page single-select filtering with category query sync', () => {
@@ -171,4 +172,19 @@ test('archive timeline year links and post taxonomy chips share the tag-button v
   assert.match(customCss, /\.kk-archive-post__taxonomy\s*{[\s\S]*justify-items:\s*flex-start;/)
   assert.match(customCss, /\.kk-archive-post__taxonomy li\s*{[^}]*line-height:\s*1\.2;/)
   assert.match(customCss, /\.kk-archive-post__taxonomy li\s*{[^}]*white-space:\s*nowrap;/)
+})
+
+test('archive mobile styles let chips and taxonomy wrap instead of overflowing', () => {
+  const archivePage = fs.readFileSync('docs/.vitepress/theme/components/ArchivePage.vue', 'utf8')
+  const customCss = fs.readFileSync('docs/.vitepress/theme/custom.css', 'utf8')
+
+  assert.match(archivePage, /class="kk-category-link__label"/)
+  assert.match(customCss, /\.kk-category-link\s*{[\s\S]*min-width:\s*0;/)
+  assert.match(customCss, /\.kk-category-link__label\s*{[\s\S]*overflow-wrap:\s*anywhere;/)
+  assert.match(customCss, /\.kk-category-link__count\s*{[\s\S]*flex-shrink:\s*0;/)
+  assert.match(customCss, /@media\s*\(max-width:\s*640px\)[\s\S]*\.kk-category-link\s*{[\s\S]*justify-content:\s*space-between;/)
+  assert.match(customCss, /@media\s*\(max-width:\s*640px\)[\s\S]*\.kk-category-link\s*{[\s\S]*white-space:\s*normal;/)
+  assert.match(customCss, /@media\s*\(max-width:\s*640px\)[\s\S]*\.kk-archive-section__header[\s\S]*align-items:\s*stretch;/)
+  assert.match(customCss, /@media\s*\(max-width:\s*640px\)[\s\S]*\.kk-archive-post__taxonomy li\s*{[\s\S]*white-space:\s*normal;/)
+  assert.match(customCss, /@media\s*\(max-width:\s*640px\)[\s\S]*\.kk-archive-post__taxonomy li\s*{[\s\S]*max-width:\s*100%;/)
 })
