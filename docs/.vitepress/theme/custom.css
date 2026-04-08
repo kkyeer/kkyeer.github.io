@@ -119,6 +119,13 @@
   line-height: 28px;
 }
 
+.VPFlyout .VPMenuGroup .title {
+  font-size: 16px;
+  line-height: 34px;
+  font-weight: 700;
+  color: var(--vp-c-text-1);
+}
+
 .kk-category-link,
 .kk-archive-post__taxonomy li {
   border: 1px solid var(--vp-c-divider);

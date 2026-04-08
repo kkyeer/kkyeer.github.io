@@ -45,3 +45,12 @@ test('local wrapper keeps read count and comments without reintroducing custom f
   assert.match(customCss, /#hack-article-des\s*>\s*\.tags/)
   assert.match(comments, /route\.path\.startsWith\('\/views\/'\)/)
 })
+
+test('navbar category flyout group titles are larger and stronger than child links', () => {
+  const customCss = fs.readFileSync('docs/.vitepress/theme/custom.css', 'utf8')
+
+  assert.match(customCss, /\.VPFlyout\s+\.VPMenuGroup\s+\.title\s*\{/)
+  assert.match(customCss, /\.VPFlyout\s+\.VPMenuGroup\s+\.title\s*\{[\s\S]*font-size:\s*16px;/)
+  assert.match(customCss, /\.VPFlyout\s+\.VPMenuGroup\s+\.title\s*\{[\s\S]*font-weight:\s*700;/)
+  assert.match(customCss, /\.VPFlyout\s+\.VPMenuGroup\s+\.title\s*\{[\s\S]*color:\s*var\(--vp-c-text-1\);/)
+})
