@@ -122,7 +122,10 @@ test('archive tag chips use in-page single-select filtering instead of anchor na
     archivePage,
     /class="kk-category-link__count"[\s\S]*:style="\{\s*backgroundColor:\s*`var\(--\$\{section\.colorToken\}\)`\s*\}"/
   )
-  assert.match(archivePage, /v-else-if="props.type === 'timeline' && highlightSections.length"[\s\S]*class="kk-archive-chip"/)
+  assert.match(
+    archivePage,
+    /v-else-if="props.type === 'timeline' && highlightSections.length"[\s\S]*class="kk-category-link kk-tag-filter"/
+  )
   assert.match(customCss, /\.kk-tag-filter\s*{[\s\S]*appearance:\s*none;/)
   assert.match(customCss, /\.kk-tag-filter\s*{[\s\S]*-webkit-appearance:\s*none;/)
   assert.match(customCss, /\.kk-tag-filter\s*{[\s\S]*width:\s*100%;/)
@@ -138,4 +141,34 @@ test('archive tag chips use in-page single-select filtering instead of anchor na
   assert.match(tagsPage, /author:\s*false/)
   assert.match(tagsPage, /date:\s*false/)
   assert.match(tagsPage, /readingTime:\s*false/)
+})
+
+test('archive timeline year links and post taxonomy chips share the tag-button visual baseline', () => {
+  const archivePage = fs.readFileSync('docs/.vitepress/theme/components/ArchivePage.vue', 'utf8')
+  const customCss = fs.readFileSync('docs/.vitepress/theme/custom.css', 'utf8')
+
+  assert.match(
+    archivePage,
+    /v-else-if="props.type === 'timeline' && highlightSections.length"[\s\S]*class="kk-category-groups"/
+  )
+  assert.match(
+    archivePage,
+    /v-else-if="props.type === 'timeline' && highlightSections.length"[\s\S]*class="kk-category-grid"/
+  )
+  assert.match(
+    archivePage,
+    /v-else-if="props.type === 'timeline' && highlightSections.length"[\s\S]*class="kk-category-link kk-tag-filter"/
+  )
+  assert.match(
+    archivePage,
+    /v-else-if="props.type === 'timeline' && highlightSections.length"[\s\S]*class="kk-category-link__count"/
+  )
+  assert.match(customCss, /\.kk-archive-post__taxonomy li\s*{[^}]*border:\s*1px solid var\(--vp-c-divider\);/)
+  assert.match(customCss, /\.kk-archive-post__taxonomy li\s*{[^}]*border-radius:\s*10px;/)
+  assert.match(customCss, /\.kk-archive-post__taxonomy li\s*{[^}]*background:\s*var\(--vp-c-bg\);/)
+  assert.match(customCss, /\.kk-archive-post__taxonomy li\s*{[^}]*color:\s*var\(--vp-c-text-1\);/)
+  assert.match(customCss, /\.kk-archive-post__taxonomy\s*{[\s\S]*display:\s*grid;/)
+  assert.match(customCss, /\.kk-archive-post__taxonomy\s*{[\s\S]*justify-items:\s*flex-start;/)
+  assert.match(customCss, /\.kk-archive-post__taxonomy li\s*{[^}]*line-height:\s*1\.2;/)
+  assert.match(customCss, /\.kk-archive-post__taxonomy li\s*{[^}]*white-space:\s*nowrap;/)
 })

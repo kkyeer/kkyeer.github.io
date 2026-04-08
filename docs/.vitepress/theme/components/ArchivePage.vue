@@ -162,6 +162,12 @@ const tagHighlightSections = computed(() =>
     colorToken: getCategoryColorToken(section.name)
   }))
 )
+const timelineHighlightSections = computed(() =>
+  highlightSections.value.map((section) => ({
+    ...section,
+    colorToken: getCategoryColorToken(section.name)
+  }))
+)
 
 function formatTaxonomy(label: string, values: string[]) {
   if (!values.length) {
@@ -227,18 +233,22 @@ function sectionCountLabel(section: {
     </nav>
     <nav
       v-else-if="props.type === 'timeline' && highlightSections.length"
-      class="kk-archive-page__top-nav"
+      class="kk-category-groups"
       :aria-label="`${summaryLabel}快速导航`"
     >
-      <a
-        v-for="section in highlightSections"
-        :key="section.slug"
-        class="kk-archive-chip"
-        :href="topHrefFor(section)"
-      >
-        <span>{{ section.name }}</span>
-        <span class="kk-archive-chip__count">{{ section.count }}</span>
-      </a>
+      <div class="kk-category-grid">
+        <a
+          v-for="section in timelineHighlightSections"
+          :key="section.slug"
+          class="kk-category-link kk-tag-filter"
+          :href="topHrefFor(section)"
+        >
+          <span>{{ section.name }}</span>
+          <span class="kk-category-link__count" :style="{ backgroundColor: `var(--${section.colorToken})` }">
+            {{ section.count }}
+          </span>
+        </a>
+      </div>
     </nav>
     <nav v-else-if="props.type === 'categories'" class="kk-category-groups" aria-label="分类快速导航">
       <div class="kk-category-grid">
