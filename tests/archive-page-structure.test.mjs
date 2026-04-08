@@ -49,7 +49,7 @@ test('archive categories page uses dedicated category archive pipeline and squar
   assert.doesNotMatch(archivePage, /kk-category-group__title/)
   assert.doesNotMatch(archivePage, /class="kk-category-group"/)
   assert.match(archivePage, /class="kk-category-grid"/)
-  assert.match(archivePage, /class="kk-category-link"/)
+  assert.match(archivePage, /class="kk-category-link kk-tag-filter"/)
   assert.match(archivePage, /class="kk-category-link__count"/)
   assert.match(
     archivePage,
@@ -68,7 +68,7 @@ test('archive categories page uses dedicated category archive pipeline and squar
   )
   assert.match(customCss, /\.kk-category-groups\s*{/)
   assert.match(customCss, /\.kk-category-grid\s*{[\s\S]*grid-template-columns:\s*repeat\(auto-fit,\s*minmax\(/)
-  assert.match(customCss, /\.kk-category-link\s*{[\s\S]*min-height:\s*44px/)
+  assert.match(customCss, /\.kk-category-link\s*{[\s\S]*min-height:\s*38px/)
   assert.match(customCss, /\.kk-category-link\s*{[\s\S]*display:\s*inline-flex/)
   assert.match(customCss, /\.kk-category-link\s*{[\s\S]*align-items:\s*center/)
   assert.match(customCss, /\.kk-category-link\s*{[\s\S]*justify-content:\s*center/)
@@ -76,6 +76,32 @@ test('archive categories page uses dedicated category archive pipeline and squar
   assert.match(customCss, /\.kk-category-link__count\s*{[\s\S]*border-radius:\s*999px/)
   assert.match(customCss, /\.kk-category-link__count\s*{[\s\S]*background:/)
   assert.match(customCss, /@media\s*\(max-width:\s*640px\)[\s\S]*\.kk-category-grid[\s\S]*repeat\(3,\s*minmax/)
+})
+
+test('archive categories page uses in-page single-select filtering with category query sync', () => {
+  const archivePage = fs.readFileSync('docs/.vitepress/theme/components/ArchivePage.vue', 'utf8')
+  const customCss = fs.readFileSync('docs/.vitepress/theme/custom.css', 'utf8')
+
+  assert.match(archivePage, /const\s+activeCategory\s*=\s*ref\(''\)/)
+  assert.match(archivePage, /function\s+syncActiveCategory\(/)
+  assert.match(archivePage, /function\s+syncCategoryQuery\(category:\s*string\)/)
+  assert.match(archivePage, /function\s+toggleCategoryFilter\(category:\s*string\)/)
+  assert.match(archivePage, /searchParams\.get\('category'\)/)
+  assert.match(archivePage, /searchParams\.set\('category',\s*category\)/)
+  assert.match(archivePage, /searchParams\.delete\('category'\)/)
+  assert.match(archivePage, /props\.type === 'categories' && activeCategory\.value/)
+  assert.match(archivePage, /:class="\{\s*'is-active': activeCategory === item\.name\s*\}"/)
+  assert.match(archivePage, /@click="toggleCategoryFilter\(item\.name\)"/)
+  assert.match(
+    archivePage,
+    /:aria-pressed="props\.type === 'categories' && activeCategory === item\.name"/
+  )
+  assert.match(archivePage, /class="kk-category-link kk-tag-filter"/)
+  assert.match(customCss, /\.kk-tag-filter\.is-active[\s\S]*border-color:\s*var\(--vp-c-brand-1\);/)
+  assert.match(customCss, /\.kk-tag-filter\.is-active[\s\S]*background:\s*var\(--vp-c-brand-soft\);/)
+  assert.match(customCss, /\.kk-tag-filter\.is-active[\s\S]*color:\s*var\(--vp-c-brand-1\);/)
+  assert.match(archivePage, /未找到分类 “\{\{ activeCategory \}\}” 对应的文章。/)
+  assert.doesNotMatch(archivePage, /:href="`#\$\{item\.slug\}`"/)
 })
 
 test('archive tag chips use in-page single-select filtering instead of anchor navigation', () => {

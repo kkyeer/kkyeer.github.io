@@ -185,7 +185,7 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
-  min-height: 44px;
+  min-height: 38px;
   padding: 4px 8px;
   text-decoration: none;
   color: var(--vp-c-text-1);

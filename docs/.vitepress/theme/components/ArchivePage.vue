@@ -12,6 +12,7 @@ const props = defineProps<{
 const { localeIndex, site, theme } = useData()
 const route = useRoute()
 const activeTag = ref('')
+const activeCategory = ref('')
 const pagesData = computed(() => {
   const localeKeys = Object.keys(site.value.locales || {})
 
@@ -48,6 +49,33 @@ function syncTagQuery(tag: string) {
   window.history.pushState({}, '', nextPath)
 }
 
+function syncActiveCategory() {
+  if (!inBrowser || props.type !== 'categories') {
+    activeCategory.value = ''
+    return
+  }
+
+  const searchParams = new URLSearchParams(window.location.search)
+  activeCategory.value = searchParams.get('category')?.trim() ?? ''
+}
+
+function syncCategoryQuery(category: string) {
+  if (!inBrowser || props.type !== 'categories') {
+    return
+  }
+
+  const nextUrl = new URL(window.location.href)
+
+  if (category) {
+    nextUrl.searchParams.set('category', category)
+  } else {
+    nextUrl.searchParams.delete('category')
+  }
+
+  const nextPath = `${nextUrl.pathname}${nextUrl.search}${nextUrl.hash}`
+  window.history.pushState({}, '', nextPath)
+}
+
 function toggleTagFilter(tag: string) {
   if (props.type !== 'tags') {
     return
@@ -58,16 +86,29 @@ function toggleTagFilter(tag: string) {
   syncTagQuery(nextTag)
 }
 
+function toggleCategoryFilter(category: string) {
+  if (props.type !== 'categories') {
+    return
+  }
+
+  const nextCategory = activeCategory.value === category ? '' : category
+  activeCategory.value = nextCategory
+  syncCategoryQuery(nextCategory)
+}
+
 onMounted(() => {
   syncActiveTag()
+  syncActiveCategory()
   if (inBrowser) {
     window.addEventListener('popstate', syncActiveTag)
+    window.addEventListener('popstate', syncActiveCategory)
   }
 })
 
 onUnmounted(() => {
   if (inBrowser) {
     window.removeEventListener('popstate', syncActiveTag)
+    window.removeEventListener('popstate', syncActiveCategory)
   }
 })
 
@@ -75,6 +116,7 @@ watch(
   () => route.path,
   () => {
     syncActiveTag()
+    syncActiveCategory()
   }
 )
 
@@ -87,6 +129,9 @@ const categoryLinks = computed(() =>
   })))
 )
 const visibleSections = computed(() => {
+  if (props.type === 'categories' && activeCategory.value) {
+    return categoryArchive.value.sections.filter((section) => section.name === activeCategory.value)
+  }
   if (props.type === 'categories') {
     return categoryArchive.value.sections
   }
@@ -197,20 +242,26 @@ function sectionCountLabel(section: {
     </nav>
     <nav v-else-if="props.type === 'categories'" class="kk-category-groups" aria-label="分类快速导航">
       <div class="kk-category-grid">
-        <a
+        <button
           v-for="item in categoryLinks"
           :key="item.slug"
-          class="kk-category-link"
-          :href="`#${item.slug}`"
+          class="kk-category-link kk-tag-filter"
+          :class="{ 'is-active': activeCategory === item.name }"
+          type="button"
+          :aria-pressed="props.type === 'categories' && activeCategory === item.name"
+          @click="toggleCategoryFilter(item.name)"
         >
           <span>{{ item.name }}</span>
           <span class="kk-category-link__count" :style="{ backgroundColor: `var(--${item.colorToken})` }">
             {{ item.count }}
           </span>
-        </a>
+        </button>
       </div>
     </nav>
 
+    <p v-if="props.type === 'categories' && activeCategory && !visibleSections.length" class="kk-archive-page__empty">
+      未找到分类 “{{ activeCategory }}” 对应的文章。
+    </p>
     <p v-if="props.type === 'tags' && activeTag && !visibleSections.length" class="kk-archive-page__empty">
       未找到标签 “{{ activeTag }}” 对应的文章。
     </p>
