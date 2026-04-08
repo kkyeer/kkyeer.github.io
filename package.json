@@ -15,7 +15,7 @@
     "test:archive-page-structure": "node --test tests/archive-page-structure.test.mjs",
     "vitepress:audit": "node scripts/vitepress/content-audit.mjs",
     "vitepress:archive": "node scripts/vitepress/archive-dist.mjs",
-    "vitepress:dev": "vitepress dev docs",
+    "vitepress:dev": "vitepress dev docs --host 0.0.0.0",
     "vitepress:build": "vitepress build docs && node scripts/vitepress/feed-sitemap.mjs",
     "vitepress:preview": "vitepress preview docs"
   },
