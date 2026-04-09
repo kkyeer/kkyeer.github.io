@@ -1,41 +1,29 @@
-# 博客
-[![Node.js CI](https://github.com/kkyeer/kkyeer.github.io/actions/workflows/blog.yml/badge.svg?branch=master)](https://github.com/kkyeer/kkyeer.github.io/actions/workflows/blog.yml)
+# 一水轩
 
-kkyeer 的博客仓库。
+> Born for code
 
-## 当前方向
+一水轩是 kkyeer 的个人技术博客，记录技术随笔、问题复盘、源码理解与工程实践。  
+内容覆盖服务端、中间件、前端、问题排查与工具实践，适合按主题检索，也适合按时间回看积累。
 
-仓库当前仍处于 `VuePress -> VitePress` 迁移阶段，当前激活的迁移路径是：
+## 访问入口
 
-- `VitePress`
-- `@sugarat/theme` 主题基线
-- 独立保留 `/categories/`、`/tags/`、`/timeline/` 页面
-- `Valine + LeanCloud visitor` 兼容层
+- 在线阅读：[www.tpfuture.top](https://www.tpfuture.top/)
+- GitHub 仓库：[kkyeer/kkyeer.github.io](https://github.com/kkyeer/kkyeer.github.io)
 
-相关文档：
+## 内容分类
 
-- 技术方案：[migration/specs/2026-04-02-sugar-blog-theme-migration-design.md](migration/specs/2026-04-02-sugar-blog-theme-migration-design.md)
-- 落地流程：[migration/plans/2026-04-02-sugar-blog-theme-migration-implementation.md](migration/plans/2026-04-02-sugar-blog-theme-migration-implementation.md)
+- 服务端：围绕 Java、JDK/JVM、MySQL 与设计模式，整理基础原理和源码理解。
+- 中间件：聚焦 Spring、Dubbo、Redis 等常见中间件的使用经验与实现细节。
+- 前端：记录 JavaScript、前端运行环境与日常开发实践中的问题和总结。
+- 问题排查：沉淀线上故障、性能问题、疑难问题的排查路径与复盘记录。
+- 工具与实践：覆盖 Linux、IDE 与工具链、AI 辅助开发、项目经验与效率技巧。
 
-## 编译与启动
+## 浏览方式
 
-当前仓库仍同时保留 VuePress 与 VitePress 两套脚本。
+- 分类页：[按主题浏览](https://www.tpfuture.top/categories/)
+- 标签页：[按关键词检索](https://www.tpfuture.top/tags/)
+- 时间线：[按时间顺序阅读](https://www.tpfuture.top/timeline/)
 
-```bash
-# 安装依赖
-yarn install
+## 关于仓库
 
-# 旧 VuePress 调试/构建（兼容保留）
-yarn dev
-yarn build
-
-# 当前 VitePress 调试/构建
-yarn vitepress:dev
-yarn vitepress:build
-```
-
-## 文档说明
-
-仓库里仍保留了一批 reco/Lumen 路线的历史方案文档，用于回溯前期迁移判断。
-
-这些文档不会删除，但已经不再作为当前执行基线；使用前请优先查看上面的新设计文档与实施计划。
+本站内容与源码托管于当前仓库，站点基于 VitePress 持续维护与更新。
