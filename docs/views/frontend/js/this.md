@@ -9,134 +9,176 @@ publish: true
 
 # JS里的this
 
-1.处于window上下文或者不在任何function中时，this指向window，不管当前是否处于use strict状态
-2.在一个function中调用this时，要看function如何被调用
-①非strict mode，直接调用方法时，this指向window
+## 1. 全局上下文
+
+处于window上下文或者不在任何function中时，this指向window，不管当前是否处于use strict状态。
+
+## 2. 函数调用中的this
+
+在一个function中调用this时，要看function如何被调用。
+
+### 2.1 非严格模式
+
+直接调用方法时，this指向window：
 
 ```js
-function f1(){
+function f1() {
     return this;
 }
-console.log(f1()===window);//true
-let f2=()=>{
+console.log(f1() === window); // true
+
+let f2 = () => {
     return this;
 }
-console.log(f2()===window)//true
-②strict mode，因为strict mode 规定，若没有在调用时显式指定this，则this为undefined
-function f3(){
-'use strict';
-return this;
-}
-console.log(f3())//undefined
+console.log(f2() === window); // true
 ```
 
-然而，在使用箭头表达式时，隐式的指定调用为this，即window
+### 2.2 严格模式
+
+严格模式下，若没有在调用时显式指定this，则this为undefined：
 
 ```js
-let f4=()=>{
+function f3() {
     'use strict';
     return this;
 }
-console.log(f4()===window)// true
+console.log(f3()); // undefined
 ```
 
-3.调用时需要指定this时，使用call或者apply(仅在函数是function直接定义时使用，箭头函数无此效果）
+然而，在使用箭头函数时，隐式的指定调用为this，即window：
 
 ```js
-let custom={desc:'custom'}
+let f4 = () => {
+    'use strict';
+    return this;
+}
+console.log(f4() === window); // true
+```
+
+## 3. 显式指定this
+
+调用时需要指定this时，使用call或者apply（仅在函数是function直接定义时使用，箭头函数无此效果）：
+
+```js
+let custom = { desc: 'custom' }
 let desc = 'window'
-function normalWhatsThis(){
+
+function normalWhatsThis() {
     return this.desc;
 }
-let arrowWhatsThis=()=>{
+
+let arrowWhatsThis = () => {
     return this.desc;
 }
-normalWhatsThis()//undefined
-normalWhatsThis.call(custom)//"custom"
-normalWhatsThis.apply(custom)//"custom"
-// 箭头表达式没有这个效果
-arrowWhatsThis()//undefined
-arrowWhatsThis.call(custom)//undefined
-arrowWhatsThis.apply(custom)//undefined
+
+normalWhatsThis(); // undefined
+normalWhatsThis.call(custom); // "custom"
+normalWhatsThis.apply(custom); // "custom"
+
+// 箭头函数没有这个效果
+arrowWhatsThis(); // undefined
+arrowWhatsThis.call(custom); // undefined
+arrowWhatsThis.apply(custom); // undefined
 ```
 
-4.在调用函数时，使用bind可以绑定this
+## 4. 使用bind绑定this
+
+在调用函数时，使用bind可以绑定this：
 
 ```js
-let foo={
-    desc:'foo'
+let foo = {
+    desc: 'foo'
 }
-let bar={
-    desc:'bar',
-    printMe : function(){
+
+let bar = {
+    desc: 'bar',
+    printMe: function() {
         console.log(this.desc);
     }
 }
-bar.printMe();// bar
-let printFoo=bar.printMe.bind(foo);
-printFoo()//foo
+
+bar.printMe(); // bar
+let printFoo = bar.printMe.bind(foo);
+printFoo(); // foo
 ```
 
-5.箭头函数调用中，this指向当前未关闭的语法上下文的this(enclosing lexical context's this)
+## 5. 箭头函数中的this
+
+箭头函数调用中，this指向当前未关闭的语法上下文的this（enclosing lexical context's this）：
 
 ```js
-let global=this;
-let test=(()=>this);
-console.log(test()===this)//true
-*使用call,bind或者apply调用箭头函数时，第一个入参会被忽略
+let global = this;
+let test = (() => this);
+console.log(test() === this); // true
+```
+
+**注意**：使用call、bind或者apply调用箭头函数时，第一个入参会被忽略：
+
+```js
 let custom2 = {
-    desc2:'custom'
+    desc2: 'custom'
 }
 let desc2 = 'window'
 
-function arrowWhatsThis(){
+function arrowWhatsThis() {
     return console.log(this.desc2);
 }
-arrowWhatsThis()// undefined
-arrowWhatsThis.call(custom) // undefined
+
+arrowWhatsThis(); // undefined
+arrowWhatsThis.call(custom); // undefined
 ```
 
-6.如果函数本身作为对象（object）的成员，则函数中的this指向方法被调用的对象
+## 6. 对象方法中的this
+
+如果函数本身作为对象（object）的成员，则函数中的this指向方法被调用的对象：
 
 ```js
 console.log('--------1-------');
-let obj1={
-    a:3,
-    fn:function(){
+let obj1 = {
+    a: 3,
+    fn: function() {
         console.log(this.a);
-        console.log(this===obj1);
+        console.log(this === obj1);
     }
 }
-obj1.fn()
+obj1.fn();
+
 console.log('--------------2-------');
-let indiFn1=function(){
+let indiFn1 = function() {
     console.log(this.a);
-    console.log(this===obj2);
+    console.log(this === obj2);
+}
 
+let obj2 = {
+    a: 4,
+    fn: indiFn1
 }
-let obj2={
-    a:4,
-    fn:indiFn1
+
+let obj4 = {
+    a: 5,
+    fn: {}
 }
-let obj4={
-    a:5,
-    fn:{}
-}
+
 obj2.fn();
-obj4.fn=indiFn1;
+obj4.fn = indiFn1;
 obj4.fn();
-console.log('-----------3---------------');
-let indiFn2=()=>{
-    console.log(this.a);
-    console.log(this===obj2);
 
+console.log('-----------3---------------');
+let indiFn2 = () => {
+    console.log(this.a);
+    console.log(this === obj2);
 }
-let obj3={
-    a:5,
-    fn:indiFn2
+
+let obj3 = {
+    a: 5,
+    fn: indiFn2
 }
-obj3.fn()
+
+obj3.fn();
+```
+
 输出：
+```
 --------1-------
 3
 true
@@ -150,36 +192,56 @@ undefined
 false
 ```
 
-7.对象原型链中的this
+## 7. 对象原型链中的this
 
 ```js
 let o = {
-    f:function(){
-        return this.a+this.b;
+    f: function() {
+        return this.a + this.b;
     }
 }
 let p = Object.create(o);
-p.a=3;
-p.b=4;
-console.log(p.f());//7
+p.a = 3;
+p.b = 4;
+console.log(p.f()); // 7
+```
 
-* getter和setter的道理一致
-8.构造器中的this
-当一个方法被用作构造器，即方法是通过new关键词调用时，this被绑定为构造的新对象
-function fn(){
-    this.c=99
+**注意**：getter和setter的道理一致。
+
+## 8. 构造器中的this
+
+当一个方法被用作构造器，即方法是通过new关键词调用时，this被绑定为构造的新对象：
+
+```js
+function fn() {
+    this.c = 99
 }
 let obj = new fn();
-console.log(obj.c);//99
+console.log(obj.c); // 99
 ```
 
-9.作为dom事件的handler
-Dom事件的handler为function，则其中的this指向抛出事件的对象，即e.currentTarget
+## 9. DOM事件处理函数中的this
+
+DOM事件的handler为function，则其中的this指向抛出事件的对象，即e.currentTarget：
 
 ```html
-<button id='btn' onclick="alert(this.tagName)">ClickMe</button>//BUTTON
+<button id='btn' onclick="alert(this.tagName)">ClickMe</button>
+// 输出: BUTTON
 ```
+
+## 总结
+
+| 场景 | this指向 |
+|------|----------|
+| 全局上下文 | window |
+| 非严格模式直接调用函数 | window |
+| 严格模式直接调用函数 | undefined |
+| 箭头函数 | 定义时的上下文 |
+| 对象方法调用 | 调用该方法的对象 |
+| call/apply/bind | 指定的对象 |
+| 构造函数 | 新创建的对象 |
+| DOM事件处理函数 | 触发事件的元素 |
 
 ## 引用
 
-<https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this>
+- [MDN: this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)
