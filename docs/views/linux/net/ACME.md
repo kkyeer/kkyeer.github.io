@@ -222,9 +222,9 @@ BB
 acme可以**自动刷新并安装**你的证书，假设你的nginx配置文件指向的证书路径为```/etc/nginx/ssl/your.domain/****.cer```和```/etc/nginx/ssl/your.domain/****.key```,则命令为
 
 ```shell
-acme.sh --install-cert -d example.com \
---key-file       /usr/local/nginx/ssl/example.com/cert.key \
---fullchain-file /usr/local/nginx/ssl/example.com/fullchain.cer \
+acme.sh --install-cert -d your.domain \
+--key-file       /usr/local/nginx/ssl/your.domain/cert.key \
+--fullchain-file /usr/local/nginx/ssl/your.domain/fullchain.cer \
 --reloadcmd     "systemctl reload nginx"
 ```
 
