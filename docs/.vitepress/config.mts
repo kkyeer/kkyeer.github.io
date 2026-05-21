@@ -1,5 +1,6 @@
 import path from 'node:path'
 import { defineConfig } from 'vitepress'
+import withDrawio from '@dhlx/vitepress-plugin-drawio'
 import { blogTheme } from './blog-theme'
 import { getCategoryNavItems } from './theme/lib/category-tree.mjs'
 
@@ -60,7 +61,7 @@ function escapeGenericMarkdown() {
   }
 }
 
-export default defineConfig({
+export default withDrawio(defineConfig({
   extends: blogTheme,
   title: '一水轩',
   description: 'Born for code',
@@ -125,4 +126,16 @@ export default defineConfig({
       next: '下一篇'
     }
   }
+}), {
+  width: '100%',
+  height: '600px',
+  page: 0,
+  darkMode: 'auto',
+  resize: true,
+  pages: true,
+  zoom: true,
+  layers: true,
+  lightbox: true,
+  highlight: '#0000ff',
+  transparent: true,
 })
