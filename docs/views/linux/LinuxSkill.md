@@ -387,9 +387,10 @@ apt-get install  psmisc
 
 定位到进程后，可以使用```ps -ef```命令具体查看进程的细节，并自行决定kill哪些进程
 
-## 1.24. KDE下chromium无法输入中文解决
+## 1.24. KDE Wayland下chromium无法输入中文解决
 
-参考[博客](https://blog.wjqserver.com/post/wayland-fcitx5-electron-chromium/),注意，如果添加各种参数都没有解决，可以考虑调整虚拟键盘的配置（很抽象，但是解决了我的问题）
+参考[博客](https://blog.wjqserver.com/post/wayland-fcitx5-electron-chromium/)
+**注意**,如果添加各种参数都没有解决，可以考虑调整**虚拟键盘**的配置（很抽象，但是解决了我的问题）
 
 > 虚拟键盘
 若加入上述参数后仍未成功开启, 请查看虚拟键盘相关配置.
